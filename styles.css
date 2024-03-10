@@ -9,8 +9,8 @@ body {
 }
 
 .container {
-    max-width: 800px;
-    margin: 50px auto;
+    max-width: 1080px;
+    margin: 10px auto;
     padding: 20px;
     border: 2px solid #00ff00; /* Green border */
     border-radius: 10px;
@@ -23,11 +23,15 @@ header .name {
 
 
 .subtitle {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
-section h2 {
-    margin-bottom: 10px;
+.subtitle a {
+    color: #00ff00; /* Green color for links */
+}
+
+section h3 {
+    margin-bottom: 5px;
     color: #00ff00; /* Green color for section titles */
 }
 
@@ -44,17 +48,20 @@ ul li strong {
     color: #00ff00; /* Green color for main highlights */
 }
 
-.experience {
-    border-top: 1px dashed #00ff00; /* Green dashed border */
-    padding-top: 20px;
+.job-container {
+    overflow-y: auto;
+    border: 1px solid #00ff00; /* Green border for experience section */
+    border-radius: 5px;
 }
 
-.experience h3 {
+.experience h5 {
     color: #00ff00;
 }
 
 /* Custom styles for the experience section */
 #experience-list .list-group-item {
+    max-height: 400px; /* Adjust the maximum height as needed */
+    overflow-y: auto;
     background-color: #000000; /* Background color for unhighlighted items (black) */
     color: #808080; /* Text color for unhighlighted items (gray) */
     border: 1px solid #808080; /* Border color for unhighlighted items (gray) */
@@ -71,27 +78,30 @@ ul li strong {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 /* Custom CSS for rounded pills */
 .nav-pills .nav-link {
-    background-color: #00FF00; /* Bright green background color */
-    border-color: #000; /* Black border color */
-    color: #000 !important; /* Black text color */
-    font-family:  'Courier New', Courier, monospace; /* Use your desired font */
+    background-color: #000; /* Black background color */
+    border-color: #00ff00; /* Bright green border color */
+    color: #00ff00 !important; /* Bright green text color */
+    font-family: 'Courier New', Courier, monospace; /* Use your desired font */
+    margin: 10px; /* Add some margin between the pills */
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: #00FF00; /* Bright green background color */
+.nav-pills .nav-pills .show>.nav-link {
+    background-color: #00ff00; /* Bright green background color */
+    border-color: #00ff00; /* Bright green border color */
 }
+
 
 .terminal {
     font-family: monospace;
     background-color: black;
     color: #00ff00; /* Bright green text color */
-    padding: 20px;
-    margin: 50px;
+    padding: 5px;
+    margin: 10px;
     border-radius: 5px;
 }
 
@@ -110,4 +120,8 @@ ul li strong {
     51%, 100% {
         opacity: 0;
     }
+}
+
+.job-details {
+    margin: 10px;
 }
