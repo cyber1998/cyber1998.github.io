@@ -125,3 +125,9 @@ ul li strong {
 .job-details {
     margin: 10px;
 }
+
+.see-more-btn {
+    background-color: #000 !important; /* Black background */
+    color: #00ff00 !important; /* Bright green text color */
+    border-color: #00ff00 !important; /* Bright green border color */
+}

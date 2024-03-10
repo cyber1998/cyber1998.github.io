@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
       
 
-    function renderExperienceList(currentIndex) {
+    function renderExperienceList(currentIndex, showAll = false) {
         const experienceList = document.getElementById('experience-list');
         if (!experienceList) {
             console.error("Experience list element not found.");
@@ -158,7 +158,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 renderJobExperiences(currentIndex);
             });
             experienceList.appendChild(listItem);
+
+            // Check if "See More" is clicked and show all items
+            if (showAll || index <= 3) {
+                listItem.style.display = 'block';
+            } else {
+                listItem.style.display = 'none';
+            }
         });
+
+        // Add "See More" functionality
+        const seeMoreButton = document.createElement('button');
+        seeMoreButton.textContent = 'See More';
+        seeMoreButton.className = 'btn btn-primary  see-more-btn';
+        seeMoreButton.addEventListener('click', function () {
+            renderExperienceList(currentIndex, true);
+        });
+        experienceList.appendChild(seeMoreButton);
     }
 
     function renderSkills() {
