@@ -1,0 +1,113 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #808080; /* Vintage terminal-style font color */
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #00ff00; /* Green border */
+    border-radius: 10px;
+    background-color: #000;
+}
+
+header .name {
+    color: #00ff00; /* Green color for name */
+}
+
+
+.subtitle {
+    margin-bottom: 20px;
+}
+
+section h2 {
+    margin-bottom: 10px;
+    color: #00ff00; /* Green color for section titles */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+ul li strong {
+    color: #00ff00; /* Green color for main highlights */
+}
+
+.experience {
+    border-top: 1px dashed #00ff00; /* Green dashed border */
+    padding-top: 20px;
+}
+
+.experience h3 {
+    color: #00ff00;
+}
+
+/* Custom styles for the experience section */
+#experience-list .list-group-item {
+    background-color: #000000; /* Background color for unhighlighted items (black) */
+    color: #808080; /* Text color for unhighlighted items (gray) */
+    border: 1px solid #808080; /* Border color for unhighlighted items (gray) */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+#experience-list .list-group-item.active {
+    background-color: #000000; /* Background color for highlighted item (black) */
+    color: #00FF00; /* Text color for highlighted item (green) */
+    border: 1px solid #00FF00; /* Border color for highlighted item (green) */
+}
+
+#experience-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Custom CSS for rounded pills */
+.nav-pills .nav-link {
+    background-color: #00FF00; /* Bright green background color */
+    border-color: #000; /* Black border color */
+    color: #000 !important; /* Black text color */
+    font-family:  'Courier New', Courier, monospace; /* Use your desired font */
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #00FF00; /* Bright green background color */
+}
+
+.terminal {
+    font-family: monospace;
+    background-color: black;
+    color: #00ff00; /* Bright green text color */
+    padding: 20px;
+    margin: 50px;
+    border-radius: 5px;
+}
+
+.cursor {
+    display: inline-block;
+    width: 10px;
+    height: 20px;
+    background-color: #00ff00; /* Bright green cursor color */
+    animation: blink-animation 1s infinite step-end;
+}
+
+@keyframes blink-animation {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}

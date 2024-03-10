@@ -1,1 +1,62 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <header class="text-center mb-4">
+        <h1 class="name">Name</h1>
+        <p class="subtitle">Web Developer</p>
+    </header>
+
+<div id="terminal" class="terminal"></div> <!-- Add this div for the terminal animation -->
+
+ 
+<section id="experience" class="mb-4 experience">
+	<h2>Experience</h2>
+	<div class="row">
+		<div class="col-md-4">
+			<ul id="experience-list" class="list-group list-group-flush">
+				<!-- List of job titles and dates will be dynamically added here -->
+			</ul>
+		</div>
+		<div class="col-md-8">
+			<!-- Text container for job experiences -->
+			<div id="experience-container" class="job-container">
+				<!-- Job experience content will be dynamically generated here -->
+				<div id="experience-content"></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="skills" class="mb-4">
+    <h2>Skills</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Bootstrap rounded pills for skills -->
+            <ul class="nav nav-pills rounded-pill mb-3" id="pills-tab" role="tablist">
+                <!-- Skills pills will be dynamically added here -->
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <!-- Skills content will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+</section>
+
+	
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/92160670fc.js" crossorigin="anonymous"></script>
+<script src="script.js" defer></script>	
+</body>
+</html>
