@@ -1,67 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume</title>
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Resume</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
 
-<div class="container">
-    <header class="text-center mb-4">
-        <h1 class="name">Cyber Naskar</h1>
-        <p class="subtitle">Backend Engineer</p>
-
-        <p class="subtitle">
-            <a href="https://www.linkedin.com/in/cyber-naskar/">linkedIn</a>
-              <a href="mailto:cybr1998@gmail.com">email</a>
+    <div class="container">
+        <div class="audio-button ">
+            <button id="play" class="audio-button__icon">
+                <i class="fas fa-volume-mute"></i>
+            </button>   
+        </div>
+        <header class="text-center mb-4">
+            <h1 class="name">Cyber Naskar</h1>
+            <p class="subtitle">Backend Engineer</p>
+            
+            <div class="subtitle">
+                <a href="https://www.linkedin.com/in/cyber-naskar/">linkedin</a>
+                <a href="mailto:cybr1998@gmail.com">email</a>
                 <a href="https://github.com/cyber1998">github</a>
-                    <a href="https://github.com/cyber1998">resume</a>
-        </p>
-    </header>
+                <a href="https://github.com/cyber1998">resume</a>
+            </div>
+        <div class="last-updated">
+            <p>Last updated: <span id="last-updated"> 11th March, 2024 </span></p>
+        </div>
+        </header>
 
-    <section id="skills" class="mb-4">
-        <h3>Skills</h3>
-        <div class="row">
-            <div class="col-mb-4">
-                <!-- Bootstrap rounded pills for skills -->
-                <ul class="nav nav-pills rounded-pill mb-3" id="pills-tab" role="tablist">
-                    <!-- Skills pills will be dynamically added here -->
-                </ul>
-                <div class="tab-content" id="pills-tabContent">
-                    <!-- Skills content will be dynamically added here -->
+        <section id="skills" class="mb-4">
+            <h3>Main Skills</h3>
+            <div class="row">
+                <div class="col-mb-4">
+                    <ul class="nav nav-pills rounded-pill mb-3" id="pills-tab" role="tablist">
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div id="terminal" class="terminal"></div> <!-- Add this div for the terminal animation -->
- 
-    <section id="experience" class="mb-4 experience">
-        <h2>Experience</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <ul id="experience-list" class="list-group list-group-flush">
-                    <!-- List of job titles and dates will be dynamically added here -->
-                </ul>
-                <!-- <button id="see-more-btn" class="btn btn-link">See More</button> See More button -->
-            </div>
-            <div class="col-md-8">
-                <!-- Text container for job experiences -->
-                <div id="experience-container" class="job-container">
-                    <!-- Job experience content will be dynamically generated here -->
-                    <div id="experience-content"></div>
+        <div id="terminal" class="terminal"></div>
+    
+        <section id="experience" class="mb-4 experience">
+            <h3>Experience</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <ul id="experience-list" class="experience-list list-group list-group-flush">
+                    </ul>
                 </div>
-            </div>
+                <div class="col-md-8">
+                    <div id="experience-container" class="job-container">
+                        <div id="experience-content"></div>
+                    </div>
+                </div>
+                </div>
+            </section>
         </div>
-    </section>
-</div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/92160670fc.js" crossorigin="anonymous"></script>
-<script src="script.js" defer></script>	
-</body>
-</html>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/92160670fc.js" crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>	
+    <script src="audio.js" defer></script>
+    <!-- <script src="particle.js" defer></script>	 -->
+    </body>
+    </html>
