@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Start date of the job
-    const startDate = new Date('2018/05');
+    const startDate = new Date(2018, 4);
     
     // Current date
     const currentDate = new Date();
