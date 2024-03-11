@@ -1,5 +1,6 @@
 body {
     font-family: 'Courier New', Courier, monospace;
+    overflow-x:  hidden;
     font-size: 16px;
     line-height: 1.6;
     margin: 0;
@@ -15,6 +16,8 @@ body {
     border: 2px solid #00ff00; /* Green border */
     border-radius: 10px;
     background-color: #000;
+    z-index: -1;
+    overflow: auto;
 }
 
 header .name {
@@ -49,9 +52,28 @@ ul li strong {
 }
 
 .job-container {
-    overflow-y: auto;
     border: 1px solid #00ff00; /* Green border for experience section */
     border-radius: 5px;
+    height: 400px;
+    overflow-y: auto;
+}
+
+.job-container::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 5px;
+    border: 1px solid #00ff00;
+}
+
+.job-container::-webkit-scrollbar-track {
+    background: #000;
+}
+
+.job-container::-webkit-scrollbar-thumb {
+    background: #00ff00;
+}
+
+.job-container::-webkit-scrollbar-thumb:hover {
+    background: #00ff00;
 }
 
 .experience h5 {
@@ -60,7 +82,7 @@ ul li strong {
 
 /* Custom styles for the experience section */
 #experience-list .list-group-item {
-    max-height: 400px; /* Adjust the maximum height as needed */
+    height: 100px; /* Adjust the maximum height as needed */
     overflow-y: auto;
     background-color: #000000; /* Background color for unhighlighted items (black) */
     color: #808080; /* Text color for unhighlighted items (gray) */
@@ -73,6 +95,7 @@ ul li strong {
     color: #00FF00; /* Text color for highlighted item (green) */
     border: 1px solid #00FF00; /* Border color for highlighted item (green) */
 }
+
 
 #experience-navigation {
     display: flex;
@@ -88,6 +111,7 @@ ul li strong {
     color: #00ff00 !important; /* Bright green text color */
     font-family: 'Courier New', Courier, monospace; /* Use your desired font */
     margin: 10px; /* Add some margin between the pills */
+    pointer-events: none;
 }
 
 .nav-pills .nav-pills .show>.nav-link {
@@ -130,4 +154,47 @@ ul li strong {
     background-color: #000 !important; /* Black background */
     color: #00ff00 !important; /* Bright green text color */
     border-color: #00ff00 !important; /* Bright green border color */
+}
+
+button, .nav-link, a {
+    transition: opacity 0.5s ease-in-out;
+}
+
+button:hover, .nav-link:hover, a:hover {
+    opacity: 0.7;
+}
+
+/* @keyframes move {
+0% {
+    transform: translate(-50%, -50%);
+}
+100% {
+    transform: translate(calc(100vw + 2px), calc(-50% + (100vh * var(--offset))));
+}
+}
+  */
+
+/*
+.particle {
+position: absolute;
+width: 3px;
+height: 3px;
+background-color: #0f0;
+border-radius: 50%;
+top: 50%;
+left: 50%;
+animation: move 4s linear infinite;
+--offset: calc(var(--rand) * 1);
+} */
+
+.audio-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.audio-button button {
+    background-color: #000 !important; /* Black background */
+    color: #00ff00 !important; /* Bright green text color */
+    border-color: #00ff00 !important; /* Bright green border color */
+    margin: 10px;
 }
