@@ -161,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             experienceList.appendChild(listItem);
 
-            // Check if "See More" is clicked and show all items
             if (showAll || index <= 3) {
                 listItem.style.display = 'block';
             } else {
