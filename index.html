@@ -1,72 +1,301 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Resume</title>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-
-    <div class="container">
-        <div class="audio-button ">
-            <button id="play" class="audio-button__icon">
-                <i class="fas fa-volume-mute"></i>
-            </button>   
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Naskar | Backend Engineer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">CN</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
         </div>
-        <header class="text-center mb-4">
-            <h1 class="name">Cyber Naskar</h1>
-            <p class="subtitle">Backend Engineer</p>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>CYBER NASKAR</h1>
+                <h2>Backend Engineer</h2>
+                <p class="subtitle">Building scalable systems with 6+ years of experience</p>
+                <div class="location-info">
+                    <p><i class="fas fa-map-marker-alt"></i> Pune, MH</p>
+                    <p><i class="fas fa-phone"></i> +91-7278367360</p>
+                    <p><i class="fas fa-envelope"></i> cybr1998@gmail.com</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/cyber-naskar" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/cyber1998" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>I'm a Backend Engineer with over 6 years of experience specializing in Python, TypeScript, and GraphQL. I focus on building scalable microservices, optimizing database performance, and implementing AI-driven solutions. With expertise across multiple industries including AgriTech and E-commerce, I bring a wealth of experience in architecting robust backend systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
             
-            <div class="subtitle">
-                <a href="https://www.linkedin.com/in/cyber-naskar/">linkedin</a>
-                <a href="mailto:cybr1998@gmail.com">email</a>
-                <a href="https://github.com/cyber1998">github</a>
-                <a href="https://drive.google.com/file/d/1IgYx1hM9NaIUABaquOQbx9PBSuGFmfX9/view?usp=share_link">resume</a>
-            </div>
-        <div class="last-updated">
-            <p>Last updated: <span id="last-updated"> 11th March, 2024 </span></p>
-        </div>
-        </header>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Backend Engineer - Independent Consultant</h3>
+                            <span class="company">Alleyway Capital LLC</span>
+                            <span class="duration">Sep 2023 – Present</span>
+                            <span class="location">Remote (IST with overlapping PDT)</span>
+                        </div>
+                        <ul class="achievements">
+                            <li>Setup several tools and processes to increase the productivity of developers like Bitbucket CI/CD pipelines, KorbitAI, AWS suite of tools and architected a scalable logging microservice</li>
+                            <li>Revamped major part of the code & optimised several slow SQL queries, and fixed bottlenecks in the database using partitioning and proper indexes</li>
+                            <li>Worked with several third-party integrations like Shopify, Klaviyo, Omnisend, Trackdesk and Sentry</li>
+                            <li>Architected and built a garbage collection system to archive old data from the system based on business needs and free up database clutter</li>
+                            <li>Modularized legacy code to functionally separate modules and custom services for clients</li>
+                            <li>Leveraged AI-based tools like OpenAI's gpt-4 model to generate quizzes using short and meaningful inputs and Gemini's gemini-1.5-flash model to extract visual features from existing screenshots to personalize the look and feel of quizzes</li>
+                            <li>Setup AI-based recommendation of products based on the answers received from quizzes which were calculated using embeddings (OpenAI's ADA 002)</li>
+                            <li>Setup AI-based logic jumps which generated exciting user new quiz logic based on the quiz's context, user's prompt as well as the user's business details.</li>
+                        </ul>
+                    </div>
+                </div>
 
-        <section id="skills" class="mb-4">
-            <h3>Main Skills</h3>
-            <div class="row">
-                <div class="col-mb-4">
-                    <ul class="nav nav-pills rounded-pill mb-3" id="pills-tab" role="tablist">
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Senior Backend Engineer</h3>
+                            <span class="company">FarmSetu Technologies Pvt. Ltd.</span>
+                            <span class="duration">Dec 2021 – Sep 2023</span>
+                            <span class="location">Nashik, MH</span>
+                        </div>
+                        <ul class="achievements">
+                            <li>Developed several GraphQL/REST-based microservices with intricate business logic and seamless intercommunication</li>
+                            <li>Optimized database and API performance, resulting in response time reductions of up to 80%</li>
+                            <li>Led, architected, and developed multiple backend services for a variety of agri-launchpads including finance, e-commerce, and content creation-related products</li>
+                            <li>Collaborated closely with product, business, and customer success teams</li>
+                            <li>Leveraged GCP and DigitalOcean CDN for infrastructure, along with terraform for provisioning</li>
+                            <li>Conducted 25+ engineering interviews</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Software Developer</h3>
+                            <span class="company">Ufaber Edutech Pvt. Ltd. 📚</span>
+                            <span class="duration">Mar 2021 - Nov 2021</span>
+                            <span class="location">Remote, India 🇮🇳</span>
+                        </div>
+                        <ul class="achievements">
+                            <li>Led a team of junior developers to build several mock examination systems, exam evaluation systems, and LMS products.</li>
+                            <li>Mentored colleagues and junior developers in agile methodologies and query optimization.</li>
+                            <li>Collaborated with the product/project team and senior management to develop new features and improve existing ones.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Junior Software Developer</h3>
+                            <span class="company">KisanHub Technologies Pvt. Ltd. 🌾</span>
+                            <span class="duration">Mar 2019 - Feb 2021</span>
+                            <span class="location">Pune, India 🇮🇳</span>
+                        </div>
+                        <ul class="achievements">
+                            <li>Collaborated with team members to build a crop quality module, which helped businesses assess the export quality of crops worth $500k each day.</li>
+                            <li>Built and documented an ETL system to set up sync of agricultural and geo-location data of farmers from external APIs.</li>
+                            <li>Fixed several bugs and improved the performance of the existing system.</li>
+                            <li>Collaborated in squads to ship working features within days of planning and inception.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Junior Software Engineer</h3>
+                            <span class="company">Zephony Pvt. Ltd. 🧑🏻‍💻</span>
+                            <span class="duration">Aug 2018 - Feb 2019</span>
+                            <span class="location">Remote, India 🇮🇳</span>
+                        </div>
+                        <ul class="achievements">
+                            <li>Developed multiple RESTful APIs for a variety of clients.</li>
+                            <li>Implemented custom data structures and algorithms to reduce dependency on external libraries.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Python Developer</h3>
+                            <span class="company">Technokrats Pvt. Ltd. 👨🏻‍💼</span>
+                            <span class="duration">May 2018 - Jul 2018</span>
+                            <span class="location">Kolkata, India</span>
+                        </div>
+                        <ul class="achievements">
+                            <li>Collaborated with a UK-based client to maintain an insurance claims management system.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <div id="terminal" class="terminal"></div>
-    
-        <section id="experience" class="mb-4 experience">
-            <h3>Experience</h3>
-            <div class="row">
-                <div class="col-md-4">
-                    <ul id="experience-list" class="experience-list list-group list-group-flush">
-                    </ul>
-                </div>
-                <div class="col-md-8">
-                    <div id="experience-container" class="job-container">
-                        <div id="experience-content"></div>
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">TypeScript</span>
+                        <span class="skill-item">GraphQL</span>
                     </div>
                 </div>
+                <div class="skill-category">
+                    <h3>Frameworks</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Django</span>
+                        <span class="skill-item">Django REST Framework</span>
+                        <span class="skill-item">Flask</span>
+                        <span class="skill-item">ReactJS</span>
+                    </div>
                 </div>
-            </section>
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">MySQL</span>
+                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item">MongoDB</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Cloud Tools</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">Kubernetes</span>
+                        <span class="skill-item">DigitalOcean</span>
+                        <span class="skill-item">AWS</span>
+                        <span class="skill-item">ElasticSearch</span>
+                        <span class="skill-item">GCP</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Version Control</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Bitbucket</span>
+                        <span class="skill-item">Bitbucket CI/CD</span>
+                        <span class="skill-item">GitLab</span>
+                        <span class="skill-item">GitHub</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Others</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Shopify</span>
+                        <span class="skill-item">Klaviyo</span>
+                        <span class="skill-item">Mailchimp</span>
+                        <span class="skill-item">Redis + Celery</span>
+                        <span class="skill-item">SQS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>AI Based DevTools</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">GitHub Copilot</span>
+                        <span class="skill-item">KorbitAI</span>
+                        <span class="skill-item">Cursor</span>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/92160670fc.js" crossorigin="anonymous"></script>
-    <script src="script.js" defer></script>	
-    <script src="audio.js" defer></script>
-    <!-- <script src="particle.js" defer></script>	 -->
-    </body>
-    </html>
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h3>Birla Institute of Technology, Mesra</h3>
+                <p class="degree">Bachelor of Computer Applications</p>
+                <p class="edu-details">Mesra, Ranchi | Graduated June 2018</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>cybr1998@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p>+91-7278367360</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Pune, Maharashtra, India</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <p><a href="https://linkedin.com/in/cyber-naskar" target="_blank" rel="noopener noreferrer">linkedin.com/in/cyber-naskar</a></p>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <p><a href="https://github.com/cyber1998" target="_blank" rel="noopener noreferrer">github.com/cyber1998</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Cyber Naskar. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
