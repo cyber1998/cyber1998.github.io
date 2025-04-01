@@ -1,4 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Calculate experience duration
+  const calculateExperience = () => {
+    const startDate = new Date(2018, 4, 1)
+    const currentDate = new Date()
+
+    let years = currentDate.getFullYear() - startDate.getFullYear()
+    let months = currentDate.getMonth() - startDate.getMonth()
+
+    if (months < 0) {
+      years--
+      months += 12
+    }
+
+    const experienceText = `${years} years, ${months} months`
+    document.getElementById("experience-duration").textContent = experienceText
+  }
+
+  calculateExperience()
+
   // Mobile Navigation Toggle
   const hamburger = document.querySelector(".hamburger")
   const navLinks = document.querySelector(".nav-links")
@@ -8,76 +27,103 @@ document.addEventListener("DOMContentLoaded", () => {
     hamburger.classList.toggle("active")
   })
 
-  // Close mobile menu when clicking a nav link
+  // Navigation and Section Handling
+  const sections = document.querySelectorAll(".section")
   const navItems = document.querySelectorAll(".nav-links a")
+
+  // Function to show a specific section
+  const showSection = (sectionId) => {
+    sections.forEach((section) => {
+      section.classList.remove("active")
+    })
+
+    navItems.forEach((item) => {
+      item.classList.remove("active")
+    })
+
+    document.getElementById(sectionId).classList.add("active")
+    document.querySelector(`a[href="#${sectionId}"]`).classList.add("active")
+  }
+
+  // Handle navigation clicks
   navItems.forEach((item) => {
-    item.addEventListener("click", () => {
+    item.addEventListener("click", (e) => {
+      e.preventDefault()
+      const sectionId = item.getAttribute("href").substring(1)
+      showSection(sectionId)
+
+      // Close mobile menu if open
       if (navLinks.classList.contains("active")) {
         navLinks.classList.remove("active")
         hamburger.classList.remove("active")
       }
+
+      // Update URL without page reload
+      history.pushState(null, null, `#${sectionId}`)
     })
   })
 
-  // Add active class to nav links on scroll
-  const sections = document.querySelectorAll("section")
-  const navLi = document.querySelectorAll(".nav-links li a")
-
-  window.addEventListener("scroll", () => {
-    let current = ""
-
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop
-      const sectionHeight = section.clientHeight
-      if (pageYOffset >= sectionTop - sectionHeight / 3) {
-        current = section.getAttribute("id")
-      }
-    })
-
-    navLi.forEach((li) => {
-      li.classList.remove("active")
-      if (li.getAttribute("href").substring(1) === current) {
-        li.classList.add("active")
-      }
-    })
-  })
-
-  // Add scroll animation for elements
-  const fadeInElements = document.querySelectorAll(".timeline-item, .skill-category, .education-item, .contact-item")
-
-  const fadeInOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -100px 0px",
+  // Handle initial load and browser back/forward
+  const handleHashChange = () => {
+    const hash = window.location.hash.substring(1) || "about"
+    showSection(hash)
   }
 
-  const fadeInObserver = new IntersectionObserver((entries, fadeInObserver) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        return
-      } else {
-        entry.target.classList.add("fade-in")
-        fadeInObserver.unobserve(entry.target)
-      }
-    })
-  }, fadeInOptions)
+  window.addEventListener("hashchange", handleHashChange)
+  handleHashChange()
 
-  fadeInElements.forEach((element) => {
-    element.style.opacity = "0"
-    element.style.transform = "translateY(20px)"
-    element.style.transition = "opacity 0.5s ease, transform 0.5s ease"
-    fadeInObserver.observe(element)
-  })
+  // Skills Tab Functionality
+  const tabButtons = document.querySelectorAll(".tab-btn")
+  const tabContents = document.querySelectorAll(".tab-content")
 
-  document.addEventListener("scroll", () => {
-    fadeInElements.forEach((element) => {
-      const position = element.getBoundingClientRect()
+  tabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const tabId = button.getAttribute("data-tab")
 
-      // If element is in viewport
-      if (position.top < window.innerHeight && position.bottom >= 0) {
-        element.style.opacity = "1"
-        element.style.transform = "translateY(0)"
-      }
+      tabButtons.forEach((btn) => btn.classList.remove("active"))
+      tabContents.forEach((content) => content.classList.remove("active"))
+
+      button.classList.add("active")
+      document.getElementById(tabId).classList.add("active")
     })
   })
+
+  // Timeline item expansion
+  const timelineItems = document.querySelectorAll(".timeline-item")
+
+  timelineItems.forEach((item) => {
+    const achievementsContainer = item.querySelector(".achievements-container")
+
+    item.addEventListener("click", () => {
+      achievementsContainer.classList.toggle("expanded")
+    })
+  })
+
+  // Add animation for elements when they come into view
+  const animateOnScroll = () => {
+    const elements = document.querySelectorAll(".timeline-item, .education-card, .contact-card")
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1"
+            entry.target.style.transform = "translateY(0)"
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    elements.forEach((element) => {
+      element.style.opacity = "0"
+      element.style.transform = "translateY(20px)"
+      element.style.transition = "opacity 0.5s ease, transform 0.5s ease"
+      observer.observe(element)
+    })
+  }
+
+  animateOnScroll()
 })
 
