@@ -34,7 +34,7 @@
 	.skills {
 		display: flex;
 		flex-direction: column;
-		height: 100%;
+		min-height: 100%;
 	}
 
 	h2 {
@@ -317,5 +317,168 @@
 		background: linear-gradient(135deg, #00add8 0%, #ffffff 100%) !important;
 		color: #00add8 !important;
 		border-color: #00add8 !important;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.skills {
+			padding: 0 0.5rem;
+		}
+
+		h2 {
+			font-size: 1.3rem;
+			margin-bottom: 0.8rem;
+		}
+
+		.tabs {
+			gap: 0.4rem;
+			margin-bottom: 0.8rem;
+		}
+
+		.tab-btn {
+			padding: 0.4rem 0.8rem;
+			font-size: 0.8rem;
+			border-radius: 8px;
+		}
+
+		.skill-items {
+			gap: 0.4rem;
+		}
+
+		.skill-item {
+			padding: 0.4rem 0.8rem;
+			font-size: 0.8rem;
+			border-radius: 16px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.skills {
+			padding: 0 0.25rem;
+		}
+
+		h2 {
+			font-size: 1.1rem;
+			margin-bottom: 0.6rem;
+		}
+
+		.tabs {
+			gap: 0.3rem;
+			margin-bottom: 0.6rem;
+			justify-content: flex-start;
+			flex-wrap: wrap;
+		}
+
+		.tab-btn {
+			padding: 0.35rem 0.6rem;
+			font-size: 0.75rem;
+			border-radius: 6px;
+			flex: 1;
+			min-width: 80px;
+		}
+
+		.skill-items {
+			gap: 0.3rem;
+			justify-content: flex-start;
+		}
+
+		.skill-item {
+			padding: 0.35rem 0.6rem;
+			font-size: 0.75rem;
+			border-radius: 14px;
+		}
+	}
+
+	@media (max-width: 360px) {
+		.skills {
+			padding: 0 0.1rem;
+		}
+
+		h2 {
+			font-size: 1rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.tabs {
+			gap: 0.25rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.tab-btn {
+			padding: 0.3rem 0.5rem;
+			font-size: 0.7rem;
+			border-radius: 5px;
+			min-width: 70px;
+		}
+
+		.skill-items {
+			gap: 0.25rem;
+		}
+
+		.skill-item {
+			padding: 0.3rem 0.5rem;
+			font-size: 0.7rem;
+			border-radius: 12px;
+		}
+	}
+
+	/* Landscape orientation for small screens */
+	@media (max-height: 500px) and (orientation: landscape) {
+		.skills {
+			padding: 0 0.25rem;
+		}
+
+		h2 {
+			font-size: 1.2rem;
+			margin-bottom: 0.6rem;
+		}
+
+		.tabs {
+			gap: 0.3rem;
+			margin-bottom: 0.6rem;
+		}
+
+		.tab-btn {
+			padding: 0.35rem 0.7rem;
+			font-size: 0.75rem;
+		}
+
+		.skill-items {
+			gap: 0.3rem;
+		}
+
+		.skill-item {
+			padding: 0.35rem 0.7rem;
+			font-size: 0.75rem;
+		}
+	}
+
+	/* Large tablets */
+	@media (max-width: 1024px) and (min-width: 769px) {
+		.skills {
+			padding: 0 0.75rem;
+		}
+
+		h2 {
+			font-size: 1.4rem;
+		}
+
+		.tabs {
+			gap: 0.6rem;
+		}
+
+		.tab-btn {
+			padding: 0.5rem 1.2rem;
+			font-size: 0.95rem;
+		}
+
+		.skill-items {
+			gap: 0.6rem;
+		}
+
+		.skill-item {
+			padding: 0.5rem 1.2rem;
+			font-size: 0.95rem;
+		}
 	}
 </style>

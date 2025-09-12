@@ -215,7 +215,7 @@
 
 <style lang="css">
 	.experience {
-		height: 100%;
+		min-height: 100%;
 		display: flex;
 		flex-direction: column;
 		min-height: 400px;
@@ -599,30 +599,22 @@
 			margin-bottom: 0.8rem;
 		}
 
-		.achievement-item:hover {
-			transform: translateX(2px);
-		}
-
-		.progress-container {
-			margin-top: 0.8rem;
-		}
-
-		.timeline-container {
-			margin-top: 1rem;
-		}
-
-		.timeline {
-			gap: 0.8rem;
-			padding: 0.3rem;
-			margin: 0 -0.3rem;
-		}
-
 		.timeline-dot {
 			width: 60px;
 			height: 60px;
 		}
+
+		.slide-content h3 {
+			font-size: 1.1rem;
+			line-height: 1.3;
+		}
+
+		.company {
+			font-size: 0.9rem;
+		}
 	}
 
+	/* Small mobile phones */
 	@media (max-width: 480px) {
 		.experience {
 			padding: 0 0.25rem;
@@ -642,50 +634,33 @@
 
 		.slide-content h3 {
 			margin-bottom: 0.6rem;
+			font-size: 1rem;
 		}
 
 		.company {
 			margin-bottom: 0.8rem;
+			font-size: 0.85rem;
 		}
 
 		.meta {
-			margin: 0.8rem 0 1rem 0;
 			padding: 0.5rem 0.6rem;
 		}
 
 		.achievements {
-			padding: 0.8rem clamp(0.4rem, 1.5vw, 0.8rem);
-			max-height: 180px;
-			padding-right: clamp(0.8rem, 2.5vw, 1.2rem);
+			max-height: 160px;
+			padding: 0.6rem;
 		}
 
 		.achievement-item {
 			padding: 0.5rem 0.6rem;
 			margin-bottom: 0.6rem;
-			font-size: 0.85rem;
-		}
-
-		.progress-container {
-			margin-top: 0.8rem;
-		}
-
-		.timeline-container {
-			margin-top: 0.8rem;
-		}
-
-		.timeline {
-			gap: 0.6rem;
-			padding: 0.2rem;
-			margin: 0 -0.2rem;
+			font-size: 0.75rem;
 		}
 
 		.timeline-dot {
-			width: 55px;
-			height: 55px;
-		}
-
-		.year {
-			font-size: 0.9rem;
+			width: 50px;
+			height: 50px;
+			font-size: 0.7rem;
 		}
 
 		.company-short {
@@ -693,73 +668,103 @@
 		}
 	}
 
-	@media (max-width: 480px) {
+	/* Very small screens */
+	@media (max-width: 360px) {
+		.experience {
+			padding: 0 0.1rem;
+		}
+
+		.carousel {
+			min-height: 240px;
+		}
+
+		.slide {
+			min-height: 200px;
+		}
+
+		.slide-content {
+			padding: 0.8rem 0.6rem;
+		}
+
+		.slide-content h3 {
+			font-size: 0.95rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.company {
+			font-size: 0.8rem;
+			margin-bottom: 0.6rem;
+		}
+
+		.meta {
+			padding: 0.4rem 0.5rem;
+		}
+
+		.achievements {
+			max-height: 140px;
+			padding: 0.5rem;
+		}
+
+		.achievement-item {
+			padding: 0.4rem 0.5rem;
+			margin-bottom: 0.5rem;
+			font-size: 0.7rem;
+		}
+
+		.timeline-dot {
+			width: 45px;
+			height: 45px;
+			font-size: 0.65rem;
+		}
+	}
+
+	/* Landscape orientation for small screens */
+	@media (max-height: 500px) and (orientation: landscape) {
 		.experience {
 			padding: 0 0.25rem;
 		}
 
 		.carousel {
-			min-height: 280px;
+			min-height: 200px;
 		}
 
 		.slide {
-			min-height: 220px;
+			min-height: 180px;
 		}
 
 		.slide-content {
-			padding: 1rem 0.8rem;
-		}
-
-		.slide-content h3 {
-			margin-bottom: 0.6rem;
-		}
-
-		.company {
-			margin-bottom: 0.8rem;
-		}
-
-		.meta {
-			margin: 0.8rem 0 1rem 0;
-			padding: 0.5rem 0.6rem;
+			padding: 0.8rem 0.6rem;
 		}
 
 		.achievements {
-			padding: 0.8rem clamp(0.4rem, 1.5vw, 0.8rem);
-			max-height: 180px;
-			padding-right: clamp(0.8rem, 2.5vw, 1.2rem);
+			max-height: 120px;
+		}
+	}
+
+	/* Large tablets */
+	@media (max-width: 1024px) and (min-width: 769px) {
+		.experience {
+			padding: 0 0.75rem;
+		}
+
+		.slide-content {
+			padding: 1.8rem 1.2rem;
+		}
+
+		.slide-content h3 {
+			font-size: 1.2rem;
+		}
+
+		.company {
+			font-size: 0.95rem;
+		}
+
+		.achievements {
+			max-height: 200px;
 		}
 
 		.achievement-item {
-			padding: 0.5rem 0.6rem;
-			margin-bottom: 0.6rem;
-			font-size: 0.85rem;
-		}
-
-		.progress-container {
-			margin-top: 0.8rem;
-		}
-
-		.timeline-container {
-			margin-top: 0.8rem;
-		}
-
-		.timeline {
-			gap: 0.5rem;
-			padding: 0.2rem;
-			margin: 0 -0.2rem;
-		}
-
-		.timeline-dot {
-			width: 50px;
-			height: 50px;
-		}
-
-		.year {
-			font-size: 0.85rem;
-		}
-
-		.company-short {
-			font-size: 0.65rem;
+			padding: 0.7rem 0.9rem;
 		}
 	}
 </style>

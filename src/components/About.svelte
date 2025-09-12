@@ -34,7 +34,7 @@
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-		height: 100%;
+		min-height: 100%;
 	}
 
 	p {
@@ -81,5 +81,172 @@
 	.social a:hover {
 		transform: scale(1.2);
 		color: #cccccc;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.about {
+			padding: 0 1rem;
+		}
+
+		p {
+			font-size: 1.1rem;
+		}
+
+		.description {
+			font-size: 0.95rem;
+			line-height: 1.5;
+			margin: 0.8rem 0;
+		}
+
+		.contact-brief {
+			gap: 0.4rem;
+			margin: 0.8rem 0;
+		}
+
+		.item {
+			font-size: 0.85rem;
+		}
+
+		.social {
+			gap: 0.8rem;
+			margin-top: 0.8rem;
+		}
+
+		.social a {
+			font-size: 1.3rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.about {
+			padding: 0 0.5rem;
+		}
+
+		p {
+			font-size: 1rem;
+		}
+
+		.description {
+			font-size: 0.9rem;
+			line-height: 1.5;
+			margin: 0.6rem 0;
+		}
+
+		.contact-brief {
+			gap: 0.3rem;
+			margin: 0.6rem 0;
+		}
+
+		.item {
+			font-size: 0.8rem;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.2rem;
+		}
+
+		.social {
+			gap: 0.6rem;
+			margin-top: 0.6rem;
+		}
+
+		.social a {
+			font-size: 1.1rem;
+		}
+	}
+
+	@media (max-width: 360px) {
+		.about {
+			padding: 0 0.25rem;
+		}
+
+		p {
+			font-size: 0.95rem;
+		}
+
+		.description {
+			font-size: 0.85rem;
+			line-height: 1.4;
+			margin: 0.5rem 0;
+		}
+
+		.contact-brief {
+			gap: 0.25rem;
+			margin: 0.5rem 0;
+		}
+
+		.item {
+			font-size: 0.75rem;
+		}
+
+		.social {
+			gap: 0.5rem;
+			margin-top: 0.5rem;
+		}
+
+		.social a {
+			font-size: 1rem;
+		}
+	}
+
+	/* Landscape orientation for small screens */
+	@media (max-height: 500px) and (orientation: landscape) {
+		.about {
+			padding: 0 0.5rem;
+		}
+
+		p {
+			font-size: 1rem;
+		}
+
+		.description {
+			font-size: 0.9rem;
+			margin: 0.5rem 0;
+		}
+
+		.contact-brief {
+			flex-direction: row;
+			justify-content: center;
+			gap: 1rem;
+			margin: 0.5rem 0;
+		}
+
+		.item {
+			flex-direction: column;
+			align-items: center;
+			font-size: 0.8rem;
+		}
+
+		.social {
+			gap: 0.8rem;
+			margin-top: 0.5rem;
+		}
+	}
+
+	/* Large tablets */
+	@media (max-width: 1024px) and (min-width: 769px) {
+		.about {
+			padding: 0 1.5rem;
+		}
+
+		p {
+			font-size: 1.3rem;
+		}
+
+		.description {
+			font-size: 1.1rem;
+		}
+
+		.contact-brief {
+			gap: 0.6rem;
+		}
+
+		.item {
+			font-size: 0.95rem;
+		}
+
+		.social a {
+			font-size: 1.6rem;
+		}
 	}
 </style>

@@ -152,15 +152,23 @@
 </main>
 
 <style lang="css">
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
+
+	/* Fluid typography for better scaling */
+	:global(html) {
+		font-size: clamp(14px, 1.4vw, 16px);
+	}
+
 	.portfolio {
-		height: 100vh;
+		min-height: 100vh;
 		width: 100vw;
 		display: flex;
 		flex-direction: column;
 		font-family: 'Inter', sans-serif;
 		background: #000000;
 		color: #ffffff;
-		overflow: hidden;
 		position: relative;
 	}
 
@@ -227,7 +235,7 @@
 
 	.header {
 		text-align: center;
-		padding: 2rem 1rem 1rem;
+		padding: clamp(1rem, 2.1vw, 1.05rem) clamp(0.5rem, 1.05vw, 0.7rem) clamp(0.5rem, 1.05vw, 0.7rem);
 		background: rgba(255, 255, 255, 0.02);
 		backdrop-filter: blur(10px);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -235,7 +243,7 @@
 
 	.header h1 {
 		margin: 0;
-		font-size: 2.5rem;
+		font-size: clamp(1.8rem, 2.8vw, 1.54rem);
 		font-weight: 600;
 		background: linear-gradient(135deg, #ffffff, #cccccc);
 		-webkit-background-clip: text;
@@ -245,7 +253,7 @@
 
 	.header p {
 		margin: 0.5rem 0 0;
-		font-size: 1.2rem;
+		font-size: clamp(0.9rem, 1.4vw, 0.77rem);
 		color: rgba(255, 255, 255, 0.6);
 		font-weight: 300;
 	}
@@ -253,27 +261,32 @@
 	.content {
 		flex: 1;
 		display: grid;
-		grid-template-columns: 1fr 3fr 1fr;
+		grid-template-columns: minmax(250px, 1fr) minmax(400px, 2fr) minmax(250px, 1fr);
 		grid-template-rows: auto;
 		grid-template-areas: "about experience skills-contact-education";
-		gap: 1rem;
-		padding: 1rem;
-		overflow-y: auto;
+		gap: clamp(0.5rem, 1.05vw, 0.56rem);
+		padding: clamp(0.5rem, 1.05vw, 0.56rem);
+		min-height: 0;
+		align-items: start;
 	}
 
 	.section {
 		background: rgba(255, 255, 255, 0.08);
 		backdrop-filter: blur(25px);
 		border: 1px solid rgba(255, 255, 255, 0.12);
-		border-radius: 24px;
-		padding: 2rem;
+		border-radius: clamp(12px, 1.75vw, 14px);
+		padding: clamp(1rem, 1.75vw, 1.26rem);
 		box-shadow:
 			0 8px 32px rgba(0, 0, 0, 0.3),
 			0 2px 16px rgba(0, 0, 0, 0.2),
 			inset 0 1px 0 rgba(255, 255, 255, 0.1);
 		transition: all 0.4s ease;
 		position: relative;
-		overflow: hidden;
+		overflow: visible;
+		min-height: 200px;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
 	}
 
 	.section::before {
@@ -410,7 +423,7 @@
 	.skill-tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem;
+		gap: clamp(0.3rem, 0.7vw, 0.28rem);
 		justify-content: center;
 	}
 
@@ -418,9 +431,9 @@
 		background: rgba(255, 255, 255, 0.08);
 		backdrop-filter: blur(8px);
 		color: #ffffff;
-		padding: 0.4rem 1rem;
-		border-radius: 20px;
-		font-size: 0.85rem;
+		padding: clamp(0.3rem, 0.7vw, 0.245rem) clamp(0.6rem, 1.4vw, 0.56rem);
+		border-radius: clamp(15px, 2.1vw, 12.6px);
+		font-size: clamp(0.75rem, 1.05vw, 0.56rem);
 		border: 1px solid rgba(255, 255, 255, 0.15);
 		font-weight: 500;
 		transition: all 0.3s ease;
@@ -843,41 +856,317 @@
 	@media (max-width: 768px) {
 		.content {
 			grid-template-columns: 1fr;
-			grid-template-rows: auto;
+			grid-template-rows: auto auto auto;
 			grid-template-areas:
 				"about"
 				"experience"
 				"skills-contact-education";
 			padding: 0.5rem;
 			gap: 0.8rem;
+			min-height: auto;
 		}
+
 		.section {
 			padding: 1.5rem;
 			border-radius: 20px;
+			min-height: auto;
 		}
+
 		.header {
 			padding: 1.5rem 1rem 0.5rem;
 		}
+
 		.header h1 {
 			font-size: 2rem;
 		}
+
 		.header p {
 			font-size: 1rem;
 		}
+
 		.skill-categories {
 			gap: 1.2rem;
 		}
+
 		.skill-category-header {
 			padding: 0.6rem 0;
 		}
+
 		.skill-tags-container.open {
 			max-height: 280px;
 		}
+
 		.contact-education-section {
 			gap: 1.8rem;
 		}
+
 		.education-section {
 			padding: 1rem;
+		}
+
+		.skill-tags {
+			justify-content: flex-start;
+			gap: 0.4rem;
+		}
+
+		.skill-tag {
+			font-size: 0.8rem;
+			padding: 0.35rem 0.8rem;
+		}
+
+		/* Additional mobile optimizations */
+		.skill-category h4 {
+			font-size: 0.9rem;
+		}
+
+		.education-content {
+			flex-direction: column;
+			text-align: center;
+			gap: 1rem;
+			padding: 1rem;
+		}
+
+		.education-text h4 {
+			font-size: 0.9rem;
+		}
+
+		.education-text p {
+			font-size: 0.8rem;
+		}
+	}
+
+	/* Medium screens */
+	@media (max-width: 1200px) {
+		.content {
+			grid-template-columns: minmax(220px, 1fr) minmax(350px, 2fr) minmax(220px, 1fr);
+			padding: clamp(0.5rem, 0.7vw, 0.49rem);
+			gap: clamp(0.5rem, 0.7vw, 0.49rem);
+		}
+
+		.section {
+			padding: clamp(1rem, 1.4vw, 1.12rem);
+		}
+
+		.skill-tags {
+			gap: clamp(0.3rem, 0.56vw, 0.28rem);
+		}
+
+		.skill-tag {
+			font-size: clamp(0.75rem, 0.91vw, 0.56rem);
+			padding: clamp(0.3rem, 0.56vw, 0.245rem) clamp(0.7rem, 0.98vw, 0.49rem);
+		}
+	}
+
+	/* Large tablets and small laptops */
+	@media (max-width: 1024px) {
+		.content {
+			grid-template-columns: minmax(200px, 1fr) minmax(300px, 2fr) minmax(200px, 1fr);
+			padding: clamp(0.4rem, 0.7vw, 0.42rem);
+			gap: clamp(0.4rem, 0.7vw, 0.42rem);
+		}
+
+		.section {
+			padding: clamp(0.9rem, 1.225vw, 0.98rem);
+		}
+
+		.skill-tags {
+			gap: clamp(0.25rem, 0.42vw, 0.21rem);
+		}
+
+		.skill-tag {
+			font-size: clamp(0.7rem, 0.735vw, 0.49rem);
+			padding: clamp(0.25rem, 0.42vw, 0.224rem) clamp(0.6rem, 0.84vw, 0.42rem);
+		}
+	}
+
+	/* Small tablets */
+	@media (max-width: 900px) {
+		.content {
+			grid-template-columns: minmax(180px, 1fr) minmax(280px, 2fr) minmax(180px, 1fr);
+			padding: clamp(0.3rem, 0.56vw, 0.35rem);
+			gap: clamp(0.3rem, 0.56vw, 0.35rem);
+		}
+
+		.section {
+			padding: clamp(0.8rem, 1.05vw, 0.84rem);
+		}
+
+		.skill-tags {
+			gap: clamp(0.2rem, 0.35vw, 0.14rem);
+		}
+
+		.skill-tag {
+			font-size: clamp(0.65rem, 0.455vw, 0.35rem);
+			padding: clamp(0.2rem, 0.35vw, 0.14rem) clamp(0.5rem, 0.7vw, 0.35rem);
+		}
+	}
+
+	/* Mobile phones */
+	@media (max-width: 768px) {
+		.content {
+			grid-template-columns: 1fr;
+			grid-template-rows: auto auto auto;
+			grid-template-areas:
+				"about"
+				"experience"
+				"skills-contact-education";
+			padding: clamp(0.2rem, 0.42vw, 0.28rem);
+			gap: clamp(0.3rem, 0.56vw, 0.42rem);
+			min-height: auto;
+		}
+
+		.section {
+			padding: clamp(0.7rem, 0.84vw, 0.98rem);
+			border-radius: clamp(15px, 1.75vw, 12.6px);
+			min-height: auto;
+		}
+
+		.header {
+			padding: clamp(1rem, 1.4vw, 0.735rem) clamp(0.5rem, 0.7vw, 0.49rem) clamp(0.2rem, 0.42vw, 0.28rem);
+		}
+
+		.header h1 {
+			font-size: clamp(1.5rem, 2.1vw, 1.26rem);
+		}
+
+		.header p {
+			font-size: clamp(0.8rem, 1.05vw, 0.539rem);
+		}
+
+		.skill-categories {
+			gap: clamp(0.8rem, 1.05vw, 0.7rem);
+		}
+
+		.skill-category-header {
+			padding: clamp(0.4rem, 0.56vw, 0.35rem) 0;
+		}
+
+		.skill-tags-container.open {
+			max-height: clamp(200px, 24.5vh, 175px);
+		}
+
+		.contact-education-section {
+			gap: clamp(1rem, 1.4vw, 0.98rem);
+		}
+
+		.education-section {
+			padding: clamp(0.5rem, 0.7vw, 0.56rem);
+		}
+
+		.skill-tags {
+			justify-content: flex-start;
+			gap: clamp(0.2rem, 0.42vw, 0.245rem);
+		}
+
+		.skill-tag {
+			font-size: clamp(0.65rem, 0.91vw, 0.49rem);
+			padding: clamp(0.2rem, 0.42vw, 0.196rem) clamp(0.5rem, 0.91vw, 0.49rem);
+		}
+
+		/* Additional mobile optimizations */
+		.skill-category h4 {
+			font-size: clamp(0.75rem, 0.91vw, 0.56rem);
+		}
+
+		.education-content {
+			flex-direction: column;
+			text-align: center;
+			gap: clamp(0.5rem, 0.7vw, 0.56rem);
+			padding: clamp(0.7rem, 1.05vw, 0.63rem);
+		}
+
+		.education-text h4 {
+			font-size: clamp(0.75rem, 0.91vw, 0.56rem);
+		}
+
+		.education-text p {
+			font-size: clamp(0.7rem, 0.84vw, 0.525rem);
+		}
+	}
+
+	/* Very small screens */
+	@media (max-width: 360px) {
+		.header h1 {
+			font-size: clamp(1.2rem, 1.75vw, 0.98rem);
+		}
+
+		.header p {
+			font-size: clamp(0.7rem, 1.05vw, 0.539rem);
+		}
+
+		.content {
+			padding: clamp(0.1rem, 0.28vw, 0.105rem);
+			gap: clamp(0.2rem, 0.42vw, 0.21rem);
+		}
+
+		.section {
+			padding: clamp(0.5rem, 0.7vw, 0.49rem);
+			border-radius: clamp(8px, 1.05vw, 7px);
+		}
+
+		.skill-tag {
+			font-size: clamp(0.6rem, 0.7vw, 0.455rem);
+			padding: clamp(0.15rem, 0.35vw, 0.14rem) clamp(0.4rem, 0.56vw, 0.315rem);
+		}
+
+		.skill-category h4 {
+			font-size: clamp(0.7rem, 0.91vw, 0.525rem);
+		}
+
+		.education-text h4 {
+			font-size: clamp(0.7rem, 0.91vw, 0.525rem);
+		}
+
+		.education-text p {
+			font-size: clamp(0.65rem, 0.7vw, 0.49rem);
+		}
+
+		.skill-tags-container.open {
+			max-height: clamp(150px, 17.5vh, 140px);
+		}
+	}
+
+	/* Landscape orientation for small screens */
+	@media (max-height: 500px) and (orientation: landscape) {
+		.header {
+			padding: clamp(0.3rem, 0.56vw, 0.42rem) clamp(0.5rem, 0.7vw, 0.49rem);
+		}
+
+		.content {
+			padding: clamp(0.1rem, 0.28vw, 0.105rem);
+			min-height: auto;
+		}
+
+		.section {
+			padding: clamp(0.4rem, 0.56vw, 0.42rem);
+		}
+
+		.skill-tags {
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			gap: clamp(0.15rem, 0.28vw, 0.14rem);
+		}
+
+		.skill-tag {
+			font-size: clamp(0.6rem, 0.7vw, 0.455rem);
+			padding: clamp(0.15rem, 0.28vw, 0.14rem) clamp(0.4rem, 0.56vw, 0.315rem);
+		}
+	}
+
+	/* Improve mobile touch targets */
+	@media (max-width: 768px) {
+		.skill-category-header {
+			min-height: 44px;
+			display: flex;
+			align-items: center;
+		}
+
+		.skill-tag {
+			min-height: 36px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
 	}
 </style>
