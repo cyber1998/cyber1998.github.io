@@ -12,7 +12,13 @@
     "preview:local": "npm run build:local && vite preview --port 4173 --outDir dist-local",
     "prod": "npm run build:prod && vite preview --port 4173 --outDir dist-prod",
     "production": "npm run build:prod && vite preview --port 4173 --outDir dist-prod",
-    "deploy": "npm run build:prod && echo 'Ready for GitHub Pages deployment from dist-prod/'"
+    "serve:local": "mkdir -p dist-local && (ls dist-local/index.html > /dev/null 2>&1 || npm run build:local) && vite preview --port 4173 --outDir dist-local",
+    "serve:prod": "mkdir -p dist-prod && (ls dist-prod/index.html > /dev/null 2>&1 || npm run build:prod) && vite preview --port 4173 --outDir dist-prod",
+    "deploy": "npm run build:prod && echo 'Ready for GitHub Pages deployment from dist-prod/'",
+    "clean": "rm -rf dist dist-local dist-prod",
+    "clean:build": "npm run clean && npm run build",
+    "clean:local": "npm run clean && npm run build:local",
+    "clean:prod": "npm run clean && npm run build:prod"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^6.1.1",
