@@ -1,5 +1,5 @@
 <div class="about">
-	<p>Building scalable systems with 6+ years of experience</p>
+	<p>Backend Engineer</p>
 	<div class="description">
 		I'm a Backend Engineer specializing in Python, TypeScript, and GraphQL. I focus on building scalable microservices, optimizing database performance, and implementing AI-driven solutions. With expertise across multiple industries including AgriTech and E-commerce, I bring a wealth of experience in architecting robust backend systems.
 	</div>
@@ -27,7 +27,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="css">
 	.about {
 		display: flex;
 		flex-direction: column;

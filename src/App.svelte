@@ -11,6 +11,11 @@
 
 <main class="portfolio">
 	<div class="background"></div>
+	<div class="particles">
+		{#each Array(50) as _, i}
+			<div class="particle" style="--delay: {i * 0.1}s; --duration: {3 + (i % 3)}s; --size: {2 + (i % 3)}px;"></div>
+		{/each}
+	</div>
 	<header class="header">
 		<h1>Cyber Naskar</h1>
 		<p>Backend Engineer</p>
@@ -146,7 +151,7 @@
 	</div>
 </main>
 
-<style>
+<style lang="css">
 	.portfolio {
 		height: 100vh;
 		width: 100vw;
@@ -169,6 +174,55 @@
 			radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
 			radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
 		z-index: -1;
+	}
+
+	.particles {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	.particle {
+		position: absolute;
+		background: rgba(255, 255, 255, 0.1);
+		border-radius: 50%;
+		animation: float var(--duration) ease-in-out infinite;
+		animation-delay: var(--delay);
+		width: var(--size);
+		height: var(--size);
+		box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+	}
+
+	.particle:nth-child(3n) {
+		background: rgba(255, 255, 255, 0.15);
+		box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+	}
+
+	.particle:nth-child(5n) {
+		background: rgba(255, 255, 255, 0.08);
+		box-shadow: 0 0 4px rgba(255, 255, 255, 0.15);
+	}
+
+	@keyframes float {
+		0%, 100% {
+			transform: translateY(100vh) translateX(0) scale(0.5);
+			opacity: 0;
+		}
+		10% {
+			opacity: 0.3;
+		}
+		50% {
+			transform: translateY(50vh) translateX(10px) scale(1);
+			opacity: 0.8;
+		}
+		90% {
+			opacity: 0.3;
+		}
 	}
 
 	.header {
@@ -208,19 +262,44 @@
 	}
 
 	.section {
-		background: rgba(255, 255, 255, 0.03);
-		backdrop-filter: blur(15px);
-		border: 1px solid rgba(255, 255, 255, 0.05);
-		border-radius: 16px;
-		padding: 1.5rem;
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		background: rgba(255, 255, 255, 0.08);
+		backdrop-filter: blur(25px);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 24px;
+		padding: 2rem;
+		box-shadow:
+			0 8px 32px rgba(0, 0, 0, 0.3),
+			0 2px 16px rgba(0, 0, 0, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		transition: all 0.4s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.section::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(135deg,
+			rgba(255, 255, 255, 0.08) 0%,
+			rgba(255, 255, 255, 0.04) 50%,
+			rgba(255, 255, 255, 0.02) 100%);
+		border-radius: 24px;
+		pointer-events: none;
+		z-index: -1;
 	}
 
 	.section:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-		border-color: rgba(255, 255, 255, 0.1);
+		transform: translateY(-8px);
+		box-shadow:
+			0 16px 48px rgba(0, 0, 0, 0.4),
+			0 8px 24px rgba(0, 0, 0, 0.3),
+			inset 0 1px 0 rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 255, 255, 0.18);
+		background: rgba(255, 255, 255, 0.12);
 	}
 
 	.about {
@@ -336,35 +415,86 @@
 	}
 
 	.skill-tag {
-		background: rgba(255, 255, 255, 0.05);
+		background: rgba(255, 255, 255, 0.08);
+		backdrop-filter: blur(8px);
 		color: #ffffff;
-		padding: 0.3rem 0.8rem;
-		border-radius: 15px;
-		font-size: 0.8rem;
-		border: 1px solid rgba(255, 255, 255, 0.1);
+		padding: 0.4rem 1rem;
+		border-radius: 20px;
+		font-size: 0.85rem;
+		border: 1px solid rgba(255, 255, 255, 0.15);
 		font-weight: 500;
-		transition: all 0.3s;
+		transition: all 0.3s ease;
+		box-shadow:
+			0 4px 12px rgba(0, 0, 0, 0.15),
+			0 1px 4px rgba(0, 0, 0, 0.1);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.skill-tag::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+		transition: left 0.5s;
 	}
 
 	.skill-tag:hover {
-		transform: scale(1.05);
-		background: rgba(255, 255, 255, 0.1);
-		border-color: rgba(255, 255, 255, 0.2);
+		transform: scale(1.08) translateY(-2px);
+		background: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 255, 255, 0.25);
+		box-shadow:
+			0 8px 24px rgba(0, 0, 0, 0.25),
+			0 4px 8px rgba(0, 0, 0, 0.15);
+	}
+
+	.skill-tag:hover::before {
+		left: 100%;
 	}
 
 	.education-content {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
-		background: rgba(255, 255, 255, 0.03);
-		padding: 1rem;
-		border-radius: 12px;
-		border: 1px solid rgba(255, 255, 255, 0.05);
-		transition: transform 0.3s;
+		gap: 1.2rem;
+		background: rgba(255, 255, 255, 0.08);
+		backdrop-filter: blur(15px);
+		padding: 1.5rem;
+		border-radius: 20px;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		transition: all 0.4s ease;
+		box-shadow:
+			0 6px 20px rgba(0, 0, 0, 0.2),
+			0 2px 8px rgba(0, 0, 0, 0.15);
+		position: relative;
+		overflow: hidden;
+		justify-content: center;
+	}
+
+	.education-content::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(135deg,
+			rgba(255, 255, 255, 0.06) 0%,
+			rgba(255, 255, 255, 0.03) 50%,
+			rgba(255, 255, 255, 0.01) 100%);
+		border-radius: 20px;
+		pointer-events: none;
 	}
 
 	.education-content:hover {
-		transform: translateY(-3px);
+		transform: translateY(-5px);
+		background: rgba(255, 255, 255, 0.12);
+		border-color: rgba(255, 255, 255, 0.18);
+		box-shadow:
+			0 12px 32px rgba(0, 0, 0, 0.3),
+			0 6px 16px rgba(0, 0, 0, 0.2);
 	}
 
 	.education-content i {
@@ -406,7 +536,8 @@
 			gap: 0.8rem;
 		}
 		.section {
-			padding: 1rem;
+			padding: 1.5rem;
+			border-radius: 20px;
 		}
 		.header {
 			padding: 1.5rem 1rem 0.5rem;
@@ -418,19 +549,19 @@
 			font-size: 1rem;
 		}
 		.skill-categories {
-			gap: 1rem;
+			gap: 1.2rem;
 		}
 		.skill-category-header {
-			padding: 0.4rem 0;
+			padding: 0.6rem 0;
 		}
 		.skill-tags-container.open {
-			max-height: 250px;
+			max-height: 280px;
 		}
 		.contact-education-section {
-			gap: 1.5rem;
+			gap: 1.8rem;
 		}
 		.education-section {
-			padding: 0.8rem;
+			padding: 1rem;
 		}
 	}
 </style>

@@ -60,9 +60,12 @@
 		padding: 0.5rem 1rem;
 		border-radius: 10px;
 		cursor: pointer;
-		transition: all 0.3s;
+		transition: all 0.3s ease;
 		font-size: 0.9rem;
 		font-weight: 500;
+		box-shadow:
+			0 4px 12px rgba(0, 0, 0, 0.15),
+			0 1px 4px rgba(0, 0, 0, 0.1);
 	}
 
 	.tab-btn:hover, .tab-btn.active {
@@ -70,6 +73,9 @@
 		border-color: #3b82f6;
 		color: #60a5fa;
 		transform: translateY(-2px);
+		box-shadow:
+			0 8px 20px rgba(0, 0, 0, 0.2),
+			0 4px 8px rgba(0, 0, 0, 0.15);
 	}
 
 	.skill-items {
@@ -88,13 +94,19 @@
 		border-radius: 20px;
 		font-size: 0.9rem;
 		border: 1px solid rgba(59, 130, 246, 0.3);
-		transition: all 0.3s;
+		transition: all 0.3s ease;
 		font-weight: 500;
+		box-shadow:
+			0 3px 10px rgba(0, 0, 0, 0.15),
+			0 1px 4px rgba(0, 0, 0, 0.1);
 	}
 
 	.skill-item:hover {
 		transform: scale(1.05);
 		background: rgba(59, 130, 246, 0.2);
 		border-color: #60a5fa;
+		box-shadow:
+			0 6px 16px rgba(0, 0, 0, 0.2),
+			0 3px 8px rgba(0, 0, 0, 0.15);
 	}
 </style>
