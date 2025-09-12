@@ -43,11 +43,11 @@
 							</button>
 							<div class="skill-tags-container" class:open={openSkillCategory === 'languages'}>
 								<div class="skill-tags">
-									<span class="skill-tag">Python</span>
-									<span class="skill-tag">TypeScript</span>
-									<span class="skill-tag">JavaScript</span>
-									<span class="skill-tag">SQL</span>
-									<span class="skill-tag">GraphQL</span>
+									<span class="skill-tag" data-skill="python">Python</span>
+									<span class="skill-tag" data-skill="typescript">TypeScript</span>
+									<span class="skill-tag" data-skill="javascript">JavaScript</span>
+									<span class="skill-tag" data-skill="sql">SQL</span>
+									<span class="skill-tag" data-skill="graphql">GraphQL</span>
 								</div>
 							</div>
 						</div>
@@ -62,12 +62,12 @@
 							</button>
 							<div class="skill-tags-container" class:open={openSkillCategory === 'frameworks'}>
 								<div class="skill-tags">
-									<span class="skill-tag">Django</span>
-									<span class="skill-tag">Django REST</span>
-									<span class="skill-tag">Flask</span>
-									<span class="skill-tag">React</span>
-									<span class="skill-tag">Node.js</span>
-									<span class="skill-tag">Express</span>
+									<span class="skill-tag" data-skill="django">Django</span>
+									<span class="skill-tag" data-skill="django-rest-framework">Django REST</span>
+									<span class="skill-tag" data-skill="flask">Flask</span>
+									<span class="skill-tag" data-skill="react">React</span>
+									<span class="skill-tag" data-skill="nodejs">Node.js</span>
+									<span class="skill-tag" data-skill="express">Express</span>
 								</div>
 							</div>
 						</div>
@@ -82,11 +82,11 @@
 							</button>
 							<div class="skill-tags-container" class:open={openSkillCategory === 'databases'}>
 								<div class="skill-tags">
-									<span class="skill-tag">PostgreSQL</span>
-									<span class="skill-tag">MySQL</span>
-									<span class="skill-tag">MongoDB</span>
-									<span class="skill-tag">Redis</span>
-									<span class="skill-tag">Elasticsearch</span>
+									<span class="skill-tag" data-skill="postgresql">PostgreSQL</span>
+									<span class="skill-tag" data-skill="mysql">MySQL</span>
+									<span class="skill-tag" data-skill="mongodb">MongoDB</span>
+									<span class="skill-tag" data-skill="redis">Redis</span>
+									<span class="skill-tag" data-skill="elasticsearch">Elasticsearch</span>
 								</div>
 							</div>
 						</div>
@@ -101,12 +101,12 @@
 							</button>
 							<div class="skill-tags-container" class:open={openSkillCategory === 'cloud'}>
 								<div class="skill-tags">
-									<span class="skill-tag">AWS</span>
-									<span class="skill-tag">Docker</span>
-									<span class="skill-tag">Kubernetes</span>
-									<span class="skill-tag">GCP</span>
-									<span class="skill-tag">Terraform</span>
-									<span class="skill-tag">CI/CD</span>
+									<span class="skill-tag" data-skill="aws">AWS</span>
+									<span class="skill-tag" data-skill="docker">Docker</span>
+									<span class="skill-tag" data-skill="kubernetes">Kubernetes</span>
+									<span class="skill-tag" data-skill="gcp">GCP</span>
+									<span class="skill-tag" data-skill="terraform">Terraform</span>
+									<span class="skill-tag" data-skill="jenkins">CI/CD</span>
 								</div>
 							</div>
 						</div>
@@ -121,12 +121,12 @@
 							</button>
 							<div class="skill-tags-container" class:open={openSkillCategory === 'tools'}>
 								<div class="skill-tags">
-									<span class="skill-tag">Git</span>
-									<span class="skill-tag">Bitbucket</span>
-									<span class="skill-tag">GitHub</span>
-									<span class="skill-tag">Jira</span>
-									<span class="skill-tag">Slack</span>
-									<span class="skill-tag">Postman</span>
+									<span class="skill-tag" data-skill="git">Git</span>
+									<span class="skill-tag" data-skill="bitbucket">Bitbucket</span>
+									<span class="skill-tag" data-skill="github">GitHub</span>
+									<span class="skill-tag" data-skill="jira">Jira</span>
+									<span class="skill-tag" data-skill="slack">Slack</span>
+									<span class="skill-tag" data-skill="postman">Postman</span>
 								</div>
 							</div>
 						</div>
@@ -453,6 +453,322 @@
 
 	.skill-tag:hover::before {
 		left: 100%;
+	}
+
+	/* Brand-specific colors for skill tags */
+
+	/* Languages */
+	.skill-tag[data-skill="python"] {
+		background: linear-gradient(135deg, #3776ab 0%, #4a90e2 30%, #ffd43b 70%, #ffed4e 100%) !important;
+		color: #1a1a1a !important;
+		border-color: #3776ab !important;
+	}
+
+	.skill-tag[data-skill="typescript"] {
+		background: linear-gradient(135deg, #3178c6 0%, #4c9cf8 50%, #6bb6ff 100%) !important;
+		color: white !important;
+		border-color: #3178c6 !important;
+	}
+
+	.skill-tag[data-skill="javascript"] {
+		background: linear-gradient(135deg, #f7df1e 0%, #f4c430 50%, #f39c12 100%) !important;
+		color: black !important;
+		border-color: #f7df1e !important;
+	}
+
+	.skill-tag[data-skill="sql"] {
+		background: linear-gradient(135deg, #336791 0%, #4a90e2 50%, #5ba0f2 100%) !important;
+		color: white !important;
+		border-color: #336791 !important;
+	}
+
+	.skill-tag[data-skill="graphql"] {
+		background: linear-gradient(135deg, #e10098 0%, #ff4081 50%, #ff6b9d 100%) !important;
+		color: white !important;
+		border-color: #e10098 !important;
+	}
+
+	/* Frameworks */
+	.skill-tag[data-skill="django"] {
+		background: linear-gradient(135deg, #092e20 0%, #44b78b 50%, #6cc04a 100%) !important;
+		color: white !important;
+		border-color: #092e20 !important;
+	}
+
+	.skill-tag[data-skill="django-rest-framework"] {
+		background: linear-gradient(135deg, #a30000 0%, #ff6b6b 50%, #ff9999 100%) !important;
+		color: white !important;
+		border-color: #a30000 !important;
+	}
+
+	.skill-tag[data-skill="flask"] {
+		background: linear-gradient(135deg, #000000 0%, #2c2c2c 50%, #404040 100%) !important;
+		color: white !important;
+		border-color: #000000 !important;
+	}
+
+	.skill-tag[data-skill="react"] {
+		background: linear-gradient(135deg, #61dafb 0%, #21a3c4 50%, #005f73 100%) !important;
+		color: white !important;
+		border-color: #61dafb !important;
+	}
+
+	.skill-tag[data-skill="nodejs"] {
+		background: linear-gradient(135deg, #339933 0%, #68a063 50%, #7cb518 100%) !important;
+		color: white !important;
+		border-color: #339933 !important;
+	}
+
+	.skill-tag[data-skill="express"] {
+		background: linear-gradient(135deg, #000000 0%, #2c2c2c 50%, #404040 100%) !important;
+		color: white !important;
+		border-color: #000000 !important;
+	}
+
+	/* Databases */
+	.skill-tag[data-skill="postgresql"] {
+		background: linear-gradient(135deg, #336791 0%, #4a90e2 50%, #5ba0f2 100%) !important;
+		color: white !important;
+		border-color: #336791 !important;
+	}
+
+	.skill-tag[data-skill="mysql"] {
+		background: linear-gradient(135deg, #4479a1 0%, #5a8fb8 30%, #f29111 70%, #ff8c00 100%) !important;
+		color: #1a1a1a !important;
+		border-color: #4479a1 !important;
+	}
+
+	.skill-tag[data-skill="mongodb"] {
+		background: linear-gradient(135deg, #47a248 0%, #6cc04a 50%, #7cb518 100%) !important;
+		color: white !important;
+		border-color: #47a248 !important;
+	}
+
+	.skill-tag[data-skill="redis"] {
+		background: linear-gradient(135deg, #dc382d 0%, #e74c3c 30%, #ff6b6b 70%, #ff9999 100%) !important;
+		color: white !important;
+		border-color: #dc382d !important;
+	}
+
+	.skill-tag[data-skill="elasticsearch"] {
+		background: linear-gradient(135deg, #005571 0%, #00bfb3 50%, #00d4c0 100%) !important;
+		color: white !important;
+		border-color: #005571 !important;
+	}
+
+	/* Cloud & DevOps */
+	.skill-tag[data-skill="aws"] {
+		background: linear-gradient(135deg, #ff9900 0%, #ff8c00 50%, #e67e00 100%) !important;
+		color: #1a1a1a !important;
+		border-color: #ff9900 !important;
+	}
+
+	.skill-tag[data-skill="docker"] {
+		background: linear-gradient(135deg, #2496ed 0%, #1e88e5 50%, #1565c0 100%) !important;
+		color: white !important;
+		border-color: #2496ed !important;
+	}
+
+	.skill-tag[data-skill="kubernetes"] {
+		background: linear-gradient(135deg, #326ce5 0%, #1976d2 50%, #0d47a1 100%) !important;
+		color: white !important;
+		border-color: #326ce5 !important;
+	}
+
+	.skill-tag[data-skill="gcp"] {
+		background: linear-gradient(135deg, #4285f4 0%, #1976d2 50%, #0d47a1 100%) !important;
+		color: white !important;
+		border-color: #4285f4 !important;
+	}
+
+	.skill-tag[data-skill="terraform"] {
+		background: linear-gradient(135deg, #623ce4 0%, #5e35b1 50%, #4527a0 100%) !important;
+		color: white !important;
+		border-color: #623ce4 !important;
+	}
+
+	.skill-tag[data-skill="jenkins"] {
+		background: linear-gradient(135deg, #d24939 0%, #e53935 50%, #c62828 100%) !important;
+		color: white !important;
+		border-color: #d24939 !important;
+	}
+
+	/* Tools & Technologies */
+	.skill-tag[data-skill="git"] {
+		background: linear-gradient(135deg, #f05032 0%, #e53935 50%, #c62828 100%) !important;
+		color: white !important;
+		border-color: #f05032 !important;
+	}
+
+	.skill-tag[data-skill="bitbucket"] {
+		background: linear-gradient(135deg, #0052cc 0%, #1976d2 50%, #0d47a1 100%) !important;
+		color: white !important;
+		border-color: #0052cc !important;
+	}
+
+	.skill-tag[data-skill="github"] {
+		background: linear-gradient(135deg, #181717 0%, #2d3748 50%, #4a5568 100%) !important;
+		color: white !important;
+		border-color: #181717 !important;
+	}
+
+	.skill-tag[data-skill="jira"] {
+		background: linear-gradient(135deg, #0052cc 0%, #1976d2 50%, #0d47a1 100%) !important;
+		color: white !important;
+		border-color: #0052cc !important;
+	}
+
+	.skill-tag[data-skill="slack"] {
+		background: linear-gradient(135deg, #4a154b 0%, #7b1fa2 50%, #6a1b9a 100%) !important;
+		color: white !important;
+		border-color: #4a154b !important;
+	}
+
+	.skill-tag[data-skill="postman"] {
+		background: linear-gradient(135deg, #ff6c37 0%, #ff5722 50%, #d84315 100%) !important;
+		color: white !important;
+		border-color: #ff6c37 !important;
+	}
+
+	/* Hover states for brand colors */
+	.skill-tag[data-skill="python"]:hover {
+		background: linear-gradient(135deg, #2e5f8f 0%, #3d7dd4 30%, #d4af37 70%, #e6b800 100%) !important;
+		border-color: #2e5f8f !important;
+	}
+
+	.skill-tag[data-skill="typescript"]:hover {
+		background: linear-gradient(135deg, #265a9f 0%, #e6e6e6 100%) !important;
+		border-color: #265a9f !important;
+	}
+
+	.skill-tag[data-skill="javascript"]:hover {
+		background: linear-gradient(135deg, #e6c914 0%, #d4a52a 50%, #b8860b 100%) !important;
+		border-color: #e6c914 !important;
+	}
+
+	.skill-tag[data-skill="sql"]:hover {
+		background: linear-gradient(135deg, #2a567a 0%, #3d7dd4 50%, #4a90e2 100%) !important;
+		border-color: #2a567a !important;
+	}
+
+	.skill-tag[data-skill="graphql"]:hover {
+		background: linear-gradient(135deg, #b3007a 0%, #e91e63 50%, #d81b60 100%) !important;
+		border-color: #b3007a !important;
+	}
+
+	.skill-tag[data-skill="django"]:hover {
+		background: linear-gradient(135deg, #0a3a2a 0%, #3a8f5c 50%, #4caf50 100%) !important;
+		border-color: #0a3a2a !important;
+	}
+
+	.skill-tag[data-skill="django-rest-framework"]:hover {
+		background: linear-gradient(135deg, #8a0000 0%, #e53935 50%, #c62828 100%) !important;
+		border-color: #8a0000 !important;
+	}
+
+	.skill-tag[data-skill="flask"]:hover {
+		background: linear-gradient(135deg, #1a1a1a 0%, #404040 50%, #616161 100%) !important;
+		border-color: #1a1a1a !important;
+	}
+
+	.skill-tag[data-skill="react"]:hover {
+		background: linear-gradient(135deg, #4fc3e7 0%, #1a8bb4 50%, #00695c 100%) !important;
+		border-color: #4fc3e7 !important;
+	}
+
+	.skill-tag[data-skill="nodejs"]:hover {
+		background: linear-gradient(135deg, #2d7a2d 0%, #4caf50 50%, #388e3c 100%) !important;
+		border-color: #2d7a2d !important;
+	}
+
+	.skill-tag[data-skill="express"]:hover {
+		background: linear-gradient(135deg, #1a1a1a 0%, #404040 50%, #616161 100%) !important;
+		border-color: #1a1a1a !important;
+	}
+
+	.skill-tag[data-skill="postgresql"]:hover {
+		background: linear-gradient(135deg, #2a567a 0%, #3d7dd4 50%, #4a90e2 100%) !important;
+		border-color: #2a567a !important;
+	}
+
+	.skill-tag[data-skill="mysql"]:hover {
+		background: linear-gradient(135deg, #3a6589 0%, #4a7a9f 30%, #d9820e 70%, #bf360c 100%) !important;
+		border-color: #3a6589 !important;
+	}
+
+	.skill-tag[data-skill="mongodb"]:hover {
+		background: linear-gradient(135deg, #3d8a3d 0%, #4caf50 50%, #388e3c 100%) !important;
+		border-color: #3d8a3d !important;
+	}
+
+	.skill-tag[data-skill="redis"]:hover {
+		background: linear-gradient(135deg, #b32d24 0%, #c0392b 30%, #e53935 70%, #c62828 100%) !important;
+		border-color: #b32d24 !important;
+	}
+
+	.skill-tag[data-skill="elasticsearch"]:hover {
+		background: linear-gradient(135deg, #004a5c 0%, #00d4c0 100%) !important;
+		border-color: #004a5c !important;
+	}
+
+	.skill-tag[data-skill="aws"]:hover {
+		background: linear-gradient(135deg, #e68a00 0%, #3d4955 100%) !important;
+		border-color: #e68a00 !important;
+	}
+
+	.skill-tag[data-skill="docker"]:hover {
+		background: linear-gradient(135deg, #1d7ed6 0%, #1565c0 50%, #0d47a1 100%) !important;
+		border-color: #1d7ed6 !important;
+	}
+
+	.skill-tag[data-skill="kubernetes"]:hover {
+		background: linear-gradient(135deg, #2952ce 0%, #1565c0 50%, #0d47a1 100%) !important;
+		border-color: #2952ce !important;
+	}
+
+	.skill-tag[data-skill="gcp"]:hover {
+		background: linear-gradient(135deg, #357ae8 0%, #1565c0 50%, #0d47a1 100%) !important;
+		border-color: #357ae8 !important;
+	}
+
+	.skill-tag[data-skill="terraform"]:hover {
+		background: linear-gradient(135deg, #522fce 0%, #4527a0 50%, #311b92 100%) !important;
+		border-color: #522fce !important;
+	}
+
+	.skill-tag[data-skill="jenkins"]:hover {
+		background: linear-gradient(135deg, #b33d31 0%, #d32f2f 50%, #b71c1c 100%) !important;
+		border-color: #b33d31 !important;
+	}
+
+	.skill-tag[data-skill="git"]:hover {
+		background: linear-gradient(135deg, #d84328 0%, #d32f2f 50%, #b71c1c 100%) !important;
+		border-color: #d84328 !important;
+	}
+
+	.skill-tag[data-skill="bitbucket"]:hover {
+		background: linear-gradient(135deg, #00449f 0%, #1565c0 50%, #0d47a1 100%) !important;
+		border-color: #00449f !important;
+	}
+
+	.skill-tag[data-skill="github"]:hover {
+		background: linear-gradient(135deg, #2d3748 0%, #4a5568 50%, #718096 100%) !important;
+		border-color: #2d3748 !important;
+	}
+
+	.skill-tag[data-skill="jira"]:hover {
+		background: linear-gradient(135deg, #00449f 0%, #1565c0 50%, #0d47a1 100%) !important;
+		border-color: #00449f !important;
+	}
+
+	.skill-tag[data-skill="slack"]:hover {
+		background: linear-gradient(135deg, #6b2d6b 0%, #8e24aa 50%, #7b1fa2 100%) !important;
+		border-color: #6b2d6b !important;
+	}
+
+	.skill-tag[data-skill="postman"]:hover {
+		background: linear-gradient(135deg, #e65c2f 0%, #f4511e 50%, #d84315 100%) !important;
+		border-color: #e65c2f !important;
 	}
 
 	.education-content {
