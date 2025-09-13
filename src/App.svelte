@@ -152,24 +152,53 @@
 </main>
 
 <style lang="css">
-	*, *::before, *::after {
+	/* Global CSS Reset */
+	:global(*), :global(*::before), :global(*::after) {
 		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
 	}
 
-	/* Fluid typography for better scaling */
+	:global(html), :global(body) {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		overflow-x: hidden;
+	}
+
 	:global(html) {
 		font-size: clamp(14px, 1.4vw, 16px);
 	}
 
+	:global(body) {
+		background: #000000;
+		color: #ffffff;
+		font-family: 'Inter', sans-serif;
+	}
+
+	:global(#app) {
+		width: 100%;
+		min-height: 100vh;
+		margin: 0;
+		padding: 0;
+	}
+
 	.portfolio {
 		min-height: 100vh;
+		min-height: 100dvh; /* Dynamic viewport height for mobile */
 		width: 100vw;
+		width: 100dvw; /* Dynamic viewport width for mobile */
+		max-width: 100vw;
 		display: flex;
 		flex-direction: column;
 		font-family: 'Inter', sans-serif;
 		background: #000000;
 		color: #ffffff;
 		position: relative;
+		margin: 0;
+		padding: 0;
+		overflow-x: hidden;
 	}
 
 	.background {
@@ -1001,8 +1030,13 @@
 		}
 	}
 
-	/* Mobile phones */
+	/* Mobile phones - iPhone 12 and newer Android devices */
 	@media (max-width: 768px) {
+		.portfolio {
+			min-height: 100vh;
+			min-height: 100dvh;
+		}
+
 		.content {
 			grid-template-columns: 1fr;
 			grid-template-rows: auto auto auto;
@@ -1010,163 +1044,317 @@
 				"about"
 				"experience"
 				"skills-contact-education";
-			padding: clamp(0.2rem, 0.42vw, 0.28rem);
-			gap: clamp(0.3rem, 0.56vw, 0.42rem);
+			padding: 1rem;
+			gap: 1rem;
 			min-height: auto;
+			width: 100%;
+			max-width: 100%;
 		}
 
 		.section {
-			padding: clamp(0.7rem, 0.84vw, 0.98rem);
-			border-radius: clamp(15px, 1.75vw, 12.6px);
+			padding: 1.5rem;
+			border-radius: 16px;
 			min-height: auto;
+			width: 100%;
+			max-width: 100%;
+			box-sizing: border-box;
 		}
 
 		.header {
-			padding: clamp(1rem, 1.4vw, 0.735rem) clamp(0.5rem, 0.7vw, 0.49rem) clamp(0.2rem, 0.42vw, 0.28rem);
+			padding: 2rem 1rem 1rem;
+			width: 100%;
+			max-width: 100%;
 		}
 
 		.header h1 {
-			font-size: clamp(1.5rem, 2.1vw, 1.26rem);
+			font-size: 2.5rem;
+			line-height: 1.2;
 		}
 
 		.header p {
-			font-size: clamp(0.8rem, 1.05vw, 0.539rem);
+			font-size: 1.2rem;
+			margin-top: 0.5rem;
+		}
+
+		.skills-section h3 {
+			font-size: 1.4rem;
+			margin-bottom: 1.5rem;
 		}
 
 		.skill-categories {
-			gap: clamp(0.8rem, 1.05vw, 0.7rem);
+			gap: 1.2rem;
 		}
 
 		.skill-category-header {
-			padding: clamp(0.4rem, 0.56vw, 0.35rem) 0;
+			padding: 0.8rem 0;
+			min-height: 48px; /* Better touch target */
+		}
+
+		.skill-category-header h4 {
+			font-size: 1rem;
 		}
 
 		.skill-tags-container.open {
-			max-height: clamp(200px, 24.5vh, 175px);
+			max-height: 300px;
+			padding: 1rem 0.5rem;
 		}
 
 		.contact-education-section {
-			gap: clamp(1rem, 1.4vw, 0.98rem);
+			gap: 1.5rem;
 		}
 
 		.education-section {
-			padding: clamp(0.5rem, 0.7vw, 0.56rem);
+			padding: 1rem;
+		}
+
+		.education-section h3 {
+			font-size: 1.3rem;
+			margin-bottom: 1rem;
 		}
 
 		.skill-tags {
-			justify-content: flex-start;
-			gap: clamp(0.2rem, 0.42vw, 0.245rem);
+			justify-content: center;
+			gap: 0.5rem;
+			flex-wrap: wrap;
 		}
 
 		.skill-tag {
-			font-size: clamp(0.65rem, 0.91vw, 0.49rem);
-			padding: clamp(0.2rem, 0.42vw, 0.196rem) clamp(0.5rem, 0.91vw, 0.49rem);
-		}
-
-		/* Additional mobile optimizations */
-		.skill-category h4 {
-			font-size: clamp(0.75rem, 0.91vw, 0.56rem);
+			font-size: 0.9rem;
+			padding: 0.6rem 1rem;
+			border-radius: 16px;
+			min-height: 40px; /* Better touch target */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
 		}
 
 		.education-content {
 			flex-direction: column;
 			text-align: center;
-			gap: clamp(0.5rem, 0.7vw, 0.56rem);
-			padding: clamp(0.7rem, 1.05vw, 0.63rem);
+			gap: 1rem;
+			padding: 1.5rem;
+		}
+
+		.education-content i {
+			font-size: 2rem;
 		}
 
 		.education-text h4 {
-			font-size: clamp(0.75rem, 0.91vw, 0.56rem);
+			font-size: 1.1rem;
+			margin-bottom: 0.5rem;
 		}
 
 		.education-text p {
-			font-size: clamp(0.7rem, 0.84vw, 0.525rem);
+			font-size: 1rem;
+			margin-bottom: 0.3rem;
+		}
+
+		.education-text .meta {
+			font-size: 0.9rem;
+		}
+
+		/* Ensure no horizontal scroll */
+		.unified-content {
+			width: 100%;
+			max-width: 100%;
+			overflow-x: hidden;
+		}
+	}
+
+	/* iPhone 12 Pro Max and larger Android phones */
+	@media (max-width: 428px) and (min-width: 391px) {
+		.header h1 {
+			font-size: 2.8rem;
+		}
+
+		.header p {
+			font-size: 1.3rem;
+		}
+
+		.content {
+			padding: 1.2rem;
+			gap: 1.2rem;
+		}
+
+		.section {
+			padding: 1.8rem;
+		}
+
+		.skill-tag {
+			font-size: 1rem;
+			padding: 0.7rem 1.2rem;
+		}
+	}
+
+	/* iPhone 12 Pro and similar sized devices */
+	@media (max-width: 390px) and (min-width: 361px) {
+		.header h1 {
+			font-size: 2.4rem;
+		}
+
+		.header p {
+			font-size: 1.1rem;
+		}
+
+		.content {
+			padding: 1rem;
+			gap: 1rem;
+		}
+
+		.section {
+			padding: 1.5rem;
+		}
+
+		.skill-tag {
+			font-size: 0.9rem;
+			padding: 0.6rem 1rem;
 		}
 	}
 
 	/* Very small screens */
 	@media (max-width: 360px) {
 		.header h1 {
-			font-size: clamp(1.2rem, 1.75vw, 0.98rem);
+			font-size: 2rem;
 		}
 
 		.header p {
-			font-size: clamp(0.7rem, 1.05vw, 0.539rem);
+			font-size: 1rem;
 		}
 
 		.content {
-			padding: clamp(0.1rem, 0.28vw, 0.105rem);
-			gap: clamp(0.2rem, 0.42vw, 0.21rem);
+			padding: 0.8rem;
+			gap: 0.8rem;
 		}
 
 		.section {
-			padding: clamp(0.5rem, 0.7vw, 0.49rem);
-			border-radius: clamp(8px, 1.05vw, 7px);
+			padding: 1.2rem;
+			border-radius: 12px;
 		}
 
 		.skill-tag {
-			font-size: clamp(0.6rem, 0.7vw, 0.455rem);
-			padding: clamp(0.15rem, 0.35vw, 0.14rem) clamp(0.4rem, 0.56vw, 0.315rem);
+			font-size: 0.8rem;
+			padding: 0.5rem 0.8rem;
+			min-height: 36px;
 		}
 
 		.skill-category h4 {
-			font-size: clamp(0.7rem, 0.91vw, 0.525rem);
+			font-size: 0.9rem;
 		}
 
 		.education-text h4 {
-			font-size: clamp(0.7rem, 0.91vw, 0.525rem);
+			font-size: 1rem;
 		}
 
 		.education-text p {
-			font-size: clamp(0.65rem, 0.7vw, 0.49rem);
+			font-size: 0.9rem;
 		}
 
 		.skill-tags-container.open {
-			max-height: clamp(150px, 17.5vh, 140px);
+			max-height: 250px;
 		}
 	}
 
-	/* Landscape orientation for small screens */
-	@media (max-height: 500px) and (orientation: landscape) {
+	/* Landscape orientation for mobile devices */
+	@media (max-height: 500px) and (orientation: landscape) and (max-width: 768px) {
+		.portfolio {
+			min-height: 100vh;
+			min-height: 100dvh;
+		}
+
 		.header {
-			padding: clamp(0.3rem, 0.56vw, 0.42rem) clamp(0.5rem, 0.7vw, 0.49rem);
+			padding: 1rem 1rem 0.5rem;
+		}
+
+		.header h1 {
+			font-size: 2rem;
+		}
+
+		.header p {
+			font-size: 1rem;
 		}
 
 		.content {
-			padding: clamp(0.1rem, 0.28vw, 0.105rem);
+			padding: 0.5rem;
+			gap: 0.5rem;
 			min-height: auto;
 		}
 
 		.section {
-			padding: clamp(0.4rem, 0.56vw, 0.42rem);
+			padding: 1rem;
 		}
 
 		.skill-tags {
-			flex-direction: row;
-			flex-wrap: wrap;
-			justify-content: flex-start;
-			gap: clamp(0.15rem, 0.28vw, 0.14rem);
+			justify-content: center;
+			gap: 0.3rem;
 		}
 
 		.skill-tag {
-			font-size: clamp(0.6rem, 0.7vw, 0.455rem);
-			padding: clamp(0.15rem, 0.28vw, 0.14rem) clamp(0.4rem, 0.56vw, 0.315rem);
+			font-size: 0.8rem;
+			padding: 0.4rem 0.8rem;
+			min-height: 32px;
+		}
+
+		.skill-categories {
+			gap: 0.8rem;
+		}
+
+		.skill-tags-container.open {
+			max-height: 200px;
+		}
+
+		.education-content {
+			flex-direction: row;
+			text-align: left;
+			gap: 1rem;
+			padding: 1rem;
+		}
+
+		.education-content i {
+			font-size: 1.5rem;
 		}
 	}
 
-	/* Improve mobile touch targets */
+	/* Improve mobile touch targets and ensure no overlap */
 	@media (max-width: 768px) {
 		.skill-category-header {
-			min-height: 44px;
+			min-height: 48px;
 			display: flex;
 			align-items: center;
+			justify-content: space-between;
+			padding: 0.8rem 0.5rem;
+			border-radius: 8px;
+			transition: background-color 0.2s ease;
+		}
+
+		.skill-category-header:hover,
+		.skill-category-header:focus {
+			background-color: rgba(255, 255, 255, 0.05);
 		}
 
 		.skill-tag {
-			min-height: 36px;
+			min-height: 40px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			cursor: pointer;
+			user-select: none;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		/* Prevent zooming on double tap for iOS */
+		.skill-category-header,
+		.skill-tag {
+			touch-action: manipulation;
+		}
+
+		/* Ensure sections don't overlap */
+		.section {
+			margin-bottom: 0.5rem;
+		}
+
+		.section:last-child {
+			margin-bottom: 2rem;
 		}
 	}
 </style>
