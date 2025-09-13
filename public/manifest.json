@@ -1,0 +1,9 @@
+{
+  "name": "Cyber Naskar - Senior Backend Engineer",
+  "short_name": "Cyber Naskar",
+  "description": "Portfolio of Cyber Naskar, Senior Backend Engineer specializing in Python, TypeScript, and GraphQL",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000"
+}

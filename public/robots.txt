@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Block access to sensitive files
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /*.json$
+Disallow: /*.md$
+
+# Allow access to CSS and JS files
+Allow: /assets/
+
+# Sitemap
+Sitemap: https://cyber1998.github.io/sitemap.xml
