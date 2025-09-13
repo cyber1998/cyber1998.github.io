@@ -18,7 +18,7 @@
 	</div>
 	<header class="header">
 		<h1>Cyber Naskar</h1>
-		<p>Backend Engineer</p>
+		<p>Senior Software Consultant</p>
 	</header>
 	<div class="content">
 		<div class="section about">

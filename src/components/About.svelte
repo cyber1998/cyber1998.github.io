@@ -1,7 +1,6 @@
 <div class="about">
-	<p>Backend Engineer</p>
 	<div class="description">
-		I'm a Backend Engineer specializing in Python, TypeScript, and GraphQL. I focus on building scalable microservices, optimizing database performance, and implementing AI-driven solutions. With expertise across multiple industries including AgriTech and E-commerce, I bring a wealth of experience in architecting robust backend systems.
+		I'm a software consultant specializing in Python, TypeScript, and GraphQL. I focus on building scalable microservices, optimizing database performance, and implementing AI-driven solutions. With expertise across multiple industries including AgriTech and E-commerce, I bring a wealth of experience in architecting robust backend systems.
 	</div>
 	<div class="contact-brief">
 		<div class="item">
@@ -31,18 +30,12 @@
 	.about {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: center;
-		text-align: center;
+		text-align: left;
 		min-height: 100%;
 	}
 
-	p {
-		font-size: 1.2rem;
-		margin: 0.5rem 0;
-		color: rgba(255, 255, 255, 0.7);
-		font-weight: 300;
-	}
 
 	.description {
 		margin: 1rem 0;
@@ -89,10 +82,6 @@
 			padding: 0 1rem;
 		}
 
-		p {
-			font-size: 1.1rem;
-		}
-
 		.description {
 			font-size: 0.95rem;
 			line-height: 1.5;
@@ -123,9 +112,6 @@
 			padding: 0 0.5rem;
 		}
 
-		p {
-			font-size: 1rem;
-		}
 
 		.description {
 			font-size: 0.9rem;
@@ -160,9 +146,6 @@
 			padding: 0 0.25rem;
 		}
 
-		p {
-			font-size: 0.95rem;
-		}
 
 		.description {
 			font-size: 0.85rem;
@@ -195,9 +178,6 @@
 			padding: 0 0.5rem;
 		}
 
-		p {
-			font-size: 1rem;
-		}
 
 		.description {
 			font-size: 0.9rem;
@@ -206,14 +186,14 @@
 
 		.contact-brief {
 			flex-direction: row;
-			justify-content: center;
+			justify-content: flex-start;
 			gap: 1rem;
 			margin: 0.5rem 0;
 		}
 
 		.item {
 			flex-direction: column;
-			align-items: center;
+			align-items: flex-start;
 			font-size: 0.8rem;
 		}
 
@@ -229,9 +209,6 @@
 			padding: 0 1.5rem;
 		}
 
-		p {
-			font-size: 1.3rem;
-		}
 
 		.description {
 			font-size: 1.1rem;

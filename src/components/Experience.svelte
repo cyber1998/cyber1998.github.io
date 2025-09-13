@@ -2,6 +2,11 @@
 	let currentSlide = 0;
 	let expandedExperience = null; // For mobile expandable cards
 
+	const monthMap = {
+		'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+		'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+	};
+
 	const experiences = [
 		{
 			title: "Senior Backend Engineer - Fulltime Consultant",
@@ -93,6 +98,103 @@
 		expandedExperience = expandedExperience === index ? null : index;
 	}
 
+	// Calculate total experience in months
+	function calculateTotalExperience() {
+		const now = new Date();
+		let totalMonths = 0;
+
+		experiences.forEach(exp => {
+			// Handle both em dash (–) and hyphen (-) separators
+			const parts = exp.duration.split(/\s*[–-]\s*/);
+			if (parts.length === 2) {
+				const startStr = parts[0].trim();
+				const endStr = parts[1].trim();
+
+				// Parse start date
+				const startParts = startStr.split(' ');
+				const startMonth = monthMap[startParts[0]];
+				const startYear = parseInt(startParts[1]);
+
+				// Parse end date
+				let endMonth, endYear;
+				let isPresent = false;
+				if (endStr === 'Present') {
+					endMonth = now.getMonth();
+					endYear = now.getFullYear();
+					isPresent = true;
+				} else {
+					const endParts = endStr.split(' ');
+					endMonth = monthMap[endParts[0]];
+					endYear = parseInt(endParts[1]);
+				}
+
+				// Calculate months
+				let months;
+				if (isPresent) {
+					// For current position, don't add +1 since we're in the current month
+					months = (endYear - startYear) * 12 + (endMonth - startMonth);
+				} else {
+					// For completed positions, add +1 to be inclusive of the end month
+					months = (endYear - startYear) * 12 + (endMonth - startMonth) + 1;
+				}
+
+				totalMonths += Math.max(0, months);
+			}
+		});
+
+		return totalMonths - 1;
+	}
+
+	// Format experience as years and months
+	function formatExperience(months) {
+		const years = Math.floor(months / 12);
+		const remainingMonths = months % 12;
+
+		if (years === 0) {
+			return `${remainingMonths} month${remainingMonths !== 1 ? 's' : ''}`;
+		} else if (remainingMonths === 0) {
+			return `${years} year${years !== 1 ? 's' : ''}`;
+		} else {
+			return `${years} year${years !== 1 ? 's' : ''} ${remainingMonths} month${remainingMonths !== 1 ? 's' : ''}`;
+		}
+	}
+
+	// Calculate individual experience duration
+	function calculateIndividualExperience(duration) {
+		const now = new Date();
+		const parts = duration.split(/\s*[–-]\s*/);
+		if (parts.length === 2) {
+			const startStr = parts[0].trim();
+			const endStr = parts[1].trim();
+
+			const startParts = startStr.split(' ');
+			const startMonth = monthMap[startParts[0]];
+			const startYear = parseInt(startParts[1]);
+
+			let endMonth, endYear;
+			let isPresent = false;
+			if (endStr === 'Present') {
+				endMonth = now.getMonth();
+				endYear = now.getFullYear();
+				isPresent = true;
+			} else {
+				const endParts = endStr.split(' ');
+				endMonth = monthMap[endParts[0]];
+				endYear = parseInt(endParts[1]);
+			}
+
+			let months;
+			if (isPresent) {
+				months = (endYear - startYear) * 12 + (endMonth - startMonth);
+			} else {
+				months = (endYear - startYear) * 12 + (endMonth - startMonth) + 1;
+			}
+
+			return formatExperience(months);
+		}
+		return '';
+	}
+
 	// Extract years from experiences for timeline
 	$: timelineYears = experiences.map((exp, index) => {
 		const yearMatch = exp.duration.match(/(\d{4})/);
@@ -102,6 +204,9 @@
 			company: exp.company.split(' ')[0] // Short company name
 		};
 	});
+
+	$: totalExperienceMonths = calculateTotalExperience();
+	$: totalExperienceFormatted = formatExperience(totalExperienceMonths);
 
 	// Timeline scroll functionality
 	let timelineElement;
@@ -150,8 +255,10 @@
 	<div class="experience">
 		<div class="experience-header">
 			<h2>Work Experience</h2>
-			<div class="experience-count">
-				<span class="total">{experiences.length} positions</span>
+			<div class="experience-stats">
+				<span class="experience-duration">{totalExperienceFormatted}</span>
+				<span class="experience-separator">•</span>
+				<span class="experience-count">{experiences.length} positions</span>
 			</div>
 		</div>	<div class="carousel">
 		<div class="slides-container">
@@ -237,6 +344,9 @@
 						</div>
 					</div>
 					<div class="mobile-card-content" class:open={expandedExperience === index} id="mobile-content-{index}">
+						<div class="mobile-experience-duration">
+							<span class="mobile-duration-badge">{calculateIndividualExperience(exp.duration)}</span>
+						</div>
 						<div class="mobile-location">
 							<i class="fas fa-map-marker-alt"></i>
 							<span>{exp.location}</span>
@@ -284,12 +394,28 @@
 		font-weight: 600;
 	}
 
-	.experience-count {
+	.experience-stats {
 		display: flex;
 		align-items: center;
+		gap: 0.5rem;
 		font-size: clamp(0.8rem, 2.5vw, 0.9rem);
 		color: rgba(255, 255, 255, 0.6);
 		flex-shrink: 0;
+		flex-wrap: wrap;
+	}
+
+	.experience-duration {
+		color: rgba(255, 255, 255, 0.8);
+		font-weight: 500;
+	}
+
+	.experience-separator {
+		color: rgba(255, 255, 255, 0.4);
+		font-weight: 300;
+	}
+
+	.experience-count {
+		color: rgba(255, 255, 255, 0.6);
 	}
 
 	.carousel {
@@ -919,6 +1045,22 @@
 
 	.mobile-card-content.open {
 		max-height: none;
+	}
+
+	.mobile-experience-duration {
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: 0.5rem;
+	}
+
+	.mobile-duration-badge {
+		background: rgba(59, 130, 246, 0.1);
+		color: #60a5fa;
+		padding: 0.25rem 0.75rem;
+		border-radius: 12px;
+		font-size: 0.8rem;
+		font-weight: 500;
+		border: 1px solid rgba(59, 130, 246, 0.2);
 	}
 
 	.mobile-location {
