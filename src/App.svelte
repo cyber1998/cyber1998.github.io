@@ -297,6 +297,7 @@
 		padding: clamp(0.5rem, 1.05vw, 0.56rem);
 		min-height: 0;
 		align-items: start;
+		overflow-x: hidden;
 	}
 
 	.section {
@@ -361,6 +362,7 @@
 		flex-direction: column;
 		height: 100%;
 		gap: 2rem;
+		overflow-x: hidden;
 	}
 
 	.skills-section h3 {
@@ -471,6 +473,9 @@
 			0 1px 4px rgba(0, 0, 0, 0.1);
 		position: relative;
 		overflow: hidden;
+		word-wrap: break-word;
+		hyphens: auto;
+		text-align: center;
 	}
 
 	.skill-tag::before {
@@ -1058,6 +1063,7 @@
 			width: 100%;
 			max-width: 100%;
 			box-sizing: border-box;
+			overflow-x: hidden;
 		}
 
 		.header {

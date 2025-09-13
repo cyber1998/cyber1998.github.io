@@ -1,5 +1,6 @@
 <script>
 	let currentSlide = 0;
+	let expandedExperience = null; // For mobile expandable cards
 
 	const experiences = [
 		{
@@ -88,6 +89,10 @@
 		currentSlide = index;
 	}
 
+	function toggleExperience(index) {
+		expandedExperience = expandedExperience === index ? null : index;
+	}
+
 	// Extract years from experiences for timeline
 	$: timelineYears = experiences.map((exp, index) => {
 		const yearMatch = exp.duration.match(/(\d{4})/);
@@ -142,17 +147,13 @@
 	}
 </script>
 
-<div class="experience">
-	<div class="experience-header">
-		<h2>Work Experience</h2>
-		<div class="slide-counter">
-			<span class="current">{currentSlide + 1}</span>
-			<span class="separator">/</span>
-			<span class="total">{experiences.length}</span>
-		</div>
-	</div>
-
-	<div class="carousel">
+	<div class="experience">
+		<div class="experience-header">
+			<h2>Work Experience</h2>
+			<div class="experience-count">
+				<span class="total">{experiences.length} positions</span>
+			</div>
+		</div>	<div class="carousel">
 		<div class="slides-container">
 			<div class="slide active">
 				<div class="slide-content" id="experience-slide-{currentSlide}">
@@ -176,10 +177,10 @@
 						<div
 							class="timeline"
 							bind:this={timelineElement}
-							on:mousedown={handleMouseDown}
-							on:mousemove={handleMouseMove}
-							on:mouseup={handleMouseUp}
-							on:mouseleave={handleMouseLeave}
+							onmousedown={handleMouseDown}
+							onmousemove={handleMouseMove}
+							onmouseup={handleMouseUp}
+							onmouseleave={handleMouseLeave}
 							role="tablist"
 							aria-label="Work experience timeline"
 							tabindex="0"
@@ -188,7 +189,7 @@
 								<button
 									class="timeline-dot"
 									class:active={index === currentSlide}
-									on:click={() => handleTimelineClick(index)}
+									onclick={() => handleTimelineClick(index)}
 									data-year={yearData.year}
 									role="tab"
 									aria-selected={index === currentSlide}
@@ -211,6 +212,48 @@
 			<div class="progress-fill" style="width: {((currentSlide + 1) / experiences.length) * 100}%"></div>
 		</div>
 	</div>
+
+	<!-- Mobile Experience Layout -->
+	<div class="mobile-experience">
+		<div class="mobile-experience-list">
+			{#each experiences as exp, index}
+				<div class="mobile-experience-card" class:expanded={expandedExperience === index}>
+					<div 
+						class="mobile-card-header" 
+						onclick={() => toggleExperience(index)}
+						onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleExperience(index); } }}
+						role="button"
+						tabindex="0"
+						aria-expanded={expandedExperience === index}
+						aria-controls="mobile-content-{index}"
+					>
+						<div class="mobile-card-title">
+							<h3>{exp.title}</h3>
+							<span class="mobile-company">{exp.company}</span>
+						</div>
+						<div class="mobile-card-meta">
+							<span class="mobile-duration">{exp.duration}</span>
+							<i class="fas fa-chevron-down mobile-expand-icon" class:rotated={expandedExperience === index}></i>
+						</div>
+					</div>
+					<div class="mobile-card-content" class:open={expandedExperience === index} id="mobile-content-{index}">
+						<div class="mobile-location">
+							<i class="fas fa-map-marker-alt"></i>
+							<span>{exp.location}</span>
+						</div>
+						<div class="mobile-achievements">
+							{#each exp.achievements as achievement}
+								<div class="mobile-achievement-item">
+									<i class="fas fa-check-circle"></i>
+									<span>{achievement}</span>
+								</div>
+							{/each}
+						</div>
+					</div>
+				</div>
+			{/each}
+		</div>
+	</div>
 </div>
 
 <style lang="css">
@@ -222,6 +265,7 @@
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 0 1rem;
+		overflow-x: hidden;
 	}
 
 	.experience-header {
@@ -240,18 +284,12 @@
 		font-weight: 600;
 	}
 
-	.slide-counter {
+	.experience-count {
 		display: flex;
 		align-items: center;
-		gap: 0.3rem;
 		font-size: clamp(0.8rem, 2.5vw, 0.9rem);
 		color: rgba(255, 255, 255, 0.6);
 		flex-shrink: 0;
-	}
-
-	.current {
-		color: #ffffff;
-		font-weight: 600;
 	}
 
 	.carousel {
@@ -261,6 +299,7 @@
 		position: relative;
 		min-height: clamp(300px, 50vh, 500px);
 		margin: 0 -0.5rem;
+		overflow-x: hidden;
 	}
 
 	.slides-container {
@@ -269,6 +308,7 @@
 		margin: 0 0.5rem;
 		min-height: 200px;
 		max-width: 100%;
+		overflow-x: hidden;
 	}
 
 	.slide {
@@ -322,6 +362,7 @@
 		background: rgba(0, 0, 0, 0.06);
 		border-radius: clamp(12px, 3vw, 20px);
 		backdrop-filter: blur(8px);
+		overflow: hidden;
 	}
 
 	.slide-content h3 {
@@ -369,6 +410,7 @@
 	.achievements {
 		flex: 1;
 		overflow-y: auto;
+		overflow-x: hidden;
 		padding: 1rem clamp(0.5rem, 2vw, 1rem);
 		max-height: clamp(150px, 30vh, 300px);
 		padding-right: clamp(1rem, 3vw, 1.5rem);
@@ -391,6 +433,7 @@
 		position: relative;
 		word-wrap: break-word;
 		hyphens: auto;
+		overflow: hidden;
 		box-shadow:
 			0 2px 8px rgba(0, 0, 0, 0.1),
 			0 1px 4px rgba(0, 0, 0, 0.08);
@@ -414,6 +457,13 @@
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
+	}
+
+	.achievement-item span {
+		flex: 1;
+		word-wrap: break-word;
+		hyphens: auto;
+		overflow-wrap: break-word;
 	}
 
 	.progress-container {
@@ -765,6 +815,227 @@
 
 		.achievement-item {
 			padding: 0.7rem 0.9rem;
+		}
+	}
+
+	/* Mobile Experience Layout Styles */
+	.carousel,
+	.progress-container {
+		display: none;
+	}
+
+	.mobile-experience {
+		display: block;
+	}
+
+	.mobile-experience-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.mobile-experience-card {
+		background: rgba(255, 255, 255, 0.08);
+		backdrop-filter: blur(25px);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 16px;
+		overflow: hidden;
+		transition: all 0.3s ease;
+		box-shadow:
+			0 8px 32px rgba(0, 0, 0, 0.3),
+			0 2px 16px rgba(0, 0, 0, 0.2);
+	}
+
+	.mobile-experience-card:hover {
+		transform: translateY(-2px);
+		border-color: rgba(255, 255, 255, 0.18);
+		background: rgba(255, 255, 255, 0.12);
+	}
+
+	.mobile-card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		padding: 1.2rem;
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+	}
+
+	.mobile-card-header:hover {
+		background-color: rgba(255, 255, 255, 0.05);
+	}
+
+	.mobile-card-title {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.mobile-card-title h3 {
+		color: #ffffff;
+		margin: 0 0 0.3rem 0;
+		font-size: 1.1rem;
+		font-weight: 600;
+		line-height: 1.3;
+		word-wrap: break-word;
+		hyphens: auto;
+	}
+
+	.mobile-company {
+		color: rgba(255, 255, 255, 0.8);
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+
+	.mobile-card-meta {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 0.3rem;
+		flex-shrink: 0;
+	}
+
+	.mobile-duration {
+		color: rgba(255, 255, 255, 0.6);
+		font-size: 0.8rem;
+		font-weight: 400;
+	}
+
+	.mobile-expand-icon {
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 0.9rem;
+		transition: transform 0.3s ease;
+	}
+
+	.mobile-expand-icon.rotated {
+		transform: rotate(180deg);
+	}
+
+	.mobile-card-content {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.4s ease-in-out;
+		background: rgba(0, 0, 0, 0.05);
+	}
+
+	.mobile-card-content.open {
+		max-height: none;
+	}
+
+	.mobile-location {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 1rem 1.2rem 0.5rem;
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 0.85rem;
+	}
+
+	.mobile-location i {
+		color: #60a5fa;
+		font-size: 0.8rem;
+		flex-shrink: 0;
+	}
+
+	.mobile-achievements {
+		padding: 0.5rem 1.2rem 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	.mobile-achievement-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.6rem;
+		line-height: 1.5;
+		font-size: 0.85rem;
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+	.mobile-achievement-item i {
+		color: #10b981;
+		font-size: 0.7rem;
+		margin-top: 0.2rem;
+		flex-shrink: 0;
+	}
+
+	.mobile-achievement-item span {
+		flex: 1;
+		word-wrap: break-word;
+		hyphens: auto;
+		overflow-wrap: break-word;
+	}
+
+	/* Responsive adjustments for larger screens */
+	@media (min-width: 768px) {
+		.mobile-card-title h3 {
+			font-size: 1.3rem;
+		}
+
+		.mobile-company {
+			font-size: 1rem;
+		}
+
+		.mobile-duration {
+			font-size: 0.9rem;
+		}
+
+		.mobile-location {
+			font-size: 0.9rem;
+		}
+
+		.mobile-achievement-item {
+			font-size: 0.9rem;
+		}
+
+		.mobile-card-header {
+			padding: 1.5rem;
+		}
+
+		.mobile-location {
+			padding: 1.2rem 1.5rem 0.5rem;
+		}
+
+		.mobile-achievements {
+			padding: 0.5rem 1.5rem 1.2rem;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.mobile-experience-list {
+			gap: 1.5rem;
+		}
+
+		.mobile-card-title h3 {
+			font-size: 1.4rem;
+		}
+
+		.mobile-company {
+			font-size: 1.1rem;
+		}
+
+		.mobile-duration {
+			font-size: 1rem;
+		}
+
+		.mobile-location {
+			font-size: 1rem;
+		}
+
+		.mobile-achievement-item {
+			font-size: 1rem;
+		}
+
+		.mobile-card-header {
+			padding: 1.8rem;
+		}
+
+		.mobile-location {
+			padding: 1.5rem 1.8rem 0.5rem;
+		}
+
+		.mobile-achievements {
+			padding: 0.5rem 1.8rem 1.5rem;
 		}
 	}
 </style>
