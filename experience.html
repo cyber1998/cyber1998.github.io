@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Experience · Cyber Naskar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo">CYBER NASKAR</div>
+      <nav>
+        <a href="landing.html#about">About</a>
+        <a href="experience.html">Experience</a>
+        <a href="chat.html" class="special-chat" aria-label="Visit interactive chat page">Chat</a>
+      </nav>
+    </header>
+
+    <section>
+      <h1 class="section-heading">Experience</h1>
+      <p class="section-subtitle">A brief look at where I’ve been focusing my time lately.</p>
+      <div class="experience-list" aria-label="Professional experience timeline">
+        <div class="exp-item">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Senior Software Consultant</div>
+              <div class="exp-company">Alleyway Capital LLC · Remote</div>
+            </div>
+            <div class="exp-meta">Sep 2023 – Present</div>
+          </div>
+          <ul class="exp-points">
+            <li>Led a small engineering team building LLM-backed product recommendation and quiz flows for Shopify merchants.</li>
+            <li>Owned multiple enterprise clients end-to-end, from custom feature design to deployment and iteration.</li>
+            <li>Optimised slow queries and database bottlenecks, cutting monthly infra spend and improving reliability.</li>
+            <li>Worked extensively with Shopify, email providers, tracking tools, and internal microservices.</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Senior Backend Engineer</div>
+              <div class="exp-company">FarmSetu Technologies Pvt. Ltd. · Nashik</div>
+            </div>
+            <div class="exp-meta">Dec 2021 – Sep 2023</div>
+          </div>
+          <ul class="exp-points">
+            <li>Designed and implemented GraphQL/REST services with complex business rules and cross-service communication.</li>
+            <li>Improved latency and reliability of APIs and database operations for production workloads.</li>
+            <li>Collaborated with product and business teams to deliver features on tight timelines.</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Backend Engineer & earlier roles</div>
+              <div class="exp-company">uFaber, KisanHub, Zephony, Technokrats</div>
+            </div>
+            <div class="exp-meta">2018 – 2021</div>
+          </div>
+          <ul class="exp-points">
+            <li>Worked across multiple startups building Python-based services with Django, Flask, and various SQL databases.</li>
+            <li>Gained experience shipping production features, debugging live issues, and working in lean engineering teams.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Cyber Naskar. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="mailto:cybr1998@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/cyber-naskar" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/cyber1998" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="landing.html">Home</a>
+      </div>
+    </footer>
+  </main>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

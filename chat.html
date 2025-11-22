@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Interactive Chat · Cyber Naskar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo">CYBER NASKAR</div>
+      <nav>
+        <a href="landing.html#about">About</a>
+        <a href="experience.html">Experience</a>
+        <a href="chat.html" class="special-chat" aria-label="Interactive chat current page">Chat</a>
+      </nav>
+    </header>
+
+    <section>
+      <h1 class="section-heading">Chat with Cyber</h1>
+      <p class="section-subtitle">Talk to a focused AI assistant trained on my work history, skills, and key projects.</p>
+      <div class="chat-layout">
+        <div>
+          <div class="about-label">What this is</div>
+          <p class="chat-description">This chat connects you to a self-hosted LLM that knows my experience, tools I use, and how I approach engineering problems. It’s designed to help you quickly understand whether I’m the right fit for your team or project.</p>
+          <br />
+          <div class="about-label">Ask the AI about</div>
+          <ul class="chat-description">
+            <li>What kind of projects I’ve worked on.</li>
+            <li>How I think about backend architecture and scaling.</li>
+            <li>Which stacks and tools I’m most comfortable with.</li>
+            <li>How I’d approach a problem similar to yours.</li>
+          </ul>
+          <p class="chat-note">When you’re ready to talk to the human version, just reach out and we’ll set up a short call.</p>
+        </div>
+        <div class="chat-widget" aria-label="Interactive chat widget">
+          <div class="chat-header">
+            <span>Cyber Assistant</span>
+            <div class="chat-status">
+              <span class="chat-status-dot"></span>
+              <span>Online · Self-hosted LLM</span>
+            </div>
+          </div>
+          <div class="chat-messages" id="chat-messages">
+            <div class="msg msg-bot">Hi, I’m a focused assistant trained on Cyber’s experience, skills, and projects. Ask me anything about how he works or whether he’s a fit for your use case.</div>
+          </div>
+          <form class="chat-input" id="chat-form" autocomplete="off">
+            <label for="chat-input" class="visually-hidden">Your message</label>
+            <input type="text" id="chat-input" placeholder="Ask about Cyber’s experience, skills, or a problem scenario..." aria-label="Message input" />
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Cyber Naskar. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="mailto:cybr1998@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/cyber-naskar" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/cyber1998" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="landing.html">Home</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('chat-input');
+    const container = document.getElementById('chat-messages');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+      appendMessage(text, 'user');
+      input.value = '';
+      placeholderResponse();
+    });
+
+    function appendMessage(text, who) {
+      const msg = document.createElement('div');
+      msg.className = 'msg ' + (who === 'user' ? 'msg-user' : 'msg-bot');
+      msg.textContent = text;
+      container.appendChild(msg);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function placeholderResponse() {
+      // Simulate latency for realism
+      setTimeout(() => {
+        appendMessage('This is a placeholder response. Integrate your self-hosted LLM endpoint to return real answers.', 'bot');
+      }, 500);
+    }
+  </script>
+</body>
+</html>
