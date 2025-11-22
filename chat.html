@@ -5,6 +5,8 @@
   <title>Interactive Chat · Cyber Naskar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
+  <!-- Optional: Load config.js if it exists (for environment-specific tokens) -->
+  <script src="config.js" onerror="console.log('No config.js found, using default configuration')"></script>
 </head>
 <body>
   <main>
@@ -39,7 +41,7 @@
             <span>Cyber Assistant</span>
             <div class="chat-status">
               <span class="chat-status-dot"></span>
-              <span>Online · Self-hosted LLM</span>
+              <span>Online · Powered by Botsonic</span>
             </div>
           </div>
           <div class="chat-messages" id="chat-messages">
@@ -65,36 +67,11 @@
     </footer>
   </main>
 
+  <!-- Botsonic Chat Widget -->
+  <script src="chat-widget.js"></script>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    const form = document.getElementById('chat-form');
-    const input = document.getElementById('chat-input');
-    const container = document.getElementById('chat-messages');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const text = input.value.trim();
-      if (!text) return;
-      appendMessage(text, 'user');
-      input.value = '';
-      placeholderResponse();
-    });
-
-    function appendMessage(text, who) {
-      const msg = document.createElement('div');
-      msg.className = 'msg ' + (who === 'user' ? 'msg-user' : 'msg-bot');
-      msg.textContent = text;
-      container.appendChild(msg);
-      container.scrollTop = container.scrollHeight;
-    }
-
-    function placeholderResponse() {
-      // Simulate latency for realism
-      setTimeout(() => {
-        appendMessage('This is a placeholder response. Integrate your self-hosted LLM endpoint to return real answers.', 'bot');
-      }, 500);
-    }
   </script>
 </body>
 </html>
