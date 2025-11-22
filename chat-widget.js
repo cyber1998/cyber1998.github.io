@@ -14,9 +14,17 @@
     token: window.BOTSONIC_TOKEN
   };
 
-  // Verify token is available
-  if (!config.token) {
+  // Verify token is available and valid
+  if (!config.token || typeof config.token !== 'string' || config.token.trim() === '') {
     console.error('Botsonic token not configured. Please set window.BOTSONIC_TOKEN or update config.js');
+    return;
+  }
+
+  // Validate serviceBaseUrl
+  try {
+    new URL(config.serviceBaseUrl);
+  } catch (e) {
+    console.error('Invalid serviceBaseUrl:', config.serviceBaseUrl);
     return;
   }
 
@@ -34,13 +42,29 @@
     fjs.parentNode.insertBefore(js, fjs);
   })(window, document, "script", "Botsonic", "https://widget.botsonic.com/CDN/botsonic.min.js");
 
-  // Initialize with configuration once script loads
-  window.addEventListener('load', function() {
-    if (typeof Botsonic === 'function') {
-      Botsonic("init", {
-        serviceBaseUrl: config.serviceBaseUrl,
-        token: config.token
-      });
+  // Wait for Botsonic script to load, then initialize
+  let initAttempts = 0;
+  const maxAttempts = 50;
+  
+  function initBotsonic() {
+    if (typeof window.Botsonic === 'function') {
+      try {
+        window.Botsonic("init", {
+          serviceBaseUrl: config.serviceBaseUrl,
+          token: config.token
+        });
+        console.log('Botsonic initialized successfully with token:', config.token.substring(0, 8) + '...');
+      } catch (error) {
+        console.error('Error initializing Botsonic:', error);
+      }
+    } else if (initAttempts < maxAttempts) {
+      initAttempts++;
+      setTimeout(initBotsonic, 100);
+    } else {
+      console.error('Failed to initialize Botsonic after multiple attempts');
     }
-  });
+  }
+  
+  // Start initialization attempts
+  initBotsonic();
 })();
