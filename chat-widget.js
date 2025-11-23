@@ -44,6 +44,11 @@ async function sendMessageToAPI(container, text) {
     input_text: text,
     chat_id: window.__CHAT_ID
   };
+  const loader = document.createElement('div');
+  loader.className = 'msg msg-bot msg-loading loading-dots';
+  loader.textContent = 'Thinking';
+  container.appendChild(loader);
+  container.scrollTop = container.scrollHeight;
   try {
     const response = await fetch(endpoint, {
       method: 'POST',
@@ -56,25 +61,22 @@ async function sendMessageToAPI(container, text) {
     });
     if (!response.ok) throw new Error('API error: ' + response.status);
     const raw = await response.json();
-    const top = Array.isArray(raw) ? raw[0] : raw;
-    const data = top && top.data ? top.data : {};
-    const answer = data.answer || 'No response from server.';
-    appendMessage(container, answer, 'bot');
-
-    if (data.sources) {
-      try {
-        const sourcesArr = JSON.parse(data.sources);
-        if (Array.isArray(sourcesArr) && sourcesArr.length) {
-          const srcLines = sourcesArr.slice(0, 5).map(s => '• ' + truncate(cleanUrl(s.url), 80)).join('\n');
-          appendMessage(container, 'Sources:\n' + srcLines, 'bot');
-        }
-      } catch (e) {
-        // ignore malformed sources
-      }
+    // New response format: root object contains answer, sources[], chat_history[]
+    const answer = raw.answer || 'No response from server.';
+    loader.className = 'msg msg-bot';
+    loader.textContent = '';
+    await streamText(loader, answer);
+    if (Array.isArray(raw.sources) && raw.sources.length) {
+      const srcLines = raw.sources.slice(0,5).map(s => '• ' + truncate(cleanUrl(s.url||''),80)).join('\n');
+      appendMessage(container, 'Sources:\n' + srcLines, 'bot');
+    }
+    if (Array.isArray(raw.follow_up_questions) && raw.follow_up_questions.length) {
+      appendMessage(container, 'Follow-up questions:\n' + raw.follow_up_questions.map(q => '› ' + q).join('\n'), 'bot');
     }
   } catch (err) {
     console.error('Chat API error', err);
-    appendMessage(container, 'Sorry, there was a problem connecting to the chat server.', 'bot');
+    loader.className = 'msg msg-bot';
+    loader.textContent = 'Sorry, there was a problem connecting to the chat server.';
   }
 }
 
@@ -98,6 +100,21 @@ function truncate(str, max) {
 
 function cleanUrl(u) {
   try { const url = new URL(u); return url.origin + url.pathname; } catch { return u; }
+}
+
+async function streamText(node, fullText) {
+  const chars = [...fullText];
+  let idx = 0;
+  return new Promise(resolve => {
+    const interval = setInterval(() => {
+      node.textContent = chars.slice(0, idx + 1).join('');
+      idx++;
+      if (idx >= chars.length) {
+        clearInterval(interval);
+        resolve();
+      }
+    }, 12); // speed per character
+  });
 }
 
 document.addEventListener('DOMContentLoaded', initChat);
