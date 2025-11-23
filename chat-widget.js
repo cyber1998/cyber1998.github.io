@@ -49,6 +49,7 @@ async function sendMessageToAPI(container, text) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'token': chatConfig.token,
         ...(chatConfig.token && chatConfig.token !== 'd9a2f15b-d858-4938-8859-dd4d2447dcbd' ? { 'Authorization': 'Bearer ' + chatConfig.token } : {})
       },
       body: JSON.stringify(payload)
