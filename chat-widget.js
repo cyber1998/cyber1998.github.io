@@ -11,7 +11,7 @@
   const config = {
     serviceBaseUrl: "https://api-bot.writesonic.com/v1/botsonic/generate",
     // TODO: Move this to environment variable or server-side config
-    token: window.BOTSONIC_TOKEN
+    token: window.BOTSONIC_TOKEN || "d9a2f15b-d858-4938-8859-dd4d2447dcbd"
   };
 
   // Verify token is available and valid
@@ -46,7 +46,7 @@
     serviceBaseUrl: "https://api-bot.writesonic.com",
     token: "3255c3ee-fb9a-429c-93b7-c474ef0a82b1",
   });
-  
+
   // Wait for Botsonic script to load, then initialize
   let initAttempts = 0;
   const maxAttempts = 50;
