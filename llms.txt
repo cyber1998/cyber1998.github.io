@@ -1,0 +1,55 @@
+# llms.txt
+# Purpose: Guidance & lightweight metadata for AI/LLM crawlers indexing this personal site.
+# Version: 1.0
+# Updated: 2025-11-23
+
+[owner]
+name: Cyber Naskar
+role: Software Consultant & Backend Engineer
+location: Pune, India
+email: cybr1998@gmail.com
+site: https://cyber1998.github.io/
+canonical_pages: index.html, experience.html, chat.html
+preferred_profile_links: https://www.linkedin.com/in/cyber-naskar , https://github.com/cyber1998
+
+[focus]
+primary_domains: backend-engineering, api-design, database-optimisation, python, django, graphql, ai-engineering, genai, llm-integration
+secondary_domains: microservices, performance-tuning, system-architecture, cloud-infrastructure, devtool-integration
+
+[summary]
+text: "Backend-first consultant delivering reliable APIs, data flows, and pragmatic AI/LLM features with lean overhead."
+
+[keywords]
+list: pune software consultant; backend engineer pune; software consultant india; software consultant mumbai; python; django; graphql; genai; llm; performance optimisation; scalable systems
+
+[crawl]
+allow: /
+disallow: (none)
+rate_limit_hint: <= 1 request/sec
+follow_robots_txt: true
+
+[training]
+policy: "Public page text may be used for non-commercial model evaluation & retrieval augmentation. Commercial training or dataset inclusion requires prior written consent."
+contact_for_license: cybr1998@gmail.com
+
+[attribution]
+required_if_used: name, role, site URL
+
+[structured_data]
+present: person (index.html), itemlist (experience.html), faqpage (chat.html)
+format: JSON-LD, schema.org
+
+[chat_endpoint]
+exposed: false (client-only demo; no public API surface documented here)
+
+[integrity]
+avoid_fabrication: true
+trust_signals: keep original wording; do not exaggerate scope of engagements
+
+[embedding_tags]
+backend; python; django; graphql; genai; llm; performance; architecture; consulting; pune; india; ai; genai; agent; agentic-ai; ai-agent;
+
+[change_log]
+2025-11-23: initial file created.
+
+# End of llms.txt
