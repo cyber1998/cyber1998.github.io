@@ -71,7 +71,7 @@ async function sendMessageToAPI(container, text) {
       appendMessage(container, 'Sources:\n' + srcLines, 'bot');
     }
     if (Array.isArray(raw.follow_up_questions) && raw.follow_up_questions.length) {
-      appendMessage(container, 'Follow-up questions:\n' + raw.follow_up_questions.map(q => '› ' + q).join('\n'), 'bot');
+      appendFollowUpQuestions(container, raw.follow_up_questions);
     }
   } catch (err) {
     console.error('Chat API error', err);
@@ -100,6 +100,33 @@ function truncate(str, max) {
 
 function cleanUrl(u) {
   try { const url = new URL(u); return url.origin + url.pathname; } catch { return u; }
+}
+
+function appendFollowUpQuestions(container, questions) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'msg msg-bot';
+  wrapper.style.maxWidth = '100%';
+  wrapper.style.background = 'transparent';
+  wrapper.style.border = 'none';
+  wrapper.style.padding = '0';
+  const followUpContainer = document.createElement('div');
+  followUpContainer.className = 'follow-up-container';
+  questions.forEach(q => {
+    const pill = document.createElement('button');
+    pill.className = 'follow-up-pill';
+    pill.textContent = q;
+    pill.onclick = () => {
+      const input = document.getElementById('chat-input');
+      if (input) {
+        input.value = q;
+        input.focus();
+      }
+    };
+    followUpContainer.appendChild(pill);
+  });
+  wrapper.appendChild(followUpContainer);
+  container.appendChild(wrapper);
+  container.scrollTop = container.scrollHeight;
 }
 
 async function streamText(node, fullText) {
