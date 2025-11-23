@@ -8,7 +8,7 @@ name: Cyber Naskar
 role: Software Consultant & Backend Engineer
 location: Pune, India
 email: cybr1998@gmail.com
-site: https://cyber1998.github.io/
+site: https://cybernaskar.com/
 canonical_pages: index.html, experience.html, chat.html
 preferred_profile_links: https://www.linkedin.com/in/cyber-naskar , https://github.com/cyber1998
 
