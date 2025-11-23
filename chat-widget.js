@@ -9,7 +9,7 @@
 (function() {
   // Configuration - Replace with environment variable in production
   const config = {
-    serviceBaseUrl: "https://api-bot.writesonic.com",
+    serviceBaseUrl: "https://api-bot.writesonic.com/v1/botsonic/generate",
     // TODO: Move this to environment variable or server-side config
     token: window.BOTSONIC_TOKEN
   };
