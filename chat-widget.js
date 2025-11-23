@@ -1,75 +1,102 @@
-/**
- * Botsonic Chat Widget Integration
- * 
- * Configuration:
- * Set the BOTSONIC_TOKEN environment variable or update config.token
- * before deploying to production.
- */
+// Custom Chat Widget logic (migrated from inline script)
+// Configuration object: set via config.js (gitignored) or fallback values.
+// Provide window.CHAT_API_TOKEN and window.CHAT_API_BASE (without trailing slash) optionally.
 
-(function() {
-  // Configuration - Replace with environment variable in production
-  const config = {
-    serviceBaseUrl: "https://api-bot.writesonic.com/v1/botsonic/generate",
-    // TODO: Move this to environment variable or server-side config
-    token: window.BOTSONIC_TOKEN || "d9a2f15b-d858-4938-8859-dd4d2447dcbd"
-  };
+const chatConfig = {
+  apiBaseUrl: ('https://api-bot.writesonic.com/v1/botsonic/generate').replace(/\/$/, ''),
+  token: window.BOTSONIC_TOKEN || 'd9a2f15b-d858-4938-8859-dd4d2447dcbd'
+};
 
-  // Verify token is available and valid
-  if (!config.token || typeof config.token !== 'string' || config.token.trim() === '') {
-    console.error('Botsonic token not configured. Please set window.BOTSONIC_TOKEN or update config.js');
+function initChat() {
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const container = document.getElementById('chat-messages');
+  if (!form || !input || !container) {
+    console.error('Chat elements not found. Aborting chat init.');
     return;
   }
 
-  // Validate serviceBaseUrl
-  try {
-    new URL(config.serviceBaseUrl);
-  } catch (e) {
-    console.error('Invalid serviceBaseUrl:', config.serviceBaseUrl);
-    return;
-  }
-
-  // Initialize Botsonic widget
-  (function (w, d, s, o, f, js, fjs) {
-    w["botsonic_widget"] = o;
-    w[o] =
-      w[o] ||
-      function () {
-        (w[o].q = w[o].q || []).push(arguments);
-      };
-    (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
-    js.id = o;
-    js.src = f;
-    js.async = 1;
-    fjs.parentNode.insertBefore(js, fjs);
-  })(window, document, "script", "Botsonic", "https://widget.botsonic.com/CDN/botsonic.min.js");
-  Botsonic("init", {
-    serviceBaseUrl: "https://api-bot.writesonic.com",
-    token: "3255c3ee-fb9a-429c-93b7-c474ef0a82b1",
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    appendMessage(container, text, 'user');
+    input.value = '';
+    await sendMessageToAPI(container, text);
   });
+}
 
-  // Wait for Botsonic script to load, then initialize
-  let initAttempts = 0;
-  const maxAttempts = 50;
-  
-  function initBotsonic() {
-    if (typeof window.Botsonic === 'function') {
+function appendMessage(container, text, who) {
+  const msg = document.createElement('div');
+  msg.className = 'msg ' + (who === 'user' ? 'msg-user' : 'msg-bot');
+  msg.textContent = text;
+  container.appendChild(msg);
+  container.scrollTop = container.scrollHeight;
+}
+
+async function sendMessageToAPI(container, text) {
+  ensureChatId();
+  const endpoint = chatConfig.apiBaseUrl; // API expects payload with input_text & chat_id
+  const payload = {
+    input_text: text,
+    chat_id: window.__CHAT_ID
+  };
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(chatConfig.token && chatConfig.token !== 'd9a2f15b-d858-4938-8859-dd4d2447dcbd' ? { 'Authorization': 'Bearer ' + chatConfig.token } : {})
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) throw new Error('API error: ' + response.status);
+    const raw = await response.json();
+    const top = Array.isArray(raw) ? raw[0] : raw;
+    const data = top && top.data ? top.data : {};
+    const answer = data.answer || 'No response from server.';
+    appendMessage(container, answer, 'bot');
+
+    if (data.sources) {
       try {
-        window.Botsonic("init", {
-          serviceBaseUrl: config.serviceBaseUrl,
-          token: config.token
-        });
-        console.log('Botsonic initialized successfully with token:', config.token.substring(0, 8) + '...');
-      } catch (error) {
-        console.error('Error initializing Botsonic:', error);
+        const sourcesArr = JSON.parse(data.sources);
+        if (Array.isArray(sourcesArr) && sourcesArr.length) {
+          const srcLines = sourcesArr.slice(0, 5).map(s => '• ' + truncate(cleanUrl(s.url), 80)).join('\n');
+          appendMessage(container, 'Sources:\n' + srcLines, 'bot');
+        }
+      } catch (e) {
+        // ignore malformed sources
       }
-    } else if (initAttempts < maxAttempts) {
-      initAttempts++;
-      setTimeout(initBotsonic, 100);
-    } else {
-      console.error('Failed to initialize Botsonic after multiple attempts');
     }
+  } catch (err) {
+    console.error('Chat API error', err);
+    appendMessage(container, 'Sorry, there was a problem connecting to the chat server.', 'bot');
   }
-  
-  // Start initialization attempts
-  initBotsonic();
-})();
+}
+
+function ensureChatId() {
+  if (!window.__CHAT_ID) {
+    window.__CHAT_ID = generateUUIDv4();
+  }
+}
+
+function generateUUIDv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+function truncate(str, max) {
+  return str.length > max ? str.slice(0, max - 1) + '…' : str;
+}
+
+function cleanUrl(u) {
+  try { const url = new URL(u); return url.origin + url.pathname; } catch { return u; }
+}
+
+document.addEventListener('DOMContentLoaded', initChat);
