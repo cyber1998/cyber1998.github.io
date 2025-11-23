@@ -4,7 +4,7 @@
 
 const chatConfig = {
   apiBaseUrl: ('https://api-bot.writesonic.com/v1/botsonic/generate').replace(/\/$/, ''),
-  token: window.BOTSONIC_TOKEN || 'd9a2f15b-d858-4938-8859-dd4d2447dcbd'
+  token: window.BOTSONIC_TOKEN
 };
 
 function initChat() {
