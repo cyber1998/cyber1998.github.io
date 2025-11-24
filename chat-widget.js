@@ -3,8 +3,8 @@
 // Provide window.CHAT_API_TOKEN and window.CHAT_API_BASE (without trailing slash) optionally.
 
 const chatConfig = {
-  apiBaseUrl: ('https://api-bot.writesonic.com/v1/botsonic/generate').replace(/\/$/, ''),
-  token: window.BOTSONIC_TOKEN
+  // Use serverless function endpoint; keeps token server-side
+  apiBaseUrl: '/.netlify/functions/chat'
 };
 
 function initChat() {
@@ -53,9 +53,7 @@ async function sendMessageToAPI(container, text) {
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'token': chatConfig.token,
-        ...(chatConfig.token && chatConfig.token !== 'd9a2f15b-d858-4938-8859-dd4d2447dcbd' ? { 'Authorization': 'Bearer ' + chatConfig.token } : {})
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(payload)
     });

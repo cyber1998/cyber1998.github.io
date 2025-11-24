@@ -1,0 +1,8 @@
+[build]
+  # No build step needed for plain HTML/CSS/JS
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+
+# (Optional) Add a build command later if you introduce a bundler.
