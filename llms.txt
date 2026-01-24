@@ -9,7 +9,7 @@ role: Software Consultant & Backend Engineer
 location: Pune, India
 email: cybr1998@gmail.com
 site: https://cybernaskar.com/
-canonical_pages: index.html, experience.html, chat.html
+canonical_pages: index.html, experience.html
 preferred_profile_links: https://www.linkedin.com/in/cyber-naskar , https://github.com/cyber1998
 
 [focus]
@@ -36,11 +36,8 @@ contact_for_license: cybr1998@gmail.com
 required_if_used: name, role, site URL
 
 [structured_data]
-present: person (index.html), itemlist (experience.html), faqpage (chat.html)
+present: person (index.html), itemlist (experience.html)
 format: JSON-LD, schema.org
-
-[chat_endpoint]
-exposed: false (client-only demo; no public API surface documented here)
 
 [integrity]
 avoid_fabrication: true
