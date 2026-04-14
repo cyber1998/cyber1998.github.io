@@ -56,6 +56,7 @@
     </header>
 
     <section class="hero">
+      <div class="hero-orb"></div>
       <div class="hero-content">
         <div class="hero-tagline">
           <span class="hero-tagline-dot"></span>
@@ -70,7 +71,7 @@
           <a href="experience.html" class="btn-secondary">View experience</a>
         </div>
         <div class="hero-meta">
-          <span>7+ years experience</span>
+          <span>8+ years experience</span>
           <span>Pune, India</span>
           <span>Remote-friendly</span>
         </div>
@@ -104,17 +105,31 @@
             <div class="metric-label">Core Stack</div>
             <div class="stack-tags">
               <span class="stack-tag">Python</span>
-              <span class="stack-tag">Django</span>
-              <span class="stack-tag">Postgres</span>
+              <span class="stack-tag">Django, FastAPI</span>
+              <span class="stack-tag">Postgres, MySQL</span>
+              <span class="stack-tag">GraphQL</span>
+              <span class="stack-tag">MongoDB</span>
+              <span class="stack-tag">Redis</span>
+              <span class="stack-tag">Neo4j</span>
               <span class="stack-tag">TypeScript</span>
             </div>
           </div>
           <div class="metric">
             <div class="metric-label">Cloud</div>
             <div class="stack-tags">
-              <span class="stack-tag">AWS</span>
-              <span class="stack-tag">GCP</span>
+              <span class="stack-tag">AWS, GCP</span>
               <span class="stack-tag">Docker</span>
+            </div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">AI & Related Tools</div>
+            <div class="stack-tags">
+              <span class="stack-tag">Langchain, Pydantic AI</span>
+              <span class="stack-tag">AI Infrastructure Design</span>
+              <span class="stack-tag">Vector databases (Pinecone and pgvector)</span>
+              <span class="stack-tag">Most experience with Gemini, OpenAI, Anthropic, Deepseek, Z.AI and Kimi models</span>
+              <span class="stack-tag">Agent-assisted development</span>
+              <span class="stack-tag">Claude Code, Opencode (with rtk plugins)</span>
             </div>
           </div>
         </div>
@@ -176,6 +191,90 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const heroCard = document.querySelector('.hero-card');
+    const heroContent = document.querySelector('.hero-content');
+    const hero = document.querySelector('.hero');
+    const heroOrb = document.querySelector('.hero-orb');
+    
+    if (heroOrb && hero) {
+      let orbX = 0;
+      let orbY = 0;
+      let targetX = 0;
+      let targetY = 0;
+
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        targetX = e.clientX - rect.left;
+        targetY = e.clientY - rect.top;
+      });
+
+      hero.addEventListener('mouseleave', () => {
+        heroOrb.style.opacity = '0';
+      });
+
+      hero.addEventListener('mouseenter', () => {
+        heroOrb.style.opacity = '0.8';
+      });
+
+      function animateOrb() {
+        orbX += (targetX - orbX) * 0.08;
+        orbY += (targetY - orbY) * 0.08;
+        
+        heroOrb.style.transform = `translate(${orbX}px, ${orbY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animateOrb);
+      }
+      animateOrb();
+    }
+    
+    if (heroCard) {
+      const glare = document.createElement('div');
+      glare.className = 'glare';
+      heroCard.style.position = 'relative';
+      heroCard.appendChild(glare);
+
+      heroCard.addEventListener('mousemove', (e) => {
+        const rect = heroCard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 15;
+        const rotateY = (centerX - x) / 15;
+        
+        heroCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        heroCard.classList.add('tilt-active');
+        
+        const glareX = (x / rect.width) * 100;
+        const glareY = (y / rect.height) * 100;
+        glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%)`;
+      });
+
+      heroCard.addEventListener('mouseleave', () => {
+        heroCard.style.transform = '';
+        heroCard.classList.remove('tilt-active');
+      });
+    }
+
+    if (hero && heroContent) {
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const moveX = (x - centerX) / 50;
+        const moveY = (y - centerY) / 50;
+        
+        heroContent.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
+      });
+
+      hero.addEventListener('mouseleave', () => {
+        heroContent.style.transform = '';
+      });
+    }
   </script>
 </body>
 </html>
