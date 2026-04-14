@@ -132,7 +132,7 @@ nav a.active::after {
   padding-top: 20px;
   perspective: 1000px;
   position: relative;
-  overflow: clip;
+  overflow: visible;
 }
 
 .hero-orb {
@@ -336,6 +336,8 @@ nav a.active::after {
   position: relative;
   z-index: 1;
   background-image: linear-gradient(145deg, rgba(37, 99, 235, 0.06), transparent 35%);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .hero-card.tilt-active {
@@ -351,6 +353,7 @@ nav a.active::after {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
+  will-change: background;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0) 0%,
@@ -361,11 +364,6 @@ nav a.active::after {
 
 .hero-card:hover .glare {
   opacity: 0.6;
-}
-
-.hero-card .hero-card-header,
-.hero-card .hero-card-footer {
-  transform: translateZ(15px);
 }
 
 .hero-card-header {
