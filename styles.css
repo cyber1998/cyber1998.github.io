@@ -132,7 +132,7 @@ nav a.active::after {
   padding-top: 20px;
   perspective: 1000px;
   position: relative;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .hero-orb {
@@ -330,11 +330,12 @@ nav a.active::after {
   border: 1px solid var(--border);
   padding: 28px;
   box-shadow: var(--shadow-md);
-  animation: slideUp 0.8s ease-out 0.2s backwards, float 6s ease-in-out infinite 1s;
+  animation: slideUp 0.8s ease-out 0.2s backwards;
   transform-style: preserve-3d;
   transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
   position: relative;
   z-index: 1;
+  background-image: linear-gradient(145deg, rgba(37, 99, 235, 0.06), transparent 35%);
 }
 
 .hero-card.tilt-active {
@@ -362,23 +363,9 @@ nav a.active::after {
   opacity: 0.6;
 }
 
-.hero-card .metric {
-  transform: translateZ(20px);
-  transition: transform 0.15s ease-out;
-}
-
 .hero-card .hero-card-header,
 .hero-card .hero-card-footer {
   transform: translateZ(15px);
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotateX(0) rotateY(0);
-  }
-  50% {
-    transform: translateY(-10px) rotateX(1deg) rotateY(-1deg);
-  }
 }
 
 .hero-card-header {
@@ -399,37 +386,77 @@ nav a.active::after {
   font-weight: 500;
 }
 
-.hero-metrics {
+.glance-stats {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
 }
 
-.metric {
-  padding: 16px;
+.glance-stat {
+  padding: 12px;
   border-radius: var(--radius-md);
   background: var(--bg);
   border: 1px solid var(--border-subtle);
-  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 82px;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: glanceReveal 0.5s ease-out forwards;
 }
 
-.metric:hover {
-  border-color: var(--border);
-}
-
-.metric-label {
-  font-size: 0.75rem;
+.glance-stat-label {
+  font-size: 0.7rem;
   color: var(--text-muted);
-  margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-.metric-value {
-  font-size: 1.1rem;
+.glance-stat-value {
+  font-size: 0.95rem;
+  line-height: 1.35;
   font-weight: 600;
   color: var(--text-primary);
+}
+
+.glance-block {
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.7);
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: glanceReveal 0.55s ease-out forwards;
+}
+
+.glance-stats .glance-stat:nth-child(1) { animation-delay: 0.22s; }
+.glance-stats .glance-stat:nth-child(2) { animation-delay: 0.3s; }
+.glance-stats .glance-stat:nth-child(3) { animation-delay: 0.38s; }
+
+.glance-block:nth-of-type(1) { animation-delay: 0.46s; }
+.glance-block:nth-of-type(2) { animation-delay: 0.56s; }
+.glance-block:nth-of-type(3) { animation-delay: 0.66s; }
+
+@keyframes glanceReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.metric-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .stack-tags {
@@ -443,7 +470,7 @@ nav a.active::after {
   padding: 4px 10px;
   border-radius: var(--radius-full);
   font-size: 0.72rem;
-  background: var(--bg-elevated);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid var(--border);
   color: var(--text-tertiary);
   transition: all var(--transition-fast);
@@ -695,8 +722,13 @@ footer {
     gap: 40px;
   }
   
-  .hero-metrics {
+  .glance-stats {
     grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .glance-stat {
+    min-height: initial;
   }
   
   .cta-section {
@@ -715,6 +747,29 @@ footer {
   footer {
     flex-direction: column;
     gap: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  main,
+  .hero-content,
+  .hero-card,
+  .glance-stat,
+  .glance-block,
+  .hero-tagline-dot::after {
+    animation: none !important;
+  }
+
+  .hero-content,
+  .hero-card,
+  .btn-primary,
+  .btn-secondary,
+  .stack-tag {
+    transition: none !important;
   }
 }
 

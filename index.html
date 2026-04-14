@@ -82,55 +82,55 @@
           <span>At a glance</span>
           <span class="hero-pill">Senior-level</span>
         </div>
-        <div class="hero-metrics">
-          <div class="metric">
-            <div class="metric-label">Clients</div>
-            <div class="metric-value">7+</div>
-            <div class="stack-tags">
-              <span class="stack-tag">SaaS</span>
-              <span class="stack-tag">E-commerce</span>
-            </div>
+        <div class="glance-stats">
+          <div class="glance-stat">
+            <span class="glance-stat-label">Experience</span>
+            <strong class="glance-stat-value">8+ years</strong>
           </div>
-          <div class="metric">
-            <div class="metric-label">Focus</div>
-            <div class="metric-value">Backend</div>
-            <div class="stack-tags">
-              <span class="stack-tag">APIs</span>
-              <span class="stack-tag">Data</span>
-            </div>
+          <div class="glance-stat">
+            <span class="glance-stat-label">Client work</span>
+            <strong class="glance-stat-value">7+ teams</strong>
+          </div>
+          <div class="glance-stat">
+            <span class="glance-stat-label">Primary focus</span>
+            <strong class="glance-stat-value">Backend + AI</strong>
           </div>
         </div>
-        <div class="hero-metrics">
-          <div class="metric">
-            <div class="metric-label">Core Stack</div>
-            <div class="stack-tags">
-              <span class="stack-tag">Python</span>
-              <span class="stack-tag">Django, FastAPI</span>
-              <span class="stack-tag">Postgres, MySQL</span>
-              <span class="stack-tag">GraphQL</span>
-              <span class="stack-tag">MongoDB</span>
-              <span class="stack-tag">Redis</span>
-              <span class="stack-tag">Neo4j</span>
-              <span class="stack-tag">TypeScript</span>
-            </div>
+
+        <div class="glance-block">
+          <div class="metric-label">Core stack</div>
+          <div class="stack-tags">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Django</span>
+            <span class="stack-tag">FastAPI</span>
+            <span class="stack-tag">GraphQL</span>
+            <span class="stack-tag">Postgres</span>
+            <span class="stack-tag">MySQL</span>
+            <span class="stack-tag">Redis</span>
+            <span class="stack-tag">TypeScript</span>
           </div>
-          <div class="metric">
-            <div class="metric-label">Cloud</div>
-            <div class="stack-tags">
-              <span class="stack-tag">AWS, GCP</span>
-              <span class="stack-tag">Docker</span>
-            </div>
+        </div>
+
+        <div class="glance-block">
+          <div class="metric-label">Cloud & infrastructure</div>
+          <div class="stack-tags">
+            <span class="stack-tag">AWS</span>
+            <span class="stack-tag">GCP</span>
+            <span class="stack-tag">Docker</span>
+            <span class="stack-tag">Pinecone</span>
+            <span class="stack-tag">pgvector</span>
           </div>
-          <div class="metric">
-            <div class="metric-label">AI & Related Tools</div>
-            <div class="stack-tags">
-              <span class="stack-tag">Langchain, Pydantic AI</span>
-              <span class="stack-tag">AI Infrastructure Design</span>
-              <span class="stack-tag">Vector databases (Pinecone and pgvector)</span>
-              <span class="stack-tag">Most experience with Gemini, OpenAI, Anthropic, Deepseek, Z.AI and Kimi models</span>
-              <span class="stack-tag">Agent-assisted development</span>
-              <span class="stack-tag">Claude Code, Opencode (with rtk plugins)</span>
-            </div>
+        </div>
+
+        <div class="glance-block">
+          <div class="metric-label">AI implementation</div>
+          <div class="stack-tags">
+            <span class="stack-tag">LangChain</span>
+            <span class="stack-tag">PydanticAI</span>
+            <span class="stack-tag">OpenAI</span>
+            <span class="stack-tag">Gemini</span>
+            <span class="stack-tag">Anthropic</span>
+            <span class="stack-tag">Agentic workflows</span>
           </div>
         </div>
         <div class="hero-card-footer">
@@ -196,38 +196,55 @@
     const heroContent = document.querySelector('.hero-content');
     const hero = document.querySelector('.hero');
     const heroOrb = document.querySelector('.hero-orb');
-    
-    if (heroOrb && hero) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const pointerEffectsEnabled = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (heroOrb && hero && !reducedMotion && pointerEffectsEnabled) {
       let orbX = 0;
       let orbY = 0;
       let targetX = 0;
       let targetY = 0;
+      let isOrbActive = false;
 
-      hero.addEventListener('mousemove', (e) => {
+      const animateOrb = () => {
+        if (!isOrbActive) {
+          return;
+        }
+
+        orbX += (targetX - orbX) * 0.1;
+        orbY += (targetY - orbY) * 0.1;
+        heroOrb.style.transform = `translate(${orbX}px, ${orbY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animateOrb);
+      };
+
+      hero.addEventListener('mouseenter', (event) => {
         const rect = hero.getBoundingClientRect();
-        targetX = e.clientX - rect.left;
-        targetY = e.clientY - rect.top;
+        targetX = event.clientX - rect.left;
+        targetY = event.clientY - rect.top;
+        orbX = targetX;
+        orbY = targetY;
+        heroOrb.style.opacity = '0.75';
+        if (!isOrbActive) {
+          isOrbActive = true;
+          requestAnimationFrame(animateOrb);
+        }
+      });
+
+      hero.addEventListener('mousemove', (event) => {
+        const rect = hero.getBoundingClientRect();
+        targetX = event.clientX - rect.left;
+        targetY = event.clientY - rect.top;
       });
 
       hero.addEventListener('mouseleave', () => {
+        isOrbActive = false;
         heroOrb.style.opacity = '0';
       });
-
-      hero.addEventListener('mouseenter', () => {
-        heroOrb.style.opacity = '0.8';
-      });
-
-      function animateOrb() {
-        orbX += (targetX - orbX) * 0.08;
-        orbY += (targetY - orbY) * 0.08;
-        
-        heroOrb.style.transform = `translate(${orbX}px, ${orbY}px) translate(-50%, -50%)`;
-        requestAnimationFrame(animateOrb);
-      }
-      animateOrb();
+    } else if (heroOrb) {
+      heroOrb.style.display = 'none';
     }
-    
-    if (heroCard) {
+
+    if (heroCard && !reducedMotion && pointerEffectsEnabled) {
       const glare = document.createElement('div');
       glare.className = 'glare';
       heroCard.style.position = 'relative';
@@ -254,10 +271,11 @@
       heroCard.addEventListener('mouseleave', () => {
         heroCard.style.transform = '';
         heroCard.classList.remove('tilt-active');
+        glare.style.background = '';
       });
     }
 
-    if (hero && heroContent) {
+    if (hero && heroContent && !reducedMotion && pointerEffectsEnabled) {
       hero.addEventListener('mousemove', (e) => {
         const rect = hero.getBoundingClientRect();
         const x = e.clientX - rect.left;
