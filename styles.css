@@ -517,18 +517,77 @@ nav a.active::after {
 }
 
 .chat-page .chat-container {
-  flex: 1;
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
-  min-height: 0;
+  height: clamp(400px, 62vh, 620px);
+  transition: height var(--transition-smooth), max-width var(--transition-smooth);
 }
 
 .chat-page .chat-messages {
   flex: 1;
   min-height: 0;
   max-height: none;
-  height: 45vh;
+}
+
+.chat-page.chat-expanded .chat-container {
+  max-width: min(920px, 100%);
+  height: calc(100vh - 240px);
+  height: calc(100dvh - 240px);
+}
+
+.chat-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px 8px;
+}
+
+.chat-prompt {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-tertiary);
+  border-radius: var(--radius-full);
+  padding: 6px 13px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  cursor: pointer;
+  max-width: 100%;
+  transition: all var(--transition-fast);
+}
+
+.chat-prompt:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+.chat-expand {
+  margin-left: auto;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.chat-expand:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+.chat-expand svg {
+  width: 13px;
+  height: 13px;
 }
 
 .chat-container {
@@ -1058,6 +1117,26 @@ footer {
     max-height: 420px;
   }
 
+  .chat-page .chat-container {
+    height: 70vh;
+    height: 70dvh;
+  }
+
+  .chat-page.chat-expanded .chat-container {
+    max-width: 100%;
+    height: calc(100dvh - 190px);
+  }
+
+  .chat-prompt {
+    font-size: 0.72rem;
+    padding: 5px 11px;
+  }
+
+  .chat-expand {
+    width: 28px;
+    height: 28px;
+  }
+
   .chat-send {
     padding: 12px 16px;
   }
@@ -1090,7 +1169,10 @@ footer {
   .btn-secondary,
   .stack-tag,
   .chat-send,
-  .chat-input {
+  .chat-input,
+  .chat-expand,
+  .chat-prompt,
+  .chat-page .chat-container {
     transition: none !important;
   }
 }

@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Chat with my AI · Cyber Naskar" />
   <meta name="twitter:description" content="Ask Cyber Naskar's AI assistant anything about his experience and skills." />
   <meta name="twitter:image" content="https://cybernaskar.com/og-image.png" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body>
   <main>
@@ -35,6 +35,22 @@
       <p class="section-subtitle">Ask anything about my experience, expertise, and how I can help your team.</p>
       <div class="chat-container" aria-label="AI chat">
         <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
+        <div class="chat-prompts" id="chat-prompts">
+          <button type="button" class="chat-expand" id="chat-expand" aria-label="Expand chat" aria-pressed="false" title="Expand chat">
+            <svg id="chat-expand-icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3"/>
+              <path d="M21 8V5a2 2 0 0 0-2-2h-3"/>
+              <path d="M3 16v3a2 2 0 0 0 2 2h3"/>
+              <path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+            </svg>
+            <svg id="chat-expand-icon-collapse" hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M8 3v3a2 2 0 0 1-2 2H3"/>
+              <path d="M21 8h-3a2 2 0 0 1-2-2V3"/>
+              <path d="M3 16h3a2 2 0 0 1 2 2v3"/>
+              <path d="M16 21v-3a2 2 0 0 1 2-2h3"/>
+            </svg>
+          </button>
+        </div>
         <form class="chat-input-area" id="chat-form">
           <textarea id="chat-input" class="chat-input" rows="1" placeholder="Type a message…" aria-label="Type a message"></textarea>
           <button type="submit" class="chat-send">Send</button>
@@ -80,7 +96,11 @@
         return bubble;
       }
 
-      function scrollToBottom() {
+      function scrollToBottom(force) {
+        if (!force) {
+          const nearBottom = messagesEl.scrollHeight - messagesEl.scrollTop - messagesEl.clientHeight < 140;
+          if (!nearBottom) return;
+        }
         messagesEl.scrollTop = messagesEl.scrollHeight;
       }
 
@@ -99,15 +119,18 @@
         sendBtn.disabled = next;
       }
 
-      async function sendMessage() {
-        const text = inputEl.value.trim();
+      async function sendMessage(text) {
+        if (typeof text !== 'string') {
+          text = inputEl.value;
+        }
+        text = text.trim();
         if (!text || busy) return;
 
         inputEl.value = '';
         inputEl.style.height = 'auto';
         createBubble('user').textContent = text;
         addMessage('user', text);
-        scrollToBottom();
+        scrollToBottom(true);
 
         setBusy(true);
         const aiBubble = createBubble('ai');
@@ -115,10 +138,21 @@
         typing.className = 'chat-typing';
         typing.innerHTML = '<span></span><span></span><span></span>';
         aiBubble.appendChild(typing);
+        scrollToBottom(true);
 
         abortController = new AbortController();
         let fullText = '';
         let errored = false;
+        let renderFrame = null;
+
+        const scheduleRender = () => {
+          if (renderFrame) return;
+          renderFrame = requestAnimationFrame(() => {
+            renderFrame = null;
+            renderToBubble(aiBubble, fullText);
+            scrollToBottom();
+          });
+        };
 
         try {
           const response = await fetch(CHAT_API, {
@@ -149,8 +183,7 @@
                 if (!delta) continue;
                 if (typing.parentNode) typing.remove();
                 fullText += delta;
-                renderToBubble(aiBubble, fullText);
-                scrollToBottom();
+                scheduleRender();
               } catch (e) {
                 // ignore malformed chunks
               }
@@ -178,6 +211,10 @@
             throw new Error('Empty response');
           }
         } catch (err) {
+          if (renderFrame) {
+            cancelAnimationFrame(renderFrame);
+            renderFrame = null;
+          }
           if (err.name === 'AbortError') {
             setBusy(false);
             if (typing.parentNode) typing.remove();
@@ -189,11 +226,18 @@
         setBusy(false);
         if (typing.parentNode) typing.remove();
 
+        if (renderFrame) {
+          cancelAnimationFrame(renderFrame);
+          renderFrame = null;
+        }
+
         if (errored || !fullText) {
           aiBubble.textContent = '';
           aiBubble.classList.add('chat-error');
           aiBubble.textContent = "Sorry, I couldn't reach the assistant. Please try again.";
         } else {
+          renderToBubble(aiBubble, fullText);
+          scrollToBottom(true);
           addMessage('assistant', fullText);
         }
 
@@ -206,6 +250,55 @@
         welcome.innerHTML = DOMPurify.sanitize(marked.parse(welcome.textContent, { breaks: true }));
       }
       addMessage('assistant', welcome.textContent);
+
+      const PROMPTS = [
+        "What does Cyber work on currently?",
+        "What are Cyber's skills?",
+        "Breakdown Cyber's experience in years and months",
+        "What kind of AI skills does Cyber know?",
+        "What's Cyber's core tech stack?",
+        "Has Cyber shipped LLM features in production?",
+        "Can Cyber help optimize slow databases?",
+        "What does a consulting engagement look like?",
+        "Is Cyber available for new projects?",
+        "How does Cyber approach API design?",
+        "What GenAI experience does Cyber have?",
+        "Which cloud platforms does Cyber use?",
+        "What's Cyber's experience with GraphQL?",
+        "Has Cyber worked with startups?",
+        "How deep is Cyber's Django experience?",
+        "Can Cyber help design AI features for our product?",
+        "What kinds of clients does Cyber work with?",
+        "Does Cyber prefer remote or on-site work?",
+        "How fast can Cyber start a project?",
+        "Where is Cyber based?",
+        "How does Cyber handle scalability challenges?",
+        "What's Cyber's experience with agents and agentic workflows?"
+      ];
+
+      const promptsEl = document.getElementById('chat-prompts');
+      const expandBtn = document.getElementById('chat-expand');
+      const chatSection = document.getElementById('chat');
+
+      const pool = PROMPTS.slice();
+      for (let i = 0; i < 5 && pool.length; i++) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chat-prompt';
+        btn.textContent = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];
+        btn.addEventListener('click', () => sendMessage(btn.textContent));
+        promptsEl.insertBefore(btn, expandBtn);
+      }
+
+      expandBtn.addEventListener('click', () => {
+        const expanded = chatSection.classList.toggle('chat-expanded');
+        expandBtn.setAttribute('aria-pressed', String(expanded));
+        expandBtn.setAttribute('aria-label', expanded ? 'Collapse chat' : 'Expand chat');
+        expandBtn.title = expanded ? 'Collapse chat' : 'Expand chat';
+        document.getElementById('chat-expand-icon-expand').hidden = expanded;
+        document.getElementById('chat-expand-icon-collapse').hidden = !expanded;
+        inputEl.focus();
+      });
 
       formEl.addEventListener('submit', (e) => {
         e.preventDefault();
