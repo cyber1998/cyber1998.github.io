@@ -6,3 +6,15 @@
   directory = "netlify/functions"
 
 # (Optional) Add a build command later if you introduce a bundler.
+
+# Bump the ?v= query on the stylesheet link in the HTML files when styles.css changes.
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/styles.css"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
