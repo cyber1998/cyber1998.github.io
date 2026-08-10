@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="Chat with my AI · Cyber Naskar" />
   <meta name="twitter:description" content="Ask Cyber Naskar's AI assistant anything about his experience and skills." />
   <meta name="twitter:image" content="https://cybernaskar.com/og-image.png" />
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
   <main>
@@ -52,6 +52,9 @@
     </footer>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" integrity="sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js" integrity="sha384-+VfUPEb0PdtChMwmBcBmykRMDd+v7D/oFmB3rZM/puCMDYcIvF968OimRh4KQY9a" crossorigin="anonymous"></script>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -79,6 +82,15 @@
 
       function scrollToBottom() {
         messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function renderToBubble(text) {
+        if (typeof marked !== 'undefined' && typeof DOMPurify !== 'undefined') {
+          aiBubble.innerHTML = DOMPurify.sanitize(marked.parse(text, { breaks: true }));
+        } else {
+          aiBubble.style.whiteSpace = 'pre-wrap';
+          aiBubble.textContent = text;
+        }
       }
 
       function setBusy(next) {
@@ -137,7 +149,7 @@
                 if (!delta) continue;
                 if (typing.parentNode) typing.remove();
                 fullText += delta;
-                aiBubble.textContent = fullText;
+                renderToBubble(fullText);
                 scrollToBottom();
               } catch (e) {
                 // ignore malformed chunks
@@ -190,6 +202,9 @@
 
       const welcome = createBubble('ai');
       welcome.textContent = 'Hi, I\'m Cyber\'s AI assistant. Ask me anything about his experience, skills, or how he can help your team.';
+      if (typeof marked !== 'undefined' && typeof DOMPurify !== 'undefined') {
+        welcome.innerHTML = DOMPurify.sanitize(marked.parse(welcome.textContent, { breaks: true }));
+      }
       addMessage('assistant', welcome.textContent);
 
       formEl.addEventListener('submit', (e) => {
