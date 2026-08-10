@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat with my AI · Cyber Naskar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Chat with Cyber Naskar's AI assistant. Ask anything about his experience as a backend engineer and software consultant, his skills, and how he can help your team." />
+  <meta name="robots" content="index,follow" />
+  <meta name="author" content="Cyber Naskar" />
+  <link rel="canonical" href="https://cybernaskar.com/chat.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Chat with my AI · Cyber Naskar" />
+  <meta property="og:description" content="Ask Cyber Naskar's AI assistant anything about his experience, skills, and how he can help your team." />
+  <meta property="og:url" content="https://cybernaskar.com/chat.html" />
+  <meta property="og:image" content="https://cybernaskar.com/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Chat with my AI · Cyber Naskar" />
+  <meta name="twitter:description" content="Ask Cyber Naskar's AI assistant anything about his experience and skills." />
+  <meta name="twitter:image" content="https://cybernaskar.com/og-image.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo">Cyber Naskar</div>
+      <nav>
+        <a href="index.html">About</a>
+        <a href="experience.html">Experience</a>
+        <a href="chat.html" class="active">Chat <span class="nav-badge">AI</span></a>
+      </nav>
+    </header>
+
+    <section id="chat" class="chat-section chat-page">
+      <h1 class="section-heading">Chat with my AI</h1>
+      <p class="section-subtitle">Ask anything about my experience, expertise, and how I can help your team.</p>
+      <div class="chat-container" aria-label="AI chat">
+        <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
+        <form class="chat-input-area" id="chat-form">
+          <textarea id="chat-input" class="chat-input" rows="1" placeholder="Type a message…" aria-label="Type a message"></textarea>
+          <button type="submit" class="chat-send">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Cyber Naskar</div>
+      <div class="footer-links">
+        <a href="mailto:cybr1998@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/cyber-naskar" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/cyber1998" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    (function () {
+      const CHAT_API = 'https://api.cybernaskar.com/api/chat';
+      const messagesEl = document.getElementById('chat-messages');
+      const formEl = document.getElementById('chat-form');
+      const inputEl = document.getElementById('chat-input');
+      const sendBtn = formEl.querySelector('.chat-send');
+
+      const history = [];
+      let busy = false;
+      let abortController = null;
+
+      function addMessage(role, content) {
+        history.push({ role: role, content: content });
+      }
+
+      function createBubble(role) {
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble ' + role;
+        messagesEl.appendChild(bubble);
+        return bubble;
+      }
+
+      function scrollToBottom() {
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function setBusy(next) {
+        busy = next;
+        inputEl.disabled = next;
+        sendBtn.disabled = next;
+      }
+
+      async function sendMessage() {
+        const text = inputEl.value.trim();
+        if (!text || busy) return;
+
+        inputEl.value = '';
+        inputEl.style.height = 'auto';
+        createBubble('user').textContent = text;
+        addMessage('user', text);
+        scrollToBottom();
+
+        setBusy(true);
+        const aiBubble = createBubble('ai');
+        const typing = document.createElement('span');
+        typing.className = 'chat-typing';
+        typing.innerHTML = '<span></span><span></span><span></span>';
+        aiBubble.appendChild(typing);
+
+        abortController = new AbortController();
+        let fullText = '';
+        let errored = false;
+
+        try {
+          const response = await fetch(CHAT_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messages: history.slice() }),
+            signal: abortController.signal
+          });
+
+          if (!response.ok || !response.body) {
+            const err = await response.json().catch(() => ({}));
+            throw new Error(err.error || 'Request failed');
+          }
+
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          const consume = (part) => {
+            for (const line of part.split('\n')) {
+              if (!line.startsWith('data:')) continue;
+              const data = line.slice(5).trim();
+              if (!data || data === '[DONE]') continue;
+              try {
+                const json = JSON.parse(data);
+                const delta = json.choices && json.choices[0] &&
+                  json.choices[0].delta && json.choices[0].delta.content;
+                if (!delta) continue;
+                if (typing.parentNode) typing.remove();
+                fullText += delta;
+                aiBubble.textContent = fullText;
+                scrollToBottom();
+              } catch (e) {
+                // ignore malformed chunks
+              }
+            }
+          };
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+
+            const parts = buffer.split('\n\n');
+            buffer = parts.pop() || '';
+
+            for (const part of parts) {
+              consume(part);
+            }
+          }
+
+          if (buffer) {
+            consume(buffer);
+          }
+
+          if (!fullText && typing.parentNode) {
+            throw new Error('Empty response');
+          }
+        } catch (err) {
+          if (err.name === 'AbortError') {
+            setBusy(false);
+            if (typing.parentNode) typing.remove();
+            return;
+          }
+          errored = true;
+        }
+
+        setBusy(false);
+        if (typing.parentNode) typing.remove();
+
+        if (errored || !fullText) {
+          aiBubble.textContent = '';
+          aiBubble.classList.add('chat-error');
+          aiBubble.textContent = "Sorry, I couldn't reach the assistant. Please try again.";
+        } else {
+          addMessage('assistant', fullText);
+        }
+
+        inputEl.focus();
+      }
+
+      const welcome = createBubble('ai');
+      welcome.textContent = 'Hi, I\'m Cyber\'s AI assistant. Ask me anything about his experience, skills, or how he can help your team.';
+      addMessage('assistant', welcome.textContent);
+
+      formEl.addEventListener('submit', (e) => {
+        e.preventDefault();
+        sendMessage();
+      });
+
+      inputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+
+      inputEl.addEventListener('input', () => {
+        inputEl.style.height = 'auto';
+        inputEl.style.height = Math.min(inputEl.scrollHeight, 140) + 'px';
+      });
+
+      if (window.matchMedia('(min-width: 768px)').matches) {
+        inputEl.focus();
+      }
+    })();
+  </script>
+</body>
+</html>
