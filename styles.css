@@ -490,182 +490,95 @@ section {
   background-repeat: no-repeat;
 }
 
-/* ---------- Request trace (hero visual) ---------- */
-.trace {
-  --name-w: 138px;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  line-height: 1.4;
-  color: var(--text-2);
+/* ---------- Portrait (hero visual) ---------- */
+/* The photo, plus copies that only show while it glitches. The RGB pair is
+   a channel split: one copy keeps only red, the other only green and blue,
+   multiplied together. Aligned they rebuild the photo exactly; pulled apart
+   they leave cyan and red only along the edges. Two plain copies are cut
+   into bands that jump sideways, matching the heading glitch. */
+.portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--bg-subtle);
 }
 
-.trace.glitch {
+.portrait img,
+.portrait-rgb,
+.portrait-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.portrait img {
   display: block;
+  object-fit: cover;
+  object-position: 50% 0;
 }
 
-.trace-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  padding-bottom: 14px;
-  margin-bottom: 12px;
-  border-bottom: 1px solid var(--border);
-}
-
-.trace-req {
-  display: flex;
-  gap: 10px;
-  min-width: 0;
-  color: var(--text);
-  font-size: 0.82rem;
-}
-
-.trace-method {
-  font-weight: 600;
-}
-
-.trace-path {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.trace-status {
-  display: flex;
-  gap: 10px;
-  flex: none;
-}
-
-.trace-code {
-  padding: 0 6px;
-  color: var(--bg);
-  background: var(--text);
-}
-
-.trace-total {
-  min-width: 4.5em;
-  text-align: right;
-  color: var(--text);
-  font-variant-numeric: tabular-nums;
-}
-
-.trace-row {
-  display: grid;
-  grid-template-columns: var(--name-w) 1fr 30px;
-  align-items: center;
-  gap: 12px;
-  height: 26px;
-}
-
-.trace-axis {
-  height: 22px;
-  color: var(--text-3);
-  font-size: 0.66rem;
-}
-
-.trace-axis .trace-track {
-  height: 100%;
-}
-
-.trace-tick {
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.trace-tick:first-child {
-  transform: translate(0, -50%);
-}
-
-.trace-tick:last-child {
-  transform: translate(-100%, -50%);
-}
-
-.trace-name {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  opacity: 0.35;
-  transition: opacity 0.3s;
-}
-
-.trace-row.is-on .trace-name {
-  opacity: 1;
-  color: var(--text);
-}
-
-.trace-note {
-  margin-left: 6px;
-  font-style: normal;
-  color: var(--text-3);
-}
-
-.trace-track {
-  position: relative;
-  height: 10px;
-}
-
-.trace-body {
-  position: relative;
-}
-
-/* Faint gridlines behind the bars */
-.trace-body .trace-track::before {
-  content: '';
-  position: absolute;
-  inset: -8px 0;
-  background: repeating-linear-gradient(90deg, var(--border) 0 1px, transparent 1px 25%);
-  opacity: 0.7;
-}
-
-.trace-bar {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 0;
-  background: var(--text);
-  transition: width 0.45s var(--ease);
-}
-
-.trace-bar.is-parent {
-  top: 3px;
-  height: 4px;
-  background: var(--text-3);
-}
-
-.trace-bar.is-ai {
-  background: repeating-linear-gradient(135deg, var(--text) 0 3px, transparent 3px 6px);
-  outline: 1px solid var(--text);
-  outline-offset: -1px;
-}
-
-.trace-dur {
-  text-align: right;
-  color: var(--text-3);
-  font-variant-numeric: tabular-nums;
-}
-
-.trace-cursor {
-  position: absolute;
-  top: -4px;
-  bottom: -4px;
-  left: 0;
-  width: 1px;
-  background: var(--text);
+.portrait-layer {
+  background-image: url("portrait.webp?v=2");
+  background-size: cover;
+  background-position: 50% 0;
   opacity: 0;
   pointer-events: none;
 }
 
-.trace-foot {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  color: var(--text-3);
-  font-size: 0.68rem;
+.portrait-rgb {
+  isolation: isolate;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.portrait-rgb .portrait-layer {
+  opacity: 1;
+  background-blend-mode: lighten;
+}
+
+/* Lighten with pure red keeps the green/blue channels, so it reads cyan */
+.portrait-rgb .is-red { background-color: #ff0000; }
+.portrait-rgb .is-cyan { background-color: #00ffff; mix-blend-mode: multiply; }
+
+.portrait.is-glitching img {
+  animation: glitch-skew 0.42s steps(2, end) both;
+}
+
+.portrait.is-glitching .portrait-rgb {
+  opacity: 0.7;
+  animation: glitch-skew 0.42s steps(2, end) both;
+}
+
+.portrait.is-glitching .portrait-rgb .is-red {
+  animation: portrait-split-a 0.42s steps(3, end) both;
+}
+
+.portrait.is-glitching .portrait-rgb .is-cyan {
+  animation: portrait-split-b 0.42s steps(3, end) both;
+}
+
+.portrait.is-glitching .portrait-layer.is-slice-a {
+  opacity: 1;
+  animation: glitch-a 0.42s steps(3, end) both;
+}
+
+.portrait.is-glitching .portrait-layer.is-slice-b {
+  opacity: 1;
+  animation: glitch-b 0.42s steps(3, end) both;
+}
+
+@keyframes portrait-split-a {
+  0%   { transform: translate(-4px, 0) scale(1.02); }
+  50%  { transform: translate(-2px, 1px) scale(1.02); }
+  100% { transform: translate(-3px, 0) scale(1.02); }
+}
+
+@keyframes portrait-split-b {
+  0%   { transform: translate(4px, 0) scale(1.02); }
+  50%  { transform: translate(2px, -1px) scale(1.02); }
+  100% { transform: translate(3px, 0) scale(1.02); }
 }
 
 /* ---------- Ticker (scrolling neon board) ---------- */
@@ -1368,11 +1281,6 @@ footer {
 }
 
 @media (max-width: 720px) {
-  .trace {
-    --name-w: 128px;
-    font-size: 0.7rem;
-  }
-
   .hero-visual {
     padding: 22px 16px 16px;
   }

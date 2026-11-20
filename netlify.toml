@@ -7,7 +7,7 @@
 
 # (Optional) Add a build command later if you introduce a bundler.
 
-# Bump the ?v= query on styles.css, site.js and trace.js links in the HTML files when they change.
+# Bump the ?v= query on styles.css, site.js and portrait.js links in the HTML files when they change.
 
 [[headers]]
   for = "/*.html"
