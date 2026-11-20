@@ -942,6 +942,48 @@ section {
   font-weight: 700;
 }
 
+.exp-clients {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.exp-client {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-subtle);
+}
+
+.exp-client-name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.exp-client-desc {
+  font-size: 0.84rem;
+  color: var(--text-2);
+}
+
+.exp-client-figure {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text);
+}
+
+@media (max-width: 520px) {
+  .exp-clients {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- Chat ---------- */
 .chat-page {
   flex: 1;

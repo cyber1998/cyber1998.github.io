@@ -1,7 +1,7 @@
 # llms.txt
 # Purpose: Guidance & lightweight metadata for AI/LLM crawlers indexing this personal site.
 # Version: 1.0
-# Updated: 2025-11-23
+# Updated: 2026-11-20
 
 [owner]
 name: Cyber Naskar
@@ -35,6 +35,13 @@ contact_for_license: cybr1998@gmail.com
 [attribution]
 required_if_used: name, role, site URL
 
+[current_role]
+title: Senior Software Engineer
+company: Anatta (Shopify Platinum Partner)
+since: 2026-10
+work: performance optimisation, load testing and security for luxury brands M.Gemi and John Hardy; building a generic backend ecosystem product for developers and management
+previous: Senior Software Consultant, Alleyway Capital LLC (2023-09 to 2026-10)
+
 [structured_data]
 present: person (index.html), itemlist (experience.html)
 format: JSON-LD, schema.org
@@ -48,5 +55,6 @@ backend; python; django; graphql; genai; llm; performance; architecture; consult
 
 [change_log]
 2025-11-23: initial file created.
+2026-11-20: added current role at Anatta.
 
 # End of llms.txt
