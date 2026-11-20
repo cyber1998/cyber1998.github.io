@@ -341,6 +341,10 @@ section {
   transform: translateY(-2px);
 }
 
+.btn-icon {
+  flex: none;
+}
+
 .btn-arrow {
   transition: transform 0.2s var(--ease);
 }
