@@ -9,6 +9,7 @@
   <link rel="canonical" href="https://cybernaskar.com/" />
   <meta name="author" content="Cyber Naskar" />
   <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Cyber Naskar | Pune Software Consultant & Backend Engineer" />
   <meta property="og:description" content="Senior backend & AI engineering consultant (Python, Django, GraphQL, GenAI, LLMs). Available for select engagements." />
@@ -22,7 +23,9 @@
   <meta name="twitter:description" content="Backend & AI engineering consultant (Python, Django, GraphQL, GenAI, LLMs)." />
   <meta name="twitter:image" content="https://cybernaskar.com/og-image.png" />
   <meta name="twitter:image:alt" content="Cyber Naskar – Backend-first software consultant" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="styles.css?v=15" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -46,29 +49,31 @@
   </script>
 </head>
 <body>
+
   <main>
     <header>
-      <div class="logo">Cyber Naskar</div>
-      <nav>
-        <a href="index.html" class="active">About</a>
+      <a href="index.html" class="logo" aria-label="Cyber Naskar, home">
+        <span class="logo-mark" aria-hidden="true"><span>C</span></span>
+        <span class="logo-text">Cyber Naskar</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="index.html" class="active" aria-current="page">About</a>
         <a href="experience.html">Experience</a>
         <a href="chat.html">Chat <span class="nav-badge">AI</span></a>
       </nav>
     </header>
 
-    <section class="hero">
-      <div class="hero-orb"></div>
+    <section class="hero" aria-labelledby="hero-title">
       <div class="hero-content">
-        <div class="hero-tagline">
-          <span class="hero-tagline-dot"></span>
-          Available for select engagements
-        </div>
-        <h1 class="hero-title">I build systems that scale.</h1>
+        <h1 class="hero-title" id="hero-title">
+          <span class="line glitch" data-glitch>I build systems</span>
+          <span class="line serif glitch" data-glitch>that scale.</span>
+        </h1>
         <p class="hero-subtitle">
           Backend engineer and software consultant helping teams design, build, and optimize production-grade systems. From high-traffic APIs to AI-powered features.
         </p>
         <div class="hero-cta">
-          <a href="https://calendly.com/cybr1998/30min" class="btn-primary">Book a call</a>
+          <a href="https://calendly.com/cybr1998/30min" class="btn-primary">Book a call <span class="btn-arrow" aria-hidden="true">→</span></a>
           <a href="experience.html" class="btn-secondary">View experience</a>
         </div>
         <div class="hero-meta">
@@ -77,29 +82,50 @@
           <span>Remote-friendly</span>
         </div>
       </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="trace glitch" id="trace"></div>
+      </div>
+    </section>
 
-      <aside class="hero-card" aria-label="Quick snapshot">
-        <div class="hero-card-header">
-          <span>At a glance</span>
-          <span class="hero-pill">Senior-level</span>
-        </div>
-        <div class="glance-stats">
-          <div class="glance-stat">
-            <span class="glance-stat-label">Experience</span>
-            <strong class="glance-stat-value">8+ years</strong>
-          </div>
-          <div class="glance-stat">
-            <span class="glance-stat-label">Client work</span>
-            <strong class="glance-stat-value">7+ teams</strong>
-          </div>
-          <div class="glance-stat">
-            <span class="glance-stat-label">Primary focus</span>
-            <strong class="glance-stat-value">Backend + AI</strong>
-          </div>
-        </div>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Python</span><span>Django</span><span>FastAPI</span><span>GraphQL</span><span>Postgres</span><span>Redis</span><span>AWS</span><span>GCP</span><span>Docker</span><span>LangChain</span><span>PydanticAI</span><span>LLM agents</span>
+        <span>Python</span><span>Django</span><span>FastAPI</span><span>GraphQL</span><span>Postgres</span><span>Redis</span><span>AWS</span><span>GCP</span><span>Docker</span><span>LangChain</span><span>PydanticAI</span><span>LLM agents</span>
+      </div>
+    </div>
 
-        <div class="glance-block">
-          <div class="metric-label">Core stack</div>
+    <section aria-label="At a glance">
+      <div class="stats">
+        <div class="panel stat reveal" data-tilt="4">
+          <div class="panel-label"><span>Experience</span></div>
+          <strong class="stat-value"><span class="num" data-count="8">8</span><span class="unit">+</span> <small>years</small></strong>
+          <p class="stat-desc">Senior-level backend engineering across startups and enterprise clients.</p>
+        </div>
+        <div class="panel stat reveal reveal-d1" data-tilt="4">
+          <div class="panel-label"><span>Client work</span></div>
+          <strong class="stat-value"><span class="num" data-count="7">7</span><span class="unit">+</span> <small>teams</small></strong>
+          <p class="stat-desc">Independent consultant. Direct access, async-friendly.</p>
+        </div>
+        <div class="panel stat reveal reveal-d2" data-tilt="4">
+          <div class="panel-label"><span>Primary focus</span></div>
+          <strong class="stat-value"><span class="num">Backend</span> <small><span class="unit">+</span> AI</small></strong>
+          <p class="stat-desc">APIs, data, and LLM features that hold up in production.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="stack-title">
+      <h2 class="section-heading reveal" id="stack-title" data-glitch>The <span class="grad">stack</span> I run on.</h2>
+      <p class="section-subtitle reveal">Tools I reach for to ship fast, scale cleanly, and wire AI into real products.</p>
+      <div class="modules">
+        <article class="panel module reveal" data-tilt="4">
+          <div class="module-head">
+          <svg class="module-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <ellipse cx="24" cy="11" rx="14" ry="5"/><path d="M10 11v13c0 2.8 6.3 5 14 5s14-2.2 14-5V11"/><path d="M10 24v13c0 2.8 6.3 5 14 5s14-2.2 14-5V24"/>
+          </svg>
+          </div>
+          <h3>Core stack</h3>
+          <p>API design, backend architecture, and databases tuned for real traffic.</p>
           <div class="stack-tags">
             <span class="stack-tag">Python</span>
             <span class="stack-tag">Django</span>
@@ -110,10 +136,15 @@
             <span class="stack-tag">Redis</span>
             <span class="stack-tag">TypeScript</span>
           </div>
-        </div>
-
-        <div class="glance-block">
-          <div class="metric-label">Cloud & infrastructure</div>
+        </article>
+        <article class="panel module reveal reveal-d1" data-tilt="4">
+          <div class="module-head">
+          <svg class="module-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M14 34h22a8 8 0 0 0 0-16 11 11 0 0 0-21-2 9 9 0 0 0-1 18z"/><path d="M19 40v-6M24 42v-8M29 40v-6"/>
+          </svg>
+          </div>
+          <h3>Cloud &amp; infrastructure</h3>
+          <p>Containerised services, managed cloud, and vector stores.</p>
           <div class="stack-tags">
             <span class="stack-tag">AWS</span>
             <span class="stack-tag">GCP</span>
@@ -121,10 +152,15 @@
             <span class="stack-tag">Pinecone</span>
             <span class="stack-tag">pgvector</span>
           </div>
-        </div>
-
-        <div class="glance-block">
-          <div class="metric-label">AI implementation</div>
+        </article>
+        <article class="panel module reveal reveal-d2" data-tilt="4">
+          <div class="module-head">
+          <svg class="module-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="13" y="13" width="22" height="22" rx="2"/><rect x="19" y="19" width="10" height="10"/><path d="M19 7v6M29 7v6M19 35v6M29 35v6M7 19h6M7 29h6M35 19h6M35 29h6"/>
+          </svg>
+          </div>
+          <h3>AI implementation</h3>
+          <p>LLM features, agents, and agentic workflows shipped to production.</p>
           <div class="stack-tags">
             <span class="stack-tag">LangChain</span>
             <span class="stack-tag">PydanticAI</span>
@@ -133,37 +169,34 @@
             <span class="stack-tag">Anthropic</span>
             <span class="stack-tag">Agentic workflows</span>
           </div>
-        </div>
-        <div class="hero-card-footer">
-          <span>Independent consultant</span>
-          <span>Async-friendly</span>
-        </div>
-      </aside>
+        </article>
+      </div>
     </section>
 
-    <section id="about">
-      <h2 class="section-heading">About</h2>
-      <p class="section-subtitle">Backend-focused, product-aware, comfortable owning problems from idea to production.</p>
+    <section id="about" aria-labelledby="about-title">
+      <h2 class="section-heading reveal" id="about-title" data-glitch>About</h2>
+      <p class="section-subtitle reveal">Backend-focused, product-aware, comfortable owning problems from idea to production.</p>
       <div class="about-grid">
-        <div class="about-main">
-          <p>
-            I'm a software consultant specializing in backend engineering, high-performance systems, and modern full-stack development. Over seven years, I've helped companies build platforms, APIs, and data flows that hold up under real usage.
-          </p>
-          <p>
-            My work ranges from architecting microservices and optimizing SQL queries to integrating AI-driven features into existing products. I can own the backend, ship clean frontends where needed, and help teams simplify complex systems.
-          </p>
+        <div class="panel reveal">
+          <div class="card-body about-main">
+            <p>
+              I'm a software consultant specializing in backend engineering, high-performance systems, and modern full-stack development. Over seven years, I've helped companies build platforms, APIs, and data flows that hold up under real usage.
+            </p>
+            <p>
+              My work ranges from architecting microservices and optimizing SQL queries to integrating AI-driven features into existing products. I can own the backend, ship clean frontends where needed, and help teams simplify complex systems.
+            </p>
+          </div>
         </div>
-        <div class="about-list">
+        <div class="panel about-list reveal reveal-d1">
           <div class="about-label">How I work</div>
           <ul>
             <li>Direct access, no layers</li>
             <li>Clear problem definition, fast iterative delivery</li>
             <li>Strong opinions on architecture, flexible on implementation</li>
           </ul>
-          <br />
           <div class="about-label">Strengths</div>
           <ul>
-            <li>API design & backend architecture</li>
+            <li>API design &amp; backend architecture</li>
             <li>Database design and performance tuning</li>
             <li>AI/LLM feature integration</li>
           </ul>
@@ -171,17 +204,17 @@
       </div>
     </section>
 
-    <section class="cta-section">
-      <h2 class="section-heading">Let's work together</h2>
+    <section class="panel cta-section reveal" aria-labelledby="cta-title">
+      <h2 class="section-heading" id="cta-title" data-glitch>Let's work <span class="grad">together</span></h2>
       <p class="section-subtitle">Available for consulting engagements, long-term collaborations, and interesting problems.</p>
-      <div class="hero-cta" style="justify-content: center;">
-        <a href="https://calendly.com/cybr1998/30min" class="btn-primary">Schedule a call</a>
+      <div class="hero-cta">
+        <a href="https://calendly.com/cybr1998/30min" class="btn-primary">Schedule a call <span class="btn-arrow" aria-hidden="true">→</span></a>
         <a href="mailto:cybr1998@gmail.com" class="btn-secondary">Send an email</a>
       </div>
     </section>
 
     <footer>
-      <div>© <span id="year"></span> Cyber Naskar</div>
+      <div>© <span id="year"></span> Cyber Naskar · Built in Pune</div>
       <div class="footer-links">
         <a href="mailto:cybr1998@gmail.com">Email</a>
         <a href="https://www.linkedin.com/in/cyber-naskar" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -190,128 +223,7 @@
     </footer>
   </main>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const heroCard = document.querySelector('.hero-card');
-    const heroContent = document.querySelector('.hero-content');
-    const hero = document.querySelector('.hero');
-    const heroOrb = document.querySelector('.hero-orb');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const pointerEffectsEnabled = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-    if (heroOrb && hero && !reducedMotion && pointerEffectsEnabled) {
-      let orbX = 0;
-      let orbY = 0;
-      let targetX = 0;
-      let targetY = 0;
-      let isOrbActive = false;
-
-      const animateOrb = () => {
-        if (!isOrbActive) {
-          return;
-        }
-
-        orbX += (targetX - orbX) * 0.1;
-        orbY += (targetY - orbY) * 0.1;
-        heroOrb.style.transform = `translate(${orbX}px, ${orbY}px) translate(-50%, -50%)`;
-        requestAnimationFrame(animateOrb);
-      };
-
-      hero.addEventListener('mouseenter', (event) => {
-        const rect = hero.getBoundingClientRect();
-        targetX = event.clientX - rect.left;
-        targetY = event.clientY - rect.top;
-        orbX = targetX;
-        orbY = targetY;
-        heroOrb.style.opacity = '0.75';
-        if (!isOrbActive) {
-          isOrbActive = true;
-          requestAnimationFrame(animateOrb);
-        }
-      });
-
-      hero.addEventListener('mousemove', (event) => {
-        const rect = hero.getBoundingClientRect();
-        targetX = event.clientX - rect.left;
-        targetY = event.clientY - rect.top;
-      });
-
-      hero.addEventListener('mouseleave', () => {
-        isOrbActive = false;
-        heroOrb.style.opacity = '0';
-      });
-    } else if (heroOrb) {
-      heroOrb.style.display = 'none';
-    }
-
-    if (heroCard && !reducedMotion && pointerEffectsEnabled) {
-      const glare = document.createElement('div');
-      glare.className = 'glare';
-      heroCard.style.position = 'relative';
-      heroCard.appendChild(glare);
-
-      let cardFrame = null;
-      let pointerX = 0;
-      let pointerY = 0;
-
-      const applyCardTilt = () => {
-        const rect = heroCard.getBoundingClientRect();
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = (pointerY - centerY) / 18;
-        const rotateY = (centerX - pointerX) / 18;
-
-        heroCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.012)`;
-        heroCard.classList.add('tilt-active');
-
-        const glareX = (pointerX / rect.width) * 100;
-        const glareY = (pointerY / rect.height) * 100;
-        glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0) 62%)`;
-
-        cardFrame = null;
-      };
-
-      heroCard.addEventListener('mousemove', (e) => {
-        const rect = heroCard.getBoundingClientRect();
-        pointerX = e.clientX - rect.left;
-        pointerY = e.clientY - rect.top;
-
-        if (!cardFrame) {
-          cardFrame = requestAnimationFrame(applyCardTilt);
-        }
-      });
-
-      heroCard.addEventListener('mouseleave', () => {
-        if (cardFrame) {
-          cancelAnimationFrame(cardFrame);
-          cardFrame = null;
-        }
-        heroCard.style.transform = '';
-        heroCard.classList.remove('tilt-active');
-        glare.style.background = '';
-      });
-    }
-
-    if (hero && heroContent && !reducedMotion && pointerEffectsEnabled) {
-      hero.addEventListener('mousemove', (e) => {
-        const rect = hero.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const moveX = (x - centerX) / 50;
-        const moveY = (y - centerY) / 50;
-        
-        heroContent.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
-      });
-
-      hero.addEventListener('mouseleave', () => {
-        heroContent.style.transform = '';
-      });
-    }
-  </script>
+  <script src="trace.js?v=15" defer></script>
+  <script src="site.js?v=15" defer></script>
 </body>
 </html>

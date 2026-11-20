@@ -9,16 +9,19 @@
   <link rel="canonical" href="https://cybernaskar.com/experience.html" />
   <meta name="robots" content="index,follow" />
   <meta name="author" content="Cyber Naskar" />
+  <meta name="theme-color" content="#ffffff" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Cyber Naskar · Backend & AI Engineering Experience" />
   <meta property="og:description" content="Detailed backend engineering and software consulting experience across LLM features, high-traffic APIs, GraphQL services, and optimisation work." />
   <meta property="og:url" content="https://cybernaskar.com/experience.html" />
-  <meta property="og:image" content="https://cybernaskar.com/og-image.jpg" />
+  <meta property="og:image" content="https://cybernaskar.com/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cyber Naskar · Backend & AI Engineering Experience" />
   <meta name="twitter:description" content="LLM-backed features, GraphQL/REST services, performance optimisation and consulting across India & remote." />
-  <meta name="twitter:image" content="https://cybernaskar.com/og-image.jpg" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <meta name="twitter:image" content="https://cybernaskar.com/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="styles.css?v=15" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -55,21 +58,28 @@
   </script>
 </head>
 <body>
+
   <main>
     <header>
-      <div class="logo">Cyber Naskar</div>
-      <nav>
+      <a href="index.html" class="logo" aria-label="Cyber Naskar, home">
+        <span class="logo-mark" aria-hidden="true"><span>C</span></span>
+        <span class="logo-text">Cyber Naskar</span>
+      </a>
+      <nav aria-label="Primary">
         <a href="index.html">About</a>
-        <a href="experience.html" class="active">Experience</a>
+        <a href="experience.html" class="active" aria-current="page">Experience</a>
         <a href="chat.html">Chat <span class="nav-badge">AI</span></a>
       </nav>
     </header>
 
     <section>
-      <h1 class="section-heading">Experience</h1>
-      <p class="section-subtitle">Where I've been focusing my time lately.</p>
+      <div class="page-head">
+        <h1 class="section-heading" data-glitch>Experience</h1>
+        <p class="section-subtitle">Where I've been focusing my time lately.</p>
+      </div>
       <div class="experience-list" aria-label="Professional experience timeline">
-        <div class="exp-item">
+        <div class="panel exp-item reveal">
+          <span class="exp-node" aria-hidden="true"></span>
           <div class="exp-header">
             <div>
               <div class="exp-role">Senior Software Consultant</div>
@@ -84,7 +94,8 @@
             <li>Worked extensively with Shopify, email providers, tracking tools, and microservices</li>
           </ul>
         </div>
-        <div class="exp-item">
+        <div class="panel exp-item reveal">
+          <span class="exp-node" aria-hidden="true"></span>
           <div class="exp-header">
             <div>
               <div class="exp-role">Senior Backend Engineer</div>
@@ -98,7 +109,8 @@
             <li>Collaborated with product and business teams to deliver features on tight timelines</li>
           </ul>
         </div>
-        <div class="exp-item">
+        <div class="panel exp-item reveal">
+          <span class="exp-node" aria-hidden="true"></span>
           <div class="exp-header">
             <div>
               <div class="exp-role">Backend Engineer</div>
@@ -114,17 +126,17 @@
       </div>
     </section>
 
-    <section class="cta-section">
-      <h2 class="section-heading">Interested in working together?</h2>
+    <section class="panel cta-section reveal" aria-labelledby="cta-title">
+      <h2 class="section-heading" id="cta-title" data-glitch>Interested in working <span class="grad">together?</span></h2>
       <p class="section-subtitle">I'm available for select consulting engagements and interesting projects.</p>
-      <div class="hero-cta" style="justify-content: center;">
-        <a href="https://calendly.com/cybr1998/30min" class="btn-primary">Schedule a call</a>
+      <div class="hero-cta">
+        <a href="https://calendly.com/cybr1998/30min" class="btn-primary">Schedule a call <span class="btn-arrow" aria-hidden="true">→</span></a>
         <a href="index.html" class="btn-secondary">Back to home</a>
       </div>
     </section>
 
     <footer>
-      <div>© <span id="year"></span> Cyber Naskar</div>
+      <div>© <span id="year"></span> Cyber Naskar · Built in Pune</div>
       <div class="footer-links">
         <a href="mailto:cybr1998@gmail.com">Email</a>
         <a href="https://www.linkedin.com/in/cyber-naskar" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -132,6 +144,7 @@
       </div>
     </footer>
   </main>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <script src="site.js?v=15" defer></script>
 </body>
 </html>
