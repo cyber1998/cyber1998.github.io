@@ -405,7 +405,7 @@ section {
   align-items: center;
   gap: 40px;
   min-height: min(660px, calc(100vh - 170px));
-  margin-bottom: 72px;
+  margin-bottom: 120px;
 }
 
 .hero-content {
@@ -459,11 +459,11 @@ section {
   color: var(--neon);
 }
 
-/* Globe sits in a framed HUD board */
+/* Portrait sits in a framed board */
 .hero-visual {
   position: relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 400px;
   padding: 26px 24px 20px;
   justify-self: end;
   border: 1px solid var(--border);
@@ -579,57 +579,6 @@ section {
   0%   { transform: translate(4px, 0) scale(1.02); }
   50%  { transform: translate(2px, -1px) scale(1.02); }
   100% { transform: translate(3px, 0) scale(1.02); }
-}
-
-/* ---------- Ticker (scrolling neon board) ---------- */
-.ticker {
-  position: relative;
-  margin: 0 0 120px;
-  padding: 16px 0;
-  overflow: hidden;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: rgba(250, 250, 251, 0.7);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: ticker 40s linear infinite;
-}
-
-.ticker:hover .ticker-track {
-  animation-play-state: paused;
-}
-
-.ticker-track span {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 1.05rem;
-  letter-spacing: -0.015em;
-  color: var(--text-2);
-  white-space: nowrap;
-}
-
-.ticker-track span::after {
-  content: '';
-  width: 7px;
-  height: 7px;
-  margin: 0 28px;
-  background: var(--neon);
-  transform: rotate(45deg);
-}
-
-.ticker-track span:nth-child(4n)::after {
-  background: var(--pink);
-}
-
-@keyframes ticker {
-  to { transform: translateX(-50%); }
 }
 
 /* ---------- Stats ---------- */
@@ -1305,7 +1254,7 @@ footer {
   }
 
   .hero-visual {
-    max-width: 560px;
+    max-width: 420px;
     justify-self: start;
   }
 
@@ -1353,9 +1302,6 @@ footer {
     max-width: 100%;
   }
 
-  .ticker {
-    margin-bottom: 80px;
-  }
 
   .stats,
   .modules {
@@ -1423,9 +1369,6 @@ footer {
     scroll-behavior: auto !important;
   }
 
-  .ticker-track {
-    animation: none !important;
-  }
 
   .reveal {
     opacity: 1;
