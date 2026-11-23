@@ -524,7 +524,7 @@ section {
 }
 
 .portrait-layer {
-  background-image: url("portrait.webp?v=2");
+  background-image: url("portrait.webp?v=3");
   background-size: cover;
   background-position: 50% 0;
   opacity: 0;
