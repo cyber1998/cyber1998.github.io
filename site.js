@@ -9,7 +9,7 @@
   // ---- Glitch: short RGB-split bursts on headings ----
   var glitchEls = Array.prototype.slice.call(document.querySelectorAll('[data-glitch]'));
   glitchEls.forEach(function (el) {
-    el.setAttribute('data-text', el.textContent.replace(/s+/g, ' ').trim());
+    el.setAttribute('data-text', el.textContent.replace(/\s+/g, ' ').trim());
     el.classList.add('glitch');
   });
   function glitch(el) {
@@ -106,5 +106,22 @@
         card.style.transform = '';
       });
     });
+  }
+
+  // ---- Private visit counter ----
+  // Sends the page, the referring site and whether this is the first page of
+  // the tab session. No cookies; the tracker stores no IP addresses.
+  if (/(^|\.)cybernaskar\.com$/.test(location.hostname) && navigator.sendBeacon) {
+    var firstInSession = false;
+    try {
+      firstInSession = !sessionStorage.getItem('cn-visit');
+      sessionStorage.setItem('cn-visit', '1');
+    } catch (e) {}
+    try {
+      navigator.sendBeacon(
+        'https://site-visits.cybr1998.workers.dev/hit',
+        JSON.stringify({ p: location.pathname, r: document.referrer, s: firstInSession })
+      );
+    } catch (e) {}
   }
 })();
