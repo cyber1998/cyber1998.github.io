@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://cybernaskar.com/index.html</loc>
-    <lastmod>2025-11-23</lastmod>
-    <priority>1.0</priority>
+    <loc>https://www.cybernaskar.com/</loc>
+    <lastmod>2026-11-25</lastmod>
   </url>
   <url>
-    <loc>https://cybernaskar.com/experience.html</loc>
-    <lastmod>2025-11-23</lastmod>
-    <priority>0.8</priority>
+    <loc>https://www.cybernaskar.com/experience.html</loc>
+    <lastmod>2026-11-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.cybernaskar.com/chat.html</loc>
+    <lastmod>2026-11-25</lastmod>
   </url>
 </urlset>

@@ -8,7 +8,7 @@ name: Cyber Naskar
 role: Software Consultant & Backend Engineer
 location: Pune, India
 email: cybr1998@gmail.com
-site: https://cybernaskar.com/
+site: https://www.cybernaskar.com/
 canonical_pages: index.html, experience.html
 preferred_profile_links: https://www.linkedin.com/in/cyber-naskar , https://github.com/cyber1998
 
@@ -44,7 +44,7 @@ work: performance optimisation, load testing and security for luxury brands M.Ge
 previous: Senior Software Consultant, Alleyway Capital LLC (2023-09 to 2026-10)
 
 [structured_data]
-present: person (index.html), itemlist (experience.html)
+present: website + profilepage + person (index.html), profilepage + person roles (experience.html), webpage (chat.html)
 format: JSON-LD, schema.org
 
 [integrity]
@@ -57,5 +57,6 @@ backend; python; django; graphql; genai; llm; performance; architecture; consult
 [change_log]
 2025-11-23: initial file created.
 2026-11-20: added current role at Anatta.
+2026-11-25: canonical host is now https://www.cybernaskar.com/.
 
 # End of llms.txt
